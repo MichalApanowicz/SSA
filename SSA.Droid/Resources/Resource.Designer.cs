@@ -43,11 +43,120 @@ namespace SSA.Droid
 			}
 		}
 		
+		public partial class Id
+		{
+			
+			// aapt resource value: 0x7f04000d
+			public const int addItemButton = 2130968589;
+			
+			// aapt resource value: 0x7f04000b
+			public const int addListButton = 2130968587;
+			
+			// aapt resource value: 0x7f040011
+			public const int deleteItemButton = 2130968593;
+			
+			// aapt resource value: 0x7f04000c
+			public const int deleteListButton = 2130968588;
+			
+			// aapt resource value: 0x7f040008
+			public const int editText1 = 2130968584;
+			
+			// aapt resource value: 0x7f040015
+			public const int editTextDesc = 2130968597;
+			
+			// aapt resource value: 0x7f040017
+			public const int editTextListId = 2130968599;
+			
+			// aapt resource value: 0x7f040013
+			public const int editTextName = 2130968595;
+			
+			// aapt resource value: 0x7f040009
+			public const int frameLayout1 = 2130968585;
+			
+			// aapt resource value: 0x7f04000e
+			public const int getFromListButton = 2130968590;
+			
+			// aapt resource value: 0x7f040010
+			public const int getListButton = 2130968592;
+			
+			// aapt resource value: 0x7f040001
+			public const int itemTextView1 = 2130968577;
+			
+			// aapt resource value: 0x7f04000a
+			public const int linearLayout1 = 2130968586;
+			
+			// aapt resource value: 0x7f04000f
+			public const int linearLayout2 = 2130968591;
+			
+			// aapt resource value: 0x7f040000
+			public const int listView1 = 2130968576;
+			
+			// aapt resource value: 0x7f040018
+			public const int outputText = 2130968600;
+			
+			// aapt resource value: 0x7f040004
+			public const int radioButton1 = 2130968580;
+			
+			// aapt resource value: 0x7f040007
+			public const int radioButton2 = 2130968583;
+			
+			// aapt resource value: 0x7f040003
+			public const int radioGroup1 = 2130968579;
+			
+			// aapt resource value: 0x7f040005
+			public const int space1 = 2130968581;
+			
+			// aapt resource value: 0x7f040006
+			public const int space2 = 2130968582;
+			
+			// aapt resource value: 0x7f040012
+			public const int textView1 = 2130968594;
+			
+			// aapt resource value: 0x7f040014
+			public const int textView2 = 2130968596;
+			
+			// aapt resource value: 0x7f040016
+			public const int textView3 = 2130968598;
+			
+			// aapt resource value: 0x7f040002
+			public const int toolbar1 = 2130968578;
+			
+			static Id()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Id()
+			{
+			}
+		}
+		
 		public partial class Layout
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Main = 2130837504;
+			public const int AllItems = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int AllLists = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int Item = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int ListDetailsActivity = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int Main = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int MainActivity = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int MainListView = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int Test = 2130837511;
 			
 			static Layout()
 			{
@@ -70,6 +179,18 @@ namespace SSA.Droid
 			
 			// aapt resource value: 0x7f030002
 			public const int app_name = 2130903042;
+			
+			// aapt resource value: 0x7f030006
+			public const int main_tab_3 = 2130903046;
+			
+			// aapt resource value: 0x7f030005
+			public const int main_tab_all_items = 2130903045;
+			
+			// aapt resource value: 0x7f030004
+			public const int main_tab_all_lists = 2130903044;
+			
+			// aapt resource value: 0x7f030003
+			public const int main_tab_test = 2130903043;
 			
 			static String()
 			{

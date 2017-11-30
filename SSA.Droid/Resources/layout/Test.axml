@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <LinearLayout
+       android:orientation="horizontal"
+       android:minWidth="25px"
+       android:minHeight="25px"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/linearLayout1">
+    <Button
+        android:text="Add List"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:id="@+id/addListButton" />
+    <Button
+        android:text="Delete List"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:id="@+id/deleteListButton" />
+    <Button
+        android:text="Add Item"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:id="@+id/addItemButton" />
+    <Button
+        android:text="Get from list"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:id="@+id/getFromListButton" />
+  </LinearLayout>
+  <LinearLayout
+      android:orientation="horizontal"
+      android:minWidth="25px"
+      android:minHeight="25px"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/linearLayout2">
+    <Button
+        android:text="Get list"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:id="@+id/getListButton" />
+    <Button
+      android:text="Delete Item"
+      android:layout_width="wrap_content"
+      android:layout_height="fill_parent"
+      android:id="@+id/deleteItemButton" />
+  </LinearLayout>
+  <TextView
+      android:text="Nazwa"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/textView1" />
+  <EditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/editTextName" />
+  <TextView
+      android:text="Opis"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/textView2" />
+  <EditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/editTextDesc" />
+  <TextView
+      android:text="ListID"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/textView3" />
+  <EditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/editTextListId" />
+  <EditText
+      android:inputType="none"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:id="@+id/outputText"
+      android:editable="false" />
+</LinearLayout>

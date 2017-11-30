@@ -66,11 +66,21 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainActivity.cs" />
+    <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Activities\MainActivityFragments\AllItemsFragment.cs" />
+    <Compile Include="Activities\MainActivityFragments\AllListsFragment.cs" />
+    <Compile Include="Activities\MainActivityFragments\TestFragment.cs" />
+    <Compile Include="Constants\Constants.cs" />
+    <Compile Include="Constants\SampleData.cs" />
     <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Models\ItemStatus.cs" />
     <Compile Include="Models\ListModel.cs" />
     <Compile Include="Models\ListStatus.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\ItemRepository.cs" />
+    <Compile Include="Repositories\ItemStatusRepository.cs" />
+    <Compile Include="Repositories\ListRepository.cs" />
+    <Compile Include="Repositories\ListStatusRepository.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -80,6 +90,13 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\MainActivity.axml" />
+    <AndroidResource Include="Resources\layout\MainListView.axml" />
+    <AndroidResource Include="Resources\layout\Test.axml" />
+    <AndroidResource Include="Resources\layout\AllItems.axml" />
+    <AndroidResource Include="Resources\layout\AllLists.axml" />
+    <AndroidResource Include="Resources\layout\Item.axml" />
+    <AndroidResource Include="Resources\layout\ListDetailsActivity.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

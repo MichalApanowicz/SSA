@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">SSA.Droid</string>
+  <string name="main_tab_test">Test</string>
+  <string name="main_tab_all_lists">Wszytkie listy</string>
+  <string name="main_tab_all_items">Wszytkie przedmioty</string>
+  <string name="main_tab_3">Twoje listy</string>
 </resources>
