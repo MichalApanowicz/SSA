@@ -67,6 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Models\ItemModel.cs" />
+    <Compile Include="Models\ItemStatus.cs" />
+    <Compile Include="Models\ListModel.cs" />
+    <Compile Include="Models\ListStatus.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
