@@ -26,6 +26,8 @@ namespace SSA.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::SSA.Droid.Resource.String.ApplicationName;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::SSA.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Attribute
@@ -60,8 +62,14 @@ namespace SSA.Droid
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f030001
+			public const int ApplicationName = 2130903041;
+			
 			// aapt resource value: 0x7f030000
-			public const int app_name = 2130903040;
+			public const int Hello = 2130903040;
+			
+			// aapt resource value: 0x7f030002
+			public const int app_name = 2130903042;
 			
 			static String()
 			{
