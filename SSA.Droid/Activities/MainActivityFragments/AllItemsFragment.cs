@@ -7,25 +7,32 @@ using SQLite.Net;
 using SQLite.Net.Platform.XamarinAndroid;
 using SSA.Droid.Repositories;
 
-namespace  SSA.Droid.Activities.MainActivityFragments
+namespace SSA.Droid.Activities.MainActivityFragments
 {
-    public class AllItemsFragment : Fragment
+    public class AllItemsFragment : Android.Support.V4.App.Fragment
     {
-        ItemRepository _items =
-            new ItemRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        private ListView _listView;
 
-        private ListView listView;
+        private ItemRepository _itemRepository;
+
+        public AllItemsFragment() { }
+
+        public static AllItemsFragment NewInstance(ItemRepository itemRepository)
+        {
+            AllItemsFragment fragment = new AllItemsFragment { _itemRepository = itemRepository };
+            return fragment;
+        }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view = inflater.Inflate(Resource.Layout.AllItems, null);
-            listView = view.FindViewById<ListView>(Resource.Id.listView1);
+            _listView = view.FindViewById<ListView>(Resource.Id.listView1);
 
-            var items = _items.GetAll();
+            var items = _itemRepository.GetAll();
             var adapter = new ArrayAdapter<string>(Context, Android.Resource.Layout.SimpleListItem1,
                 objects: items.Select(x => x.Name).ToArray());
 
-            listView.Adapter = adapter;
+            _listView.Adapter = adapter;
 
             return view;
         }

@@ -9,9 +9,17 @@ using SSA.Droid.Repositories;
 
 namespace SSA.Droid.Activities.MainActivityFragments
 {
-    public class AllListsFragment : Fragment
+    public class AllListsFragment : Android.Support.V4.App.Fragment
     {
-        ListRepository _lists = new ListRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        private ListRepository _listRepository;
+
+        public AllListsFragment() { }
+
+        public static AllListsFragment NewInstance(ListRepository listRepository)
+        {
+            AllListsFragment fragment = new AllListsFragment { _listRepository = listRepository };
+            return fragment;
+        }
 
         private ListView listView;
 
@@ -20,7 +28,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
             View view = inflater.Inflate(Resource.Layout.AllLists, null);
             listView = view.FindViewById<ListView>(Resource.Id.listView1);
 
-            var lists = _lists.GetAll();
+            var lists = _listRepository.GetAll();
             var adapter = new ArrayAdapter<string>(Context, Android.Resource.Layout.SimpleListItem1, objects: lists.Select(x => x.Name).ToArray());
 
             listView.Adapter = adapter;

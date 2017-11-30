@@ -19,10 +19,10 @@ namespace SSA.Droid
     static class SampleData
     {
 
-        static ItemRepository _items = new ItemRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-        static ListRepository _lists = new ListRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-        static ItemStatusRepository _itemStatus = new ItemStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-        static ListStatusRepository _listStatus = new ListStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        static ItemRepository _itemRepository = new ItemRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        static ListRepository _listRepository = new ListRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        static ItemStatusRepository _itemRepositorytatus = new ItemStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        static ListStatusRepository _listRepositorytatus = new ListStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
 
         private static ItemStatus itemStatus1 = new ItemStatus
         {
@@ -181,16 +181,16 @@ namespace SSA.Droid
 
         public static void AddData()
         {
-            _itemStatus.Save(itemStatus1);
-            _listStatus.Save(listStatus1);
+            _itemRepositorytatus.Save(itemStatus1);
+            _listRepositorytatus.Save(listStatus1);
 
             foreach (var list in lists)
             {
-                _lists.Save(list);
+                _listRepository.Save(list);
             }
             foreach (var item in items)
             {
-                _items.Save(item);
+                _itemRepository.Save(item);
             }
         }
     }

@@ -102,6 +102,7 @@
     <Compile Include="Activities\MainActivityFragments\AllItemsFragment.cs" />
     <Compile Include="Activities\MainActivityFragments\AllListsFragment.cs" />
     <Compile Include="Activities\MainActivityFragments\TestFragment.cs" />
+    <Compile Include="Adapters\MainActivityFragmentAdapter.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Constants\SampleData.cs" />
     <Compile Include="Models\ItemModel.cs" />

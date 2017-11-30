@@ -10,52 +10,38 @@ using SQLite.Net.Platform.XamarinAndroid;
 using SSA.Droid.Activities.MainActivityFragments;
 using SSA.Droid.Models;
 using SSA.Droid.Repositories;
+using Android.Support.V4.View;
+using Android.Support.V4.App;
+using SSA.Droid.Adapters;
+
 
 namespace SSA.Droid
 {
     [Activity(Label = "SSA.Droid", MainLauncher = true)]
-    public class MainActivity : Activity
+    public class MainActivity : FragmentActivity
     {
-        Fragment[] _fragments;
+        Android.Support.V4.App.Fragment[] _fragments;
+        private ListRepository _listRepository = new ListRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        private ItemRepository _itemRepository = new ItemRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+          
+            SetContentView(Resource.Layout.Main);
 
-            _fragments = new Fragment[]
+            _fragments = new Android.Support.V4.App.Fragment[]
             {
-                new AllListsFragment(),
-                new AllItemsFragment(),
-                new TestFragment(),
+                AllListsFragment.NewInstance(_listRepository),
+                AllItemsFragment.NewInstance(_itemRepository),
+                TestFragment.NewInstance(_listRepository, _itemRepository),
             };
+            
 
-            InitializeTabNavigation();
-            SetContentView(Resource.Layout.MainActivity);
-        }
+            MainActivityFragmentAdapter adapter = new MainActivityFragmentAdapter(SupportFragmentManager, _fragments);
 
-        private void InitializeTabNavigation()
-        {
-            ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-            AddTabToActionBar(Resource.String.main_tab_all_lists);
-            AddTabToActionBar(Resource.String.main_tab_all_items);
-            AddTabToActionBar(Resource.String.main_tab_test);
-        }
-
-        void AddTabToActionBar(int labelResourceId)
-        {
-            ActionBar.Tab tab = ActionBar.NewTab()
-                .SetText(labelResourceId);
-            tab.TabSelected += TabOnTabSelected;
-            ActionBar.AddTab(tab);
-        }
-
-        void TabOnTabSelected(object sender, ActionBar.TabEventArgs tabEventArgs)
-        {
-            ActionBar.Tab tab = (ActionBar.Tab)sender;
-
-            Log.Debug("The tab {0} has been selected.", tab.Text);
-            Fragment frag = _fragments[tab.Position];
-            tabEventArgs.FragmentTransaction.Replace(Resource.Id.frameLayout1, frag);
+            ViewPager viewPager = FindViewById<ViewPager>(Resource.Id.mainviewpager);
+            viewPager.Adapter = adapter;
         }
     }
 }
