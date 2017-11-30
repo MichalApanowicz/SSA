@@ -21,5 +21,12 @@ namespace SSA.Droid.Adapters
         {
             return _fragments[position];
         }
+
+        public override Java.Lang.ICharSequence GetPageTitleFormatted(int position)
+        {
+            var x = _fragments[position];
+
+            return new Java.Lang.String(x.Id.ToString());
+        }
     }
 }

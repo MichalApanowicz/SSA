@@ -36,7 +36,6 @@ namespace SSA.Droid
                 AllItemsFragment.NewInstance(_itemRepository),
                 TestFragment.NewInstance(_listRepository, _itemRepository),
             };
-            
 
             MainActivityFragmentAdapter adapter = new MainActivityFragmentAdapter(SupportFragmentManager, _fragments);
 

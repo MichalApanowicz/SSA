@@ -15,7 +15,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         private ItemRepository _itemRepository;
 
-        public AllItemsFragment() { }
+        private AllItemsFragment() { }
 
         public static AllItemsFragment NewInstance(ItemRepository itemRepository)
         {

@@ -12,8 +12,8 @@ namespace SSA.Droid.Activities.MainActivityFragments
     public class AllListsFragment : Android.Support.V4.App.Fragment
     {
         private ListRepository _listRepository;
-
-        public AllListsFragment() { }
+ 
+        private AllListsFragment() { }
 
         public static AllListsFragment NewInstance(ListRepository listRepository)
         {
