@@ -12,15 +12,18 @@ using SSA.Droid.Models;
 using SSA.Droid.Repositories;
 using Android.Support.V4.View;
 using Android.Support.V4.App;
+using Android.Support.V7.App;
 using SSA.Droid.Adapters;
+using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 
 namespace SSA.Droid
 {
     [Activity(Label = "SSA.Droid", MainLauncher = true)]
-    public class MainActivity : FragmentActivity
+    public class MainActivity : AppCompatActivity
     {
         Android.Support.V4.App.Fragment[] _fragments;
+        private string[] TabNames { get; set; }
         private ListRepository _listRepository = new ListRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
         private ItemRepository _itemRepository = new ItemRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
 
@@ -29,6 +32,7 @@ namespace SSA.Droid
             base.OnCreate(bundle);
           
             SetContentView(Resource.Layout.Main);
+            SupportActionBar.Title = "SSA";
 
             _fragments = new Android.Support.V4.App.Fragment[]
             {
@@ -37,7 +41,14 @@ namespace SSA.Droid
                 TestFragment.NewInstance(_listRepository, _itemRepository),
             };
 
-            MainActivityFragmentAdapter adapter = new MainActivityFragmentAdapter(SupportFragmentManager, _fragments);
+            TabNames = new[]
+            {
+                "Listy",
+                "Wszystkie przedmioty",
+                "Test"
+            };
+
+            MainActivityFragmentAdapter adapter = new MainActivityFragmentAdapter(SupportFragmentManager, _fragments, TabNames);
 
             ViewPager viewPager = FindViewById<ViewPager>(Resource.Id.mainviewpager);
             viewPager.Adapter = adapter;
