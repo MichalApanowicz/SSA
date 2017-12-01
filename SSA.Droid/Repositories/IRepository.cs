@@ -7,6 +7,7 @@ namespace SSA.Droid.Repositories
         T Save(T item);
         T Get(int id);
         int Delete(int id);
+        int DeleteAll();
         List<T> GetAll();
     }
 }

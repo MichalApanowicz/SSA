@@ -193,5 +193,12 @@ namespace SSA.Droid
                 _itemRepository.Save(item);
             }
         }
+        public static void DropData()
+        {
+            _itemRepositorytatus.DeleteAll();
+            _listRepositorytatus.DeleteAll();
+            _listRepository.DeleteAll();
+            _itemRepository.DeleteAll();
+        }
     }
 }

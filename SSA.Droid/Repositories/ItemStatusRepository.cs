@@ -46,6 +46,12 @@ namespace SSA.Droid.Repositories
             return _db.Delete<ItemStatus>(id);
         }
 
+        public int DeleteAll()
+        {
+            _db.DropTable<ItemStatus>();
+            return _db.CreateTable<ItemStatus>();
+        }
+
         public List<ItemStatus> GetAll()
         {
             List<ItemStatus> result = new List<ItemStatus>();

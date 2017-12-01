@@ -47,6 +47,12 @@ namespace SSA.Droid.Repositories
             return _db.Delete<ItemModel>(id);
         }
 
+        public int DeleteAll()
+        {
+            _db.DropTable<ItemModel>();
+            return _db.CreateTable<ItemModel>();
+        }
+
         public void DeleteItem(int listId, int itemId)
         {
             var list = _db.GetWithChildren<ListModel>(listId);

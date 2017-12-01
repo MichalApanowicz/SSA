@@ -34,6 +34,9 @@ namespace SSA.Droid
           
             SetContentView(Resource.Layout.Main);
 
+            SampleData.DropData();
+            SampleData.AddData();
+
             _fragments = new Android.Support.V4.App.Fragment[]
             {
                 AllListsFragment.NewInstance(_listRepository),
@@ -48,9 +51,9 @@ namespace SSA.Droid
                 "Test"
             };
 
-            MainActivityFragmentAdapter adapter = new MainActivityFragmentAdapter(SupportFragmentManager, _fragments, TabNames);
+            var adapter = new MainActivityFragmentAdapter(SupportFragmentManager, _fragments, TabNames);
 
-            ViewPager viewPager = FindViewById<ViewPager>(Resource.Id.mainviewpager);
+            var viewPager = FindViewById<ViewPager>(Resource.Id.mainviewpager);
             viewPager.Adapter = adapter;
 
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
