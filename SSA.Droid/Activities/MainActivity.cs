@@ -13,6 +13,7 @@ using SSA.Droid.Repositories;
 using Android.Support.V4.View;
 using Android.Support.V4.App;
 using Android.Support.V7.App;
+using Android.Views;
 using SSA.Droid.Adapters;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 
@@ -32,7 +33,6 @@ namespace SSA.Droid
             base.OnCreate(bundle);
           
             SetContentView(Resource.Layout.Main);
-            SupportActionBar.Title = "SSA";
 
             _fragments = new Android.Support.V4.App.Fragment[]
             {
@@ -52,6 +52,24 @@ namespace SSA.Droid
 
             ViewPager viewPager = FindViewById<ViewPager>(Resource.Id.mainviewpager);
             viewPager.Adapter = adapter;
+
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            toolbar.Title = "Photo Editing";
+            toolbar.InflateMenu(Resource.Menu.top_menu);
+            SetSupportActionBar(toolbar);
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.top_menu, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            Toast.MakeText(this, "Action selected: " + item.TitleFormatted,
+                ToastLength.Short).Show();
+            return base.OnOptionsItemSelected(item);
         }
     }
 }
