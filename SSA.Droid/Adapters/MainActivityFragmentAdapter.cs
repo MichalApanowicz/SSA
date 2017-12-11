@@ -7,8 +7,8 @@ namespace SSA.Droid.Adapters
 {
     class MainActivityFragmentAdapter : FragmentPagerAdapter
     {
-        private Android.Support.V4.App.Fragment[] _fragments;
-        private string[] _tabNames;
+        private readonly Fragment[] _fragments;
+        private readonly string[] _tabNames;
 
         public MainActivityFragmentAdapter(Android.Support.V4.App.FragmentManager fm, Android.Support.V4.App.Fragment[] fragments, string[] tabNames)
                 : base(fm)

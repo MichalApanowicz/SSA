@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\ListDetailsActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\MainActivityFragments\AllItemsFragment.cs" />
     <Compile Include="Activities\MainActivityFragments\AllListsFragment.cs" />

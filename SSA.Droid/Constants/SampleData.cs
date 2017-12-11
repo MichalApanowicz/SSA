@@ -171,7 +171,7 @@ namespace SSA.Droid
             {
                 Name = "Lista Jastrzębi",
                 Description = "Rzeczy zabrane na zbiórkę",
-                Status = listStatus1,
+                ListStatusId = 1,
                 Items = new List<ItemModel> 
                 {
 

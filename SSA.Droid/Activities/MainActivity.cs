@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Android.App;
+using Android.Content.PM;
 using Android.Nfc;
 using Android.Widget;
 using Android.OS;
@@ -15,18 +16,23 @@ using Android.Support.V4.App;
 using Android.Support.V7.App;
 using Android.Views;
 using SSA.Droid.Adapters;
-using Toolbar = Android.Support.V7.Widget.Toolbar;
+//using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 
 namespace SSA.Droid
 {
-    [Activity(Label = "SSA.Droid", MainLauncher = true)]
-    public class MainActivity : AppCompatActivity
+
+    [Activity(
+        MainLauncher = true, 
+        ConfigurationChanges = ConfigChanges.KeyboardHidden | ConfigChanges.Orientation)]
+  public class MainActivity : FragmentActivity
     {
-        Android.Support.V4.App.Fragment[] _fragments;
+        private Android.Support.V4.App.Fragment[] _fragments;
         private string[] TabNames { get; set; }
-        private ListRepository _listRepository = new ListRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-        private ItemRepository _itemRepository = new ItemRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        private readonly ListRepository _listRepository = 
+            new ListRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        private readonly ItemRepository _itemRepository = 
+            new ItemRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -57,9 +63,9 @@ namespace SSA.Droid
             viewPager.Adapter = adapter;
 
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            toolbar.Title = "Photo Editing";
+            toolbar.Title = "SSA";
             toolbar.InflateMenu(Resource.Menu.top_menu);
-            SetSupportActionBar(toolbar);
+            SetActionBar(toolbar);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
