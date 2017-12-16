@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using Android.App;
 using Android.Content;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Newtonsoft.Json;
+using SSA.Droid.Activities;
 using SSA.Droid.Models;
 
 namespace SSA.Droid.Adapters
@@ -11,11 +14,11 @@ namespace SSA.Droid.Adapters
     public class AllItemsAdapter : BaseAdapter<string>
     {
         private readonly List<ItemModel> _items;
-        private readonly LayoutInflater _layoutInflater;
+        private readonly Activity _context;
 
-        public AllItemsAdapter(LayoutInflater layoutInflater, List<ItemModel> items)
+        public AllItemsAdapter(Activity context, List<ItemModel> items) : base()
         {
-            _layoutInflater = layoutInflater;
+            _context = context;
             _items = items;
         }
 
@@ -23,11 +26,17 @@ namespace SSA.Droid.Adapters
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            var item = _items.ToArray()[position];
+            var item = _items[position];
+            
+            var view = convertView ?? _context.LayoutInflater.Inflate(Resource.Layout.ItemOnAllItemsList, null);
 
-            var view = convertView ?? _layoutInflater.Inflate(Resource.Layout.ItemOnAllItemsList, null);
-            view.FindViewById<TextView>(Resource.Id.textView1).Text = $"{item.Name}";
-            view.FindViewById<TextView>(Resource.Id.textView2).Text = $"{item.Description}";
+            var linearLayout = view.FindViewById<LinearLayout>(Resource.Id.linearLayout3);
+            var checkBox = view.FindViewById<CheckBox>(Resource.Id.checkBox1);
+            var text1 = view.FindViewById<TextView>(Resource.Id.textView1);
+            var text2 = view.FindViewById<TextView>(Resource.Id.textView2);
+
+            text1.Text = $"{item.Name} [id: {checkBox.Id}, tag: {checkBox.Tag}, itemId: {item.ItemId}]";
+            text2.Text = $"{item.Description}";
 
             var available = item.ItemStatusId == (int)ItemStatusEnum.Available;
             if (available)
@@ -37,10 +46,21 @@ namespace SSA.Droid.Adapters
             else
             {
                 //view.FindViewById<TextView>(Resource.Id.textView3).Text = $"{item.Status.Name}";
-                view.FindViewById<CheckBox>(Resource.Id.checkBox1).Visibility = ViewStates.Invisible;
+                checkBox.Visibility = ViewStates.Invisible;
             }
-            
-            
+           
+
+            if (convertView == null)
+            {
+                linearLayout.Click += (sender, e) =>
+                {
+                    var intent = new Intent(_context, typeof(ItemDetailsActivity));
+                    intent.PutExtra("Item", JsonConvert.SerializeObject(item));
+
+                    _context.StartActivity(intent);
+                };
+            }
+
             return view;
         }
 

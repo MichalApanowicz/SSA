@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\ItemDetailsActivity.cs" />
     <Compile Include="Activities\ListDetailsActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\MainActivityFragments\AllItemsFragment.cs" />
@@ -144,11 +145,16 @@
     <AndroidResource Include="Resources\layout\AllItems.axml" />
     <AndroidResource Include="Resources\layout\AllLists.axml" />
     <AndroidResource Include="Resources\layout\Item.axml" />
-    <AndroidResource Include="Resources\layout\ListDetailsActivity.axml" />
+    <AndroidResource Include="Resources\layout\ListDetailsActivity.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\values\styles.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ItemOnAllItemsList.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ItemDetailsActivity.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

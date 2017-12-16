@@ -3,7 +3,9 @@ using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
+using Android.Graphics;
 using Android.OS;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
@@ -29,40 +31,62 @@ namespace SSA.Droid.Activities.MainActivityFragments
             return fragment;
         }
 
-        public override void OnStart()
+        public override void OnCreate(Bundle savedInstanceState)
         {
-            //ListView.ChoiceMode = ChoiceMode.Multiple;
-            base.OnStart();
+            base.OnCreate(savedInstanceState);
+
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.AllItems, null);
-            
+            var lv = view.FindViewById<ListView>(Android.Resource.Id.List);
             SelectedItems = new List<ItemModel>();
 
             _items = _itemRepository.GetAllWithCildren();
 
-            ListAdapter = new AllItemsAdapter(inflater, _items);
-            
-
+            ListAdapter = new AllItemsAdapter(Activity, _items);
+            lv.ChoiceMode = ChoiceMode.Multiple;
+            lv.ItemSelected += (sender, e) =>
+            {
+                e.View.SetBackgroundColor(Color.OrangeRed);
+            };
             return view;
         }
 
+
         public override void OnListItemClick(ListView l, View v, int position, long id)
         {
-            //ListView.SetItemChecked(position, true);
-            var item = _items[position];
-            if (v.FindViewById<CheckBox>(Resource.Id.checkBox1).Checked =
-                !v.FindViewById<CheckBox>(Resource.Id.checkBox1).Checked)
+            var checkBox = v.FindViewById<CheckBox>(Resource.Id.checkBox1);
+            var text1 = v.FindViewById<TextView>(Resource.Id.textView1).Text;
+            var text2 = v.FindViewById<TextView>(Resource.Id.textView2).Text;
+
+            var item = _items.FirstOrDefault(x => x.ItemId == id);
+            
+            if (SelectedItems.Contains(item))
             {
-                SelectedItems.Add(item);
+                SelectedItems.Remove(item);
+                ListView.SetItemChecked(position , false);
+                //checkBox.Checked = false;
+                
             }
             else
             {
-                SelectedItems.Remove(item);
+                SelectedItems.Add(item);
+                ListView.SetItemChecked(position, true);
+                
+                //checkBox.Checked = true;
             }
-            base.OnListItemClick(l, v, position, id);
+            for (var i=0; i< ListView.CheckedItemPositions.Size(); i++)
+            {
+               // ListView.
+            }
+            Log.Info($"checkBox: {position}", ListView.IsItemChecked(position).ToString());
+            Log.Info($"GetCheckedItemIds", ListView.GetCheckedItemIds().Length.ToString());
+            Log.Info($"SelectedItemId", ListView.CheckedItemPositions.ToString());
+            Log.Info($"CheckedItemCount", ListView.CheckedItemCount.ToString());
+
+            //base.OnListItemClick(l, v, position, id);
         }
     }
 }

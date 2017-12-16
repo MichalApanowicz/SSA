@@ -14,7 +14,7 @@ using SSA.Droid.Models;
 
 namespace SSA.Droid.Activities
 {
-    [Activity(Label = "ListDetailsActivity")]
+    [Activity(Label = "ListDetailsActivity", WindowSoftInputMode = SoftInput.StateAlwaysHidden)]
     public class ListDetailsActivity : ListActivity
     {
         private ListModel _list;
@@ -38,6 +38,7 @@ namespace SSA.Droid.Activities
                 objects: _items.Select(x => x.Name).ToArray());
 
             ListAdapter = adapter;
+            
         }
     }
 }
