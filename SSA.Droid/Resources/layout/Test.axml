@@ -79,6 +79,26 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:id="@+id/editTextListId" />
+  <TextView
+    android:text="Kod EAN"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/textView4" />
+  <EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/editTextEan" />
+  <TextView
+    android:text="Status ID"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/textView5" />
+  <EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/editTextStatus" />
   <EditText
       android:inputType="none"
       android:layout_width="fill_parent"

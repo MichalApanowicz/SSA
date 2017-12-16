@@ -16,28 +16,26 @@ using Android.Support.V4.App;
 using Android.Support.V7.App;
 using Android.Views;
 using SSA.Droid.Adapters;
-//using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 
 namespace SSA.Droid
 {
 
     [Activity(
-        MainLauncher = true, 
-        ConfigurationChanges = ConfigChanges.KeyboardHidden | ConfigChanges.Orientation)]
-  public class MainActivity : FragmentActivity
+        MainLauncher = true)]
+    public class MainActivity : FragmentActivity
     {
         private Android.Support.V4.App.Fragment[] _fragments;
         private string[] TabNames { get; set; }
-        private readonly ListRepository _listRepository = 
+        private readonly ListRepository _listRepository =
             new ListRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-        private readonly ItemRepository _itemRepository = 
+        private readonly ItemRepository _itemRepository =
             new ItemRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-          
+
             SetContentView(Resource.Layout.Main);
 
             SampleData.DropData();
@@ -76,8 +74,34 @@ namespace SSA.Droid
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            Toast.MakeText(this, "Action selected: " + item.TitleFormatted,
-                ToastLength.Short).Show();
+            switch (item.ItemId)
+            {
+                case Resource.Id.menu_createNewList:
+                    if (AllItemsFragment.SelectedItems == null) return true;
+                    var x = "";
+                    try
+                    {
+                        x += _listRepository.Save(new ListModel()
+                        {
+                            Name = "Nowa",
+                            Description = "Opis",
+                            ListStatusId = 1,
+                            Items = AllItemsFragment.SelectedItems
+                        }).ToString() + System.Environment.NewLine;
+                    }
+                    catch (Exception ex)
+                    {
+                        x += ex.Message;
+                    }
+                    
+                    Log.Info("list", x.ToString());
+                    return true;
+
+                case Resource.Id.menu_save:
+                    Toast.MakeText(this, "Action selected: " + item.TitleFormatted,
+                        ToastLength.Short).Show();
+                    return true;
+            }
             return base.OnOptionsItemSelected(item);
         }
     }

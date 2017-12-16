@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Android.App;
 using Android.OS;
 using Android.Views;
@@ -12,7 +13,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
 {
     public class TestFragment : Android.Support.V4.App.Fragment
     {
-        private EditText _outputText, _nameText, _descText, _listIdText;
+        private EditText _outputText, _nameText, _descText, _listIdText, _eanText, _statusText;
         private Button _addListButton, _deleteListButton, _addItemButton, _deleteItemButton, _getFromListButton, _getListButton;
 
         private ItemRepository _itemRepository;
@@ -47,6 +48,8 @@ namespace SSA.Droid.Activities.MainActivityFragments
             _nameText = view.FindViewById<EditText>(Resource.Id.editTextName);
             _descText = view.FindViewById<EditText>(Resource.Id.editTextDesc);
             _listIdText = view.FindViewById<EditText>(Resource.Id.editTextListId);
+            _statusText = view.FindViewById<EditText>(Resource.Id.editTextStatus);
+            _eanText = view.FindViewById<EditText>(Resource.Id.editTextEan);
 
             try
             {
@@ -67,7 +70,8 @@ namespace SSA.Droid.Activities.MainActivityFragments
                         {
                             Name = _nameText.Text,
                             Description = _descText.Text,
-                            ListId = Int32.Parse(_listIdText.Text)
+                            ListId = Int32.Parse(_listIdText.Text),
+                            KodEAN = _eanText.Text
                         }).ToString() + System.Environment.NewLine;
                     _outputText.Text += result;
                 }
@@ -105,7 +109,13 @@ namespace SSA.Droid.Activities.MainActivityFragments
             {
                 try
                 {
-                    _outputText.Text += _listRepository.Save(new ListModel() { Name = _nameText.Text, Description = _descText.Text }).ToString() + System.Environment.NewLine;
+                    _outputText.Text += _listRepository.Save(new ListModel()
+                    {
+                        Name = _nameText.Text,
+                        Description = _descText.Text,
+                        ListStatusId = Int32.Parse(_statusText.Text),
+                        Items = new List<ItemModel>()
+                    }).ToString() + System.Environment.NewLine;
                 }
                 catch (Exception ex)
                 {

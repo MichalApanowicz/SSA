@@ -10,7 +10,7 @@ namespace SSA.Droid.Adapters
         private readonly Fragment[] _fragments;
         private readonly string[] _tabNames;
 
-        public MainActivityFragmentAdapter(Android.Support.V4.App.FragmentManager fm, Android.Support.V4.App.Fragment[] fragments, string[] tabNames)
+        public MainActivityFragmentAdapter(Android.Support.V4.App.FragmentManager fm, Fragment[] fragments, string[] tabNames)
                 : base(fm)
         {
             _fragments = fragments;
@@ -19,7 +19,7 @@ namespace SSA.Droid.Adapters
 
         public override int Count => _fragments.Length;
 
-        public override Android.Support.V4.App.Fragment GetItem(int position)
+        public override Fragment GetItem(int position)
         {
             return _fragments[position];
         }

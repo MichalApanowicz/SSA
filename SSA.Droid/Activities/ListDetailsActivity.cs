@@ -17,8 +17,9 @@ namespace SSA.Droid.Activities
     [Activity(Label = "ListDetailsActivity")]
     public class ListDetailsActivity : ListActivity
     {
-        private List<ItemModel> _items;
         private ListModel _list;
+        private List<ItemModel> _items;
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

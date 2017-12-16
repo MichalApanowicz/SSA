@@ -71,5 +71,12 @@ namespace SSA.Droid.Repositories
             }
             return result;
         }
+
+        public List<ItemModel> GetAllWithCildren()
+        {
+            List<ItemModel> result = _db.GetAllWithChildren<ItemModel>();
+            
+            return result;
+        }
     }
 }

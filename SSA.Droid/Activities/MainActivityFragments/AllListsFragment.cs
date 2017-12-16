@@ -26,8 +26,6 @@ namespace SSA.Droid.Activities.MainActivityFragments
             return fragment;
         }
 
-        private ListView listView;
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view = inflater.Inflate(Resource.Layout.AllLists, null);
