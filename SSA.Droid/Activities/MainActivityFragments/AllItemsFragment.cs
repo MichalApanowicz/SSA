@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Content;
@@ -66,16 +67,17 @@ namespace SSA.Droid.Activities.MainActivityFragments
             if (SelectedItems.Contains(item))
             {
                 SelectedItems.Remove(item);
-                ListView.SetItemChecked(position , false);
-                //checkBox.Checked = false;
-                
+                ListView.SetItemChecked(position, false);
+                v.SetBackgroundColor(Color.Wheat);
+                checkBox.Checked = false;
+
             }
             else
             {
                 SelectedItems.Add(item);
                 ListView.SetItemChecked(position, true);
-                
-                //checkBox.Checked = true;
+                v.SetBackgroundColor(Color.OrangeRed);
+                checkBox.Checked = true;
             }
             for (var i=0; i< ListView.CheckedItemPositions.Size(); i++)
             {
