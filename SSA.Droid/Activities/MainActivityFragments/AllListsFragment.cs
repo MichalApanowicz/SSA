@@ -22,7 +22,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         public static AllListsFragment NewInstance(ListRepository listRepository)
         {
-            AllListsFragment fragment = new AllListsFragment { _listRepository = listRepository };
+            var fragment = new AllListsFragment { _listRepository = listRepository };
             return fragment;
         }
 

@@ -21,8 +21,9 @@ namespace SSA.Droid.Activities.MainActivityFragments
     public class AllItemsFragment : Android.Support.V4.App.ListFragment
     {
         private ItemRepository _itemRepository;
-        private List<ItemModel> _items;
-        public static List<ItemModel> SelectedItems;
+        private static List<ItemModel> _items;
+        private static List<ItemModel> _selectedItems;
+        private AllItemsAdapter _adapter;
 
         private AllItemsFragment() { }
 
@@ -32,59 +33,39 @@ namespace SSA.Droid.Activities.MainActivityFragments
             return fragment;
         }
 
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-
-        }
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.AllItems, null);
             var lv = view.FindViewById<ListView>(Android.Resource.Id.List);
-            SelectedItems = new List<ItemModel>();
+            _selectedItems = new List<ItemModel>();
 
             _items = _itemRepository.GetAllWithCildren();
 
-            ListAdapter = new AllItemsAdapter(Activity, _items);
-            lv.ChoiceMode = ChoiceMode.Multiple;
+            _adapter = new AllItemsAdapter(Activity, _items);
+            ListAdapter = _adapter;
+            lv.ChoiceMode = ChoiceMode.None;
 
             return view;
         }
 
-
         public override void OnListItemClick(ListView l, View v, int position, long id)
         {
-            var checkBox = v.FindViewById<CheckBox>(Resource.Id.checkBox1);
-            var text1 = v.FindViewById<TextView>(Resource.Id.textView1).Text;
-            var text2 = v.FindViewById<TextView>(Resource.Id.textView2).Text;
+            //Log.Debug("Fragment", $"_selectedItems[{_selectedItems.Count}]: {_selectedItems.ToArray().ToString()}");
+        }
 
-            var item = _items.FirstOrDefault(x => x.ItemId == id);
+        public List<ItemModel> GetSelectedItems()
+        {
+            _selectedItems.Clear();
+
+            var selected = ((AllItemsAdapter)ListAdapter).GetSelectedRows();
+            foreach (var i in selected)
+            {
+                _selectedItems.Add(_items.First(x => x.ItemId == i));
+            }
+            _adapter.NotifyDataSetChanged();
+            Log.Debug("Fragment", $"_selectedItems[{_selectedItems.Count}]: {JsonConvert.SerializeObject(_selectedItems, Formatting.Indented)}");
             
-            checkBox.Toggle();
-            if (SelectedItems.Contains(item))
-            {
-                SelectedItems.Remove(item);
-                ListView.SetItemChecked(position, false);
-                v.SetBackgroundColor(Color.Wheat);
-            }
-            else
-            {
-                SelectedItems.Add(item);
-                ListView.SetItemChecked(position, true);
-                v.SetBackgroundColor(Color.OrangeRed);
-            }
-            for (var i=0; i< ListView.CheckedItemPositions.Size(); i++)
-            {
-                var x = ListView.CheckedItemPositions.ValueAt(i);
-                ListView.GetChildAt(i).FindViewById<CheckBox>(Resource.Id.checkBox1).Toggle();
-            }
-            Log.Info($"checkBox: {position}", ListView.IsItemChecked(position).ToString());
-            Log.Info($"GetCheckedItemIds", ListView.GetCheckedItemIds().Length.ToString());
-            Log.Info($"SelectedItemId", ListView.CheckedItemPositions.ToString());
-            Log.Info($"CheckedItemCount", ListView.CheckedItemCount.ToString());
-
-            //base.OnListItemClick(l, v, position, id);
+            return _selectedItems;
         }
     }
 }

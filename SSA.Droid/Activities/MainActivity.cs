@@ -15,6 +15,7 @@ using Android.Support.V4.View;
 using Android.Support.V4.App;
 using Android.Support.V7.App;
 using Android.Views;
+using Newtonsoft.Json;
 using SSA.Droid.Adapters;
 
 
@@ -77,17 +78,20 @@ namespace SSA.Droid
             switch (item.ItemId)
             {
                 case Resource.Id.menu_createNewList:
-                    if (AllItemsFragment.SelectedItems == null) return true;
+                    //if (AllItemsFragment.SelectedItems == null) return true;
                     var x = "";
                     try
                     {
+                        var selectedItems = ((AllItemsFragment) _fragments[1]).GetSelectedItems();
                         x += _listRepository.Save(new ListModel()
                         {
                             Name = "Nowa",
                             Description = "Opis",
                             ListStatusId = 1,
-                            Items = AllItemsFragment.SelectedItems
-                        }).ToString() + System.Environment.NewLine;
+                            Items = selectedItems
+                        }) + System.Environment.NewLine;
+                        
+                        Log.Debug("MainActivity", $"menu_createNewList: {JsonConvert.SerializeObject(x, Formatting.Indented)}");
                     }
                     catch (Exception ex)
                     {

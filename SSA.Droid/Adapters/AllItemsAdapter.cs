@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -12,17 +13,19 @@ using SSA.Droid.Models;
 
 namespace SSA.Droid.Adapters
 {
-    class MyViewHolder : Java.Lang.Object
+    class ItemOnListViewHolder : Java.Lang.Object
     {
+        public LinearLayout LinearLayout { get; set; }
         public TextView Name { get; set; }
         public TextView Description { get; set; }
         public CheckBox CheckBox { get; set; }
     }
 
-    public class AllItemsAdapter : BaseAdapter<string>, View.IOnClickListener
+    public class AllItemsAdapter : BaseAdapter<string>
     {
         private readonly List<ItemModel> _items;
         private readonly Activity _context;
+        private readonly List<int> _selected = new List<int>();
 
         public AllItemsAdapter(Activity context, List<ItemModel> items) : base()
         {
@@ -34,42 +37,42 @@ namespace SSA.Droid.Adapters
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
+            ItemOnListViewHolder holder = null;
+            var view = convertView;
+
+            if (view != null)
+                holder = view.Tag as ItemOnListViewHolder;
+
             var item = _items[position];
 
-            var view = convertView ?? _context.LayoutInflater.Inflate(Resource.Layout.ItemOnAllItemsList, null);
-
-            var linearLayout = view.FindViewById<LinearLayout>(Resource.Id.linearLayout3);
-            var checkBox = view.FindViewById<CheckBox>(Resource.Id.checkBox1);
-            var text1 = view.FindViewById<TextView>(Resource.Id.textView1);
-            var text2 = view.FindViewById<TextView>(Resource.Id.textView2);
-
-            text1.Text = $"{item.Name} [id: {checkBox.Id}, tag: {checkBox.Tag}, itemId: {item.ItemId}]";
-            text2.Text = $"{item.Description}";
-
-            var available = item.ItemStatusId == (int)ItemStatusEnum.Available;
-            if (available)
+            if (holder == null)
             {
-                // view.FindViewById<TextView>(Resource.Id.textView3).Visibility = ViewStates.Invisible;
-            }
-            else
-            {
-                //view.FindViewById<TextView>(Resource.Id.textView3).Text = $"{item.Status.Name}";
-                checkBox.Visibility = ViewStates.Invisible;
-            }
+                holder = new ItemOnListViewHolder();
+                view = _context.LayoutInflater.Inflate(Resource.Layout.ItemOnAllItemsList, null);
+                holder.LinearLayout = view.FindViewById<LinearLayout>(Resource.Id.linearLayout3);
+                holder.Name = view.FindViewById<TextView>(Resource.Id.textView1);
+                holder.Description = view.FindViewById<TextView>(Resource.Id.textView2);
+                holder.CheckBox = view.FindViewById<CheckBox>(Resource.Id.checkBox1);
 
-            checkBox.SetOnClickListener(this);
-
-            if (convertView == null)
-            {
-                linearLayout.Click += (sender, e) =>
+                holder.CheckBox.Click += (s, e) =>
+                {
+                    if (holder.CheckBox.Checked) _selected.Add(item.ItemId);
+                    else _selected.Remove(item.ItemId);
+                    Log.Debug("Adapter", $"_selected: {JsonConvert.SerializeObject(_selected, Formatting.Indented)}");
+                };
+                holder.LinearLayout.Click += (sender, e) =>
                 {
                     var intent = new Intent(_context, typeof(ItemDetailsActivity));
                     intent.PutExtra("Item", JsonConvert.SerializeObject(item));
 
                     _context.StartActivity(intent);
                 };
+                view.Tag = holder;
             }
 
+            holder.Name.Text = $"{item.Name} [{item.ItemId}]";
+            holder.Description.Text = item.Description;
+            holder.CheckBox.Checked = _selected.Contains(item.ItemId);
             return view;
         }
 
@@ -77,9 +80,11 @@ namespace SSA.Droid.Adapters
 
         public override string this[int position] => _items.ToArray()[position].Name;
 
-        public void OnClick(View v)
+        public List<int> GetSelectedRows()
         {
-            v.FindViewById<CheckBox>(Resource.Id.checkBox1).Checked = true;
+            var result = _selected.Select(x => x).ToList();// Select(item => item.Clone()).ToList(); ;
+            _selected.Clear();
+            return result;
         }
     }
 }
