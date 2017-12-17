@@ -114,7 +114,6 @@
     <Compile Include="Activities\MainActivityFragments\AllListsFragment.cs" />
     <Compile Include="Activities\MainActivityFragments\TestFragment.cs" />
     <Compile Include="Adapters\AllItemsAdapter.cs" />
-    <Compile Include="Adapters\AllListsAdapter.cs" />
     <Compile Include="Adapters\MainActivityFragmentAdapter.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Constants\ItemStatusEnum.cs" />
@@ -157,9 +156,6 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ItemDetailsActivity.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\ListOnAllListsList.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
