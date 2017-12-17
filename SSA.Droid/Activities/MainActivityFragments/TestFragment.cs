@@ -114,6 +114,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
                         Name = _nameText.Text,
                         Description = _descText.Text,
                         ListStatusId = Int32.Parse(_statusText.Text),
+                        Status = new ListStatus(),
                         Items = new List<ItemModel>()
                     }).ToString() + System.Environment.NewLine;
                 }

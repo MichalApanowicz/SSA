@@ -13,14 +13,6 @@ using SSA.Droid.Models;
 
 namespace SSA.Droid.Adapters
 {
-    class ItemOnListViewHolder : Java.Lang.Object
-    {
-        public LinearLayout LinearLayout { get; set; }
-        public TextView Name { get; set; }
-        public TextView Description { get; set; }
-        public CheckBox CheckBox { get; set; }
-    }
-
     public class AllItemsAdapter : BaseAdapter<string>
     {
         private readonly List<ItemModel> _items;
@@ -86,6 +78,14 @@ namespace SSA.Droid.Adapters
             _selected.Clear();
             return result;
         }
+    }
+
+    internal class ItemOnListViewHolder : Java.Lang.Object
+    {
+        public LinearLayout LinearLayout { get; set; }
+        public TextView Name { get; set; }
+        public TextView Description { get; set; }
+        public CheckBox CheckBox { get; set; }
     }
 }
 

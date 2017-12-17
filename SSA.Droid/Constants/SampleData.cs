@@ -15,14 +15,14 @@ using SSA.Droid.Models;
 using SSA.Droid.Repositories;
 
 namespace SSA.Droid
-{ 
+{
     static class SampleData
     {
 
         static ItemRepository _itemRepository = new ItemRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
         static ListRepository _listRepository = new ListRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-        static ItemStatusRepository _itemRepositorytatus = new ItemStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-        static ListStatusRepository _listRepositorytatus = new ListStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        static ItemStatusRepository _itemRepositoryStatus = new ItemStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        static ListStatusRepository _listRepositoryStatus = new ListStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
 
         private static ItemStatus itemStatus1 = new ItemStatus
         {
@@ -33,7 +33,13 @@ namespace SSA.Droid
         private static ListStatus listStatus1 = new ListStatus
         {
             ListStatusId = 1,
-            Name = "Available",
+            Name = "Uncommitted",
+        };
+
+        private static ListStatus listStatus2 = new ListStatus
+        {
+            ListStatusId = 2,
+            Name = "Committed",
         };
 
         private static List<ItemModel> items = new List<ItemModel>
@@ -151,38 +157,42 @@ namespace SSA.Droid
             {
                 Name = "Magazyn Główny",
                 Description = "Rzeczy znajdujące się w magazynie nr 1 przy ulicy Głównej 1 w Bydgoszczy",
-                ListStatusId = 1,
+                CreateDate = "2017-12-14", Person = "Michał Apanowicz", ListStatusId = 1,
                 Items = new List<ItemModel>
                 {
 
-                }
+                },
+                Status = listStatus1
             },
             new ListModel()
             {
                 Name = "Lista obozowa 1",
                 Description = "Rzeczy zabrane na kwaterkę",
-                ListStatusId = 1,
+                CreateDate = "2017-12-14", Person = "Michał Apanowicz", ListStatusId = 1,
                 Items = new List<ItemModel>
                 {
 
-                }
+                },
+                Status = listStatus1
             },
             new ListModel()
             {
                 Name = "Lista Jastrzębi",
                 Description = "Rzeczy zabrane na zbiórkę",
-                ListStatusId = 1,
-                Items = new List<ItemModel> 
+                CreateDate = "2017-12-14", Person = "Michał Apanowicz", ListStatusId = 2,
+                Items = new List<ItemModel>
                 {
 
-                }
+                },
+                Status = listStatus2
             }
         };
 
         public static void AddData()
         {
-            _itemRepositorytatus.Save(itemStatus1);
-            _listRepositorytatus.Save(listStatus1);
+            _itemRepositoryStatus.Save(itemStatus1);
+            _listRepositoryStatus.Save(listStatus1);
+            _listRepositoryStatus.Save(listStatus2);
 
             foreach (var list in lists)
             {
@@ -195,8 +205,8 @@ namespace SSA.Droid
         }
         public static void DropData()
         {
-            _itemRepositorytatus.DeleteAll();
-            _listRepositorytatus.DeleteAll();
+            _itemRepositoryStatus.DeleteAll();
+            _listRepositoryStatus.DeleteAll();
             _listRepository.DeleteAll();
             _itemRepository.DeleteAll();
         }

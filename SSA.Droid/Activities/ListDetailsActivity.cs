@@ -19,6 +19,8 @@ namespace SSA.Droid.Activities
     {
         private ListModel _list;
         private List<ItemModel> _items;
+
+        private TextView _person, _createDate;
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -33,7 +35,12 @@ namespace SSA.Droid.Activities
             toolbar.InflateMenu(Resource.Menu.top_menu);
             SetActionBar(toolbar);
 
-            
+            _person = FindViewById<TextView>(Resource.Id.ListPersonText);
+            _createDate = FindViewById<TextView>(Resource.Id.ListDateText);
+
+            _person.Text = _list.Person;
+            _createDate.Text = DateTime.Parse(_list.CreateDate).ToLongDateString();
+
             var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItemChecked,
                 objects: _items.Select(x => x.Name).ToArray());
 

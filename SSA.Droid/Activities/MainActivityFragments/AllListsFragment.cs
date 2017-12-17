@@ -8,6 +8,7 @@ using Android.Widget;
 using Newtonsoft.Json;
 using SQLite.Net;
 using SQLite.Net.Platform.XamarinAndroid;
+using SSA.Droid.Adapters;
 using SSA.Droid.Models;
 using SSA.Droid.Repositories;
 
@@ -30,11 +31,9 @@ namespace SSA.Droid.Activities.MainActivityFragments
         {
             View view = inflater.Inflate(Resource.Layout.AllLists, null);
 
-            _lists = _listRepository.GetAll();
-            var adapter = new ArrayAdapter<string>(Context, Android.Resource.Layout.SimpleListItem1,
-                objects: _lists.Select(x => x.Name).ToArray());
+            _lists = _listRepository.GetAllWithCildren();
 
-            ListAdapter = adapter;
+            ListAdapter = new AllListsAdapter(Activity, _lists);
 
             return view;
         }
@@ -44,7 +43,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
             var list = _lists[position];
             base.OnListItemClick(l, v, position, id);
             Intent intent = new Intent(Context, typeof(ListDetailsActivity));
-            intent.PutExtra("List", JsonConvert.SerializeObject(list));
+            intent.PutExtra("List", JsonConvert.SerializeObject(list, new JsonSerializerSettings(){MaxDepth = 1}));
 
             StartActivity(intent);
         }

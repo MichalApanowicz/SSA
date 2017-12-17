@@ -24,6 +24,10 @@ namespace SSA.Droid.Models
 
         public string Description { get; set; }
 
+        public string Person { get; set; }
+
+        public string CreateDate { get; set; }
+
         [ForeignKey(typeof(ListStatus))]
         public int ListStatusId { get; set; }
 

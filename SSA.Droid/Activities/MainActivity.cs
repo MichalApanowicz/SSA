@@ -33,6 +33,10 @@ namespace SSA.Droid
         private readonly ItemRepository _itemRepository =
             new ItemRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
 
+        static ItemStatusRepository _itemStatusRepository = new ItemStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        static ListStatusRepository _listStatusRepository = new ListStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -88,6 +92,7 @@ namespace SSA.Droid
                             Name = "Nowa",
                             Description = "Opis",
                             ListStatusId = 1,
+                            Status = _listStatusRepository.Get(1),
                             Items = selectedItems
                         }) + System.Environment.NewLine;
                         
