@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -11,7 +12,14 @@ using SSA.Droid.Models;
 
 namespace SSA.Droid.Adapters
 {
-    public class AllItemsAdapter : BaseAdapter<string>
+    class MyViewHolder : Java.Lang.Object
+    {
+        public TextView Name { get; set; }
+        public TextView Description { get; set; }
+        public CheckBox CheckBox { get; set; }
+    }
+
+    public class AllItemsAdapter : BaseAdapter<string>, View.IOnClickListener
     {
         private readonly List<ItemModel> _items;
         private readonly Activity _context;
@@ -27,7 +35,7 @@ namespace SSA.Droid.Adapters
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             var item = _items[position];
-            
+
             var view = convertView ?? _context.LayoutInflater.Inflate(Resource.Layout.ItemOnAllItemsList, null);
 
             var linearLayout = view.FindViewById<LinearLayout>(Resource.Id.linearLayout3);
@@ -41,14 +49,15 @@ namespace SSA.Droid.Adapters
             var available = item.ItemStatusId == (int)ItemStatusEnum.Available;
             if (available)
             {
-               // view.FindViewById<TextView>(Resource.Id.textView3).Visibility = ViewStates.Invisible;
+                // view.FindViewById<TextView>(Resource.Id.textView3).Visibility = ViewStates.Invisible;
             }
             else
             {
                 //view.FindViewById<TextView>(Resource.Id.textView3).Text = $"{item.Status.Name}";
                 checkBox.Visibility = ViewStates.Invisible;
             }
-           
+
+            checkBox.SetOnClickListener(this);
 
             if (convertView == null)
             {
@@ -67,5 +76,11 @@ namespace SSA.Droid.Adapters
         public override int Count => _items.Count;
 
         public override string this[int position] => _items.ToArray()[position].Name;
+
+        public void OnClick(View v)
+        {
+            v.FindViewById<CheckBox>(Resource.Id.checkBox1).Checked = true;
+        }
     }
 }
+

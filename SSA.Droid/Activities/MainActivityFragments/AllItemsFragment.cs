@@ -48,10 +48,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
             ListAdapter = new AllItemsAdapter(Activity, _items);
             lv.ChoiceMode = ChoiceMode.Multiple;
-            lv.ItemSelected += (sender, e) =>
-            {
-                e.View.SetBackgroundColor(Color.OrangeRed);
-            };
+
             return view;
         }
 
@@ -64,24 +61,23 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
             var item = _items.FirstOrDefault(x => x.ItemId == id);
             
+            checkBox.Toggle();
             if (SelectedItems.Contains(item))
             {
                 SelectedItems.Remove(item);
                 ListView.SetItemChecked(position, false);
                 v.SetBackgroundColor(Color.Wheat);
-                checkBox.Checked = false;
-
             }
             else
             {
                 SelectedItems.Add(item);
                 ListView.SetItemChecked(position, true);
                 v.SetBackgroundColor(Color.OrangeRed);
-                checkBox.Checked = true;
             }
             for (var i=0; i< ListView.CheckedItemPositions.Size(); i++)
             {
-               // ListView.
+                var x = ListView.CheckedItemPositions.ValueAt(i);
+                ListView.GetChildAt(i).FindViewById<CheckBox>(Resource.Id.checkBox1).Toggle();
             }
             Log.Info($"checkBox: {position}", ListView.IsItemChecked(position).ToString());
             Log.Info($"GetCheckedItemIds", ListView.GetCheckedItemIds().Length.ToString());
