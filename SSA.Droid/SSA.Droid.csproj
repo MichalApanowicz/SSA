@@ -118,6 +118,7 @@
     <Compile Include="Adapters\MainActivityFragmentAdapter.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Constants\ItemStatusEnum.cs" />
+    <Compile Include="Constants\ListStatusEnum.cs" />
     <Compile Include="Constants\SampleData.cs" />
     <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Models\ItemStatus.cs" />

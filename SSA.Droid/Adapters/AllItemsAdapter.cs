@@ -45,26 +45,43 @@ namespace SSA.Droid.Adapters
                 holder.Name = view.FindViewById<TextView>(Resource.Id.textView1);
                 holder.Description = view.FindViewById<TextView>(Resource.Id.textView2);
                 holder.CheckBox = view.FindViewById<CheckBox>(Resource.Id.checkBox1);
+                holder.Status = view.FindViewById<TextView>(Resource.Id.textView3);
+                holder.Item = item;
 
                 holder.CheckBox.Click += (s, e) =>
                 {
-                    if (holder.CheckBox.Checked) _selected.Add(item.ItemId);
-                    else _selected.Remove(item.ItemId);
+                    if (holder.CheckBox.Checked) _selected.Add(holder.Item.ItemId);
+                    else _selected.Remove(holder.Item.ItemId);
                     Log.Debug("Adapter", $"_selected: {JsonConvert.SerializeObject(_selected, Formatting.Indented)}");
                 };
-                holder.LinearLayout.Click += (sender, e) =>
+                holder.LinearLayout.Click += (sender, args) =>
                 {
                     var intent = new Intent(_context, typeof(ItemDetailsActivity));
-                    intent.PutExtra("Item", JsonConvert.SerializeObject(item));
+                    intent.PutExtra("Item", JsonConvert.SerializeObject(holder.Item));
 
+                    Log.Debug("Adapter", $"item: {JsonConvert.SerializeObject(holder.Item, Formatting.Indented)}");
                     _context.StartActivity(intent);
                 };
                 view.Tag = holder;
             }
 
-            holder.Name.Text = $"{item.Name} [{item.ItemId}]";
+            holder.Item = item;
+            holder.Name.Text = $"{item.Name} [{item.KodEAN}]";
             holder.Description.Text = item.Description;
-            holder.CheckBox.Checked = _selected.Contains(item.ItemId);
+            if (item.Status.ItemStatusId == (int)ItemStatusEnum.Available)
+            {
+                holder.CheckBox.Checked = _selected.Contains(item.ItemId);
+                holder.CheckBox.Visibility = ViewStates.Visible;
+                holder.Status.Visibility = ViewStates.Invisible;
+            }
+            else
+            {
+                holder.Status.Text = item.Status.Name;
+                holder.CheckBox.Visibility = ViewStates.Invisible;
+                holder.Status.Visibility = ViewStates.Visible;
+            }
+
+
             return view;
         }
 
@@ -82,9 +99,11 @@ namespace SSA.Droid.Adapters
 
     internal class ItemOnListViewHolder : Java.Lang.Object
     {
+        public ItemModel Item { get; set; }
         public LinearLayout LinearLayout { get; set; }
         public TextView Name { get; set; }
         public TextView Description { get; set; }
+        public TextView Status { get; set; }
         public CheckBox CheckBox { get; set; }
     }
 }

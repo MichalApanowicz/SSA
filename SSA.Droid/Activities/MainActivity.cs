@@ -82,29 +82,38 @@ namespace SSA.Droid
             switch (item.ItemId)
             {
                 case Resource.Id.menu_createNewList:
-                    //if (AllItemsFragment.SelectedItems == null) return true;
-                    var x = "";
-                    try
+                    var selectedItems = ((AllItemsFragment)_fragments[1]).GetSelectedItems();
+                    if (selectedItems.Count == 0)
                     {
-                        var selectedItems = ((AllItemsFragment) _fragments[1]).GetSelectedItems();
-                        x += _listRepository.Save(new ListModel()
+                        Toast.MakeText(this, "Zaznacz przedmioty do dodania",
+                            ToastLength.Short).Show();
+                        return true;
+                    }
+                    else
+                    {
+                        try
                         {
-                            Name = "Nowa",
-                            Description = "Opis",
-                            ListStatusId = 1,
-                            Status = _listStatusRepository.Get(1),
-                            Items = selectedItems
-                        }) + System.Environment.NewLine;
-                        
-                        Log.Debug("MainActivity", $"menu_createNewList: {JsonConvert.SerializeObject(x, Formatting.Indented)}");
+                            var list = new ListModel()
+                            {
+                                Name = "Nowa",
+                                Description = "Opis",
+                                ListStatusId = 1,
+                                Status = _listStatusRepository.Get(ListStatusEnum.Uncommitted),
+                                Items = selectedItems,
+                                Person = "Michał Apanowicz",
+                                CreateDate = DateTime.Now.ToLongDateString()
+                            };
+                            var result = _listRepository.Save(list);
+                            Log.Debug("MainActivity", $"menu_createNewList: {JsonConvert.SerializeObject(result, Formatting.Indented)}");
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error("MainActivity", $"{JsonConvert.SerializeObject(ex, Formatting.Indented)}");
+                        }
+
+                        return true;
                     }
-                    catch (Exception ex)
-                    {
-                        x += ex.Message;
-                    }
-                    
-                    Log.Info("list", x.ToString());
-                    return true;
+
 
                 case Resource.Id.menu_save:
                     Toast.MakeText(this, "Action selected: " + item.TitleFormatted,

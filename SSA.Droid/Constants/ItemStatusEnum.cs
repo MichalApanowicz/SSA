@@ -3,6 +3,7 @@
     public enum ItemStatusEnum
     {
         Available = 1,
-        Reserved = 2
+        Unavailable = 2,
+        Reserved = 3
     }
 }

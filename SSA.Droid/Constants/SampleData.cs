@@ -24,29 +24,49 @@ namespace SSA.Droid
         static ItemStatusRepository _itemRepositoryStatus = new ItemStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
         static ListStatusRepository _listRepositoryStatus = new ListStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
 
-        private static ItemStatus itemStatus1 = new ItemStatus
+        private static List<ItemStatus> itemStatus = new List<ItemStatus>()
         {
-            ItemStatusId = 1,
-            Name = "Available",
-        };
-
-        private static ListStatus listStatus1 = new ListStatus
+            new ItemStatus
+            {
+                ItemStatusId = (int)ItemStatusEnum.Available,
+                Name = "Available",
+            },
+            new ItemStatus
+            {
+                ItemStatusId = (int)ItemStatusEnum.Unavailable,
+                Name = "Unavailable",
+            },
+            new ItemStatus
+            {
+                ItemStatusId = (int)ItemStatusEnum.Reserved,
+                Name = "Reserved",
+            }
+         };
+        private static List<ListStatus> listStatus = new List<ListStatus>()
         {
-            ListStatusId = 1,
-            Name = "Uncommitted",
+            new ListStatus
+            {
+                ListStatusId = (int)ListStatusEnum.Uncommitted,
+                Name = "Uncommitted",
+            },
+            new ListStatus
+            {
+                ListStatusId = (int)ListStatusEnum.Committed,
+                Name = "Committed",
+            },
+            new ListStatus
+            {
+                ListStatusId = (int)ListStatusEnum.Terminated,
+                Name = "Terminated",
+            }
         };
-
-        private static ListStatus listStatus2 = new ListStatus
-        {
-            ListStatusId = 2,
-            Name = "Committed",
-        };
+        
 
         private static List<ItemModel> items = new List<ItemModel>
         {
             new ItemModel()
             {
-                Status = itemStatus1,
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "AB 1234",
                 Name = "Młotek",
                 Description = "500g żółty",
@@ -54,7 +74,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = itemStatus1,
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Reserved),
                 KodEAN = "AB 1235",
                 Name = "Siekiera",
                 Description = "kuta ręcznie",
@@ -62,7 +82,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = itemStatus1,
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Unavailable),
                 KodEAN = "AB 1236",
                 Name = "Gwoździe calowae",
                 Description = "5kg",
@@ -70,7 +90,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = itemStatus1,
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "AB 1237",
                 Name = "Młotek",
                 Description = "250g żółty",
@@ -78,7 +98,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = itemStatus1,
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "AB 1238",
                 Name = "Łopata",
                 Description = "Fiskars",
@@ -86,7 +106,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = itemStatus1,
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "AB 1238",
                 Name = "Łopata",
                 Description = "Fiskars",
@@ -94,7 +114,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = itemStatus1,
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "AB 1239",
                 Name = "Dołownik",
                 Description = "Romanik",
@@ -102,7 +122,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = itemStatus1,
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "AB 1240",
                 Name = "Plandeka",
                 Description = "9m^2",
@@ -110,7 +130,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = itemStatus1,
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "AB 1241",
                 Name = "Plandeka",
                 Description = "3m^2",
@@ -118,7 +138,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = itemStatus1,
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "AB 1242",
                 Name = "Plandeka",
                 Description = "2m^2",
@@ -126,7 +146,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = itemStatus1,
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "AB 1242",
                 Name = "Latarka",
                 Description = "duża",
@@ -134,7 +154,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = itemStatus1,
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "AB 1242",
                 Name = "Skrzynka narzędziowa",
                 Description = "niebieska",
@@ -142,7 +162,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = itemStatus1,
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "AB 1242",
                 Name = "Apteczka",
                 Description = "mała nr 2",
@@ -162,7 +182,7 @@ namespace SSA.Droid
                 {
 
                 },
-                Status = listStatus1
+                Status = listStatus[0]
             },
             new ListModel()
             {
@@ -173,7 +193,7 @@ namespace SSA.Droid
                 {
 
                 },
-                Status = listStatus1
+                Status = listStatus[0]
             },
             new ListModel()
             {
@@ -184,16 +204,20 @@ namespace SSA.Droid
                 {
 
                 },
-                Status = listStatus2
+                Status = listStatus[1]
             }
         };
 
         public static void AddData()
         {
-            _itemRepositoryStatus.Save(itemStatus1);
-            _listRepositoryStatus.Save(listStatus1);
-            _listRepositoryStatus.Save(listStatus2);
-
+            foreach (var status in listStatus)
+            {
+                _listRepositoryStatus.Save(status);
+            }
+            foreach (var status in itemStatus)
+            {
+                _itemRepositoryStatus.Save(status);
+            }
             foreach (var list in lists)
             {
                 _listRepository.Save(list);

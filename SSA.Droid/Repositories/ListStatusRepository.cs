@@ -36,6 +36,12 @@ namespace SSA.Droid.Repositories
             return _db.Get<ListStatus>(p => p.ListStatusId == id);
         }
 
+        public ListStatus Get(ListStatusEnum status)
+        {
+            var id = (int) status;
+            return _db.Get<ListStatus>(p => p.ListStatusId == id);
+        }
+
         public List<ListStatus> GetFromList(int ListStatusId)
         {
             return _db.Query<ListStatus>("SELECT * From ListStatus WHERE ListStatusId = " + ListStatusId);
