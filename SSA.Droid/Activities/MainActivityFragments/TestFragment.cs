@@ -18,15 +18,23 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         private ItemRepository _itemRepository;
         private ListRepository _listRepository;
+        private ItemStatusRepository _itemStatusRepository;
+        private ListStatusRepository _listStatusRepository;
 
         private TestFragment() { }
 
-        public static TestFragment NewInstance(ListRepository listRepository, ItemRepository itemRepository)
+        public static TestFragment NewInstance(
+            ListRepository listRepository, 
+            ItemRepository itemRepository, 
+            ItemStatusRepository itemStatusRepository, 
+            ListStatusRepository listStatusRepository)
         {
             var fragment = new TestFragment
             {
                 _listRepository = listRepository,
-                _itemRepository = itemRepository
+                _itemRepository = itemRepository,
+                _itemStatusRepository = itemStatusRepository,
+                _listStatusRepository = listStatusRepository
             };
             return fragment;
         }
@@ -42,7 +50,6 @@ namespace SSA.Droid.Activities.MainActivityFragments
             _deleteItemButton = view.FindViewById<Button>(Resource.Id.deleteItemButton);
             _getFromListButton = view.FindViewById<Button>(Resource.Id.getFromListButton);
             _getListButton = view.FindViewById<Button>(Resource.Id.getListButton);
-
 
             _outputText = view.FindViewById<EditText>(Resource.Id.outputText);
             _nameText = view.FindViewById<EditText>(Resource.Id.editTextName);
@@ -71,7 +78,9 @@ namespace SSA.Droid.Activities.MainActivityFragments
                             Name = _nameText.Text,
                             Description = _descText.Text,
                             ListId = Int32.Parse(_listIdText.Text),
-                            KodEAN = _eanText.Text
+                            KodEAN = _eanText.Text,
+                            Status = _itemStatusRepository.Get(Int32.Parse(_statusText.Text)),
+                            ItemStatusId = Int32.Parse(_statusText.Text),
                         }).ToString() + System.Environment.NewLine;
                     _outputText.Text += result;
                 }
@@ -114,8 +123,10 @@ namespace SSA.Droid.Activities.MainActivityFragments
                         Name = _nameText.Text,
                         Description = _descText.Text,
                         ListStatusId = Int32.Parse(_statusText.Text),
-                        Status = new ListStatus(),
-                        Items = new List<ItemModel>()
+                        Status = _listStatusRepository.Get(Int32.Parse(_statusText.Text)),
+                        Items = new List<ItemModel>(),
+                        CreateDate = DateTime.Now.ToLongDateString(),
+                        Person = "Michał Apanowicz"
                     }).ToString() + System.Environment.NewLine;
                 }
                 catch (Exception ex)

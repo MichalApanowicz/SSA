@@ -15,7 +15,7 @@ using SSA.Droid.Models;
 
 namespace SSA.Droid.Repositories
 {
-    class ItemStatusRepository : IRepository<ItemStatus>
+    public class ItemStatusRepository : IRepository<ItemStatus>
     {
         private readonly SQLiteConnection _db;
 
@@ -29,6 +29,11 @@ namespace SSA.Droid.Repositories
         {
             _db.Insert(itemStatus);
             return itemStatus;
+        }
+
+        public ItemStatus Get(ItemStatusEnum status)
+        {
+            return Get((int)status);
         }
 
         public ItemStatus Get(int id)

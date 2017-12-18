@@ -56,7 +56,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
         public List<ItemModel> GetSelectedItems()
         {
             _selectedItems.Clear();
-
+            
             var selected = ((AllItemsAdapter)ListAdapter).GetSelectedRows();
             foreach (var i in selected)
             {

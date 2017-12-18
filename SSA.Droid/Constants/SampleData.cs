@@ -70,23 +70,23 @@ namespace SSA.Droid
                 KodEAN = "AB 1234",
                 Name = "Młotek",
                 Description = "500g żółty",
-                ListId = 1
+                //ListId = 1
             },
             new ItemModel()
             {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Reserved),
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "AB 1235",
                 Name = "Siekiera",
                 Description = "kuta ręcznie",
-                ListId = 1
+                //ListId = 1
             },
             new ItemModel()
             {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Unavailable),
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "AB 1236",
                 Name = "Gwoździe calowae",
                 Description = "5kg",
-                ListId = 1
+                //ListId = 1
             },
             new ItemModel()
             {
@@ -94,7 +94,7 @@ namespace SSA.Droid
                 KodEAN = "AB 1237",
                 Name = "Młotek",
                 Description = "250g żółty",
-                ListId = 1
+                //ListId = 1
             },
             new ItemModel()
             {
@@ -102,7 +102,7 @@ namespace SSA.Droid
                 KodEAN = "AB 1238",
                 Name = "Łopata",
                 Description = "Fiskars",
-                ListId = 1
+                //ListId = 1
             },
             new ItemModel()
             {
@@ -142,7 +142,7 @@ namespace SSA.Droid
                 KodEAN = "AB 1242",
                 Name = "Plandeka",
                 Description = "2m^2",
-                ListId = 1
+                //ListId = 1
             },
             new ItemModel()
             {
@@ -154,15 +154,15 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Reserved),
                 KodEAN = "AB 1242",
                 Name = "Skrzynka narzędziowa",
                 Description = "niebieska",
-                ListId = 1
+                ListId = 3
             },
             new ItemModel()
             {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Unavailable),
                 KodEAN = "AB 1242",
                 Name = "Apteczka",
                 Description = "mała nr 2",

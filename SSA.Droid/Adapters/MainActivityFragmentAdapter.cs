@@ -10,7 +10,7 @@ namespace SSA.Droid.Adapters
         private readonly Fragment[] _fragments;
         private readonly string[] _tabNames;
 
-        public MainActivityFragmentAdapter(Android.Support.V4.App.FragmentManager fm, Fragment[] fragments, string[] tabNames)
+        public MainActivityFragmentAdapter(FragmentManager fm, Fragment[] fragments, string[] tabNames)
                 : base(fm)
         {
             _fragments = fragments;

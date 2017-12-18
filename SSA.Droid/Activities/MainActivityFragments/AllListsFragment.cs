@@ -29,7 +29,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View view = inflater.Inflate(Resource.Layout.AllLists, null);
+            var view = inflater.Inflate(Resource.Layout.AllLists, null);
 
             _lists = _listRepository.GetAllWithCildren();
 
@@ -42,10 +42,16 @@ namespace SSA.Droid.Activities.MainActivityFragments
         {
             var list = _lists[position];
             base.OnListItemClick(l, v, position, id);
-            Intent intent = new Intent(Context, typeof(ListDetailsActivity));
+            var intent = new Intent(Context, typeof(ListDetailsActivity));
             intent.PutExtra("List", JsonConvert.SerializeObject(list, new JsonSerializerSettings(){MaxDepth = 1}));
 
             StartActivity(intent);
+        }
+
+        public void UpdateLists()
+        {
+            _lists = _listRepository.GetAllWithCildren();
+            ListAdapter = new AllListsAdapter(Activity, _lists);
         }
     }
 }

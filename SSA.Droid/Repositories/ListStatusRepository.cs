@@ -15,7 +15,7 @@ using SSA.Droid.Models;
 
 namespace SSA.Droid.Repositories
 {
-    class ListStatusRepository : IRepository<ListStatus>
+    public class ListStatusRepository : IRepository<ListStatus>
     {
         private readonly SQLiteConnection _db;
 
@@ -31,14 +31,13 @@ namespace SSA.Droid.Repositories
             return ListStatus;
         }
 
-        public ListStatus Get(int id)
-        {
-            return _db.Get<ListStatus>(p => p.ListStatusId == id);
-        }
-
         public ListStatus Get(ListStatusEnum status)
         {
-            var id = (int) status;
+            return Get((int)status);
+        }
+
+        public ListStatus Get(int id)
+        {
             return _db.Get<ListStatus>(p => p.ListStatusId == id);
         }
 
