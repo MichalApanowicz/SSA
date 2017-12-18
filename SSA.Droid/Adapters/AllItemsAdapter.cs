@@ -66,7 +66,7 @@ namespace SSA.Droid.Adapters
             }
 
             holder.Item = item;
-            holder.Name.Text = $"{item.Name} [{item.KodEAN}]";
+            holder.Name.Text = $"{item.Name} [{item.ItemId}]";
             holder.Description.Text = item.Description;
             if (item.Status.ItemStatusId == (int)ItemStatusEnum.Available)
             {

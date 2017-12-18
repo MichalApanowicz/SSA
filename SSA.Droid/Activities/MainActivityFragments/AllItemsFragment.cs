@@ -20,16 +20,19 @@ namespace SSA.Droid.Activities.MainActivityFragments
 {
     public class AllItemsFragment : Android.Support.V4.App.ListFragment
     {
-        private ItemRepository _itemRepository;
+        private MainRepository _repository;
         private static List<ItemModel> _items;
         private static List<ItemModel> _selectedItems;
         private AllItemsAdapter _adapter;
 
         private AllItemsFragment() { }
 
-        public static AllItemsFragment NewInstance(ItemRepository itemRepository)
+        public static AllItemsFragment NewInstance(MainRepository repository)
         {
-            var fragment = new AllItemsFragment { _itemRepository = itemRepository };
+            var fragment = new AllItemsFragment
+            {
+                _repository = repository
+            };
             return fragment;
         }
 
@@ -39,7 +42,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
             var lv = view.FindViewById<ListView>(Android.Resource.Id.List);
             _selectedItems = new List<ItemModel>();
 
-            _items = _itemRepository.GetAllWithCildren();
+            _items = _repository.GetAllItemsWithCildren();
 
             _adapter = new AllItemsAdapter(Activity, _items);
             ListAdapter = _adapter;
@@ -66,6 +69,13 @@ namespace SSA.Droid.Activities.MainActivityFragments
             Log.Debug("Fragment", $"_selectedItems[{_selectedItems.Count}]: {JsonConvert.SerializeObject(_selectedItems, Formatting.Indented)}");
             
             return _selectedItems;
+        }
+
+        public void UpdateItems()
+        {
+            _items = _repository.GetAllItemsWithCildren();
+            _adapter = new AllItemsAdapter(Activity, _items);
+            _adapter.NotifyDataSetChanged();
         }
     }
 }

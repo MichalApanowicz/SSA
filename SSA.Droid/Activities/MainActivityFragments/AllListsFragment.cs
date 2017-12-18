@@ -16,14 +16,14 @@ namespace SSA.Droid.Activities.MainActivityFragments
 {
     public class AllListsFragment : Android.Support.V4.App.ListFragment
     {
-        private ListRepository _listRepository;
+        private MainRepository _repository;
         private List<ListModel> _lists;
 
         private AllListsFragment() { }
 
-        public static AllListsFragment NewInstance(ListRepository listRepository)
+        public static AllListsFragment NewInstance(MainRepository repository)
         {
-            var fragment = new AllListsFragment { _listRepository = listRepository };
+            var fragment = new AllListsFragment { _repository = repository };
             return fragment;
         }
 
@@ -31,7 +31,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
         {
             var view = inflater.Inflate(Resource.Layout.AllLists, null);
 
-            _lists = _listRepository.GetAllWithCildren();
+            _lists = _repository.GetAllListsWithCildren();
 
             ListAdapter = new AllListsAdapter(Activity, _lists);
 
@@ -50,7 +50,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         public void UpdateLists()
         {
-            _lists = _listRepository.GetAllWithCildren();
+            _lists = _repository.GetAllListsWithCildren();
             ListAdapter = new AllListsAdapter(Activity, _lists);
         }
     }

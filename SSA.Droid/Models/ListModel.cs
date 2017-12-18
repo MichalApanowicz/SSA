@@ -34,7 +34,7 @@ namespace SSA.Droid.Models
         [ManyToOne()]
         public ListStatus Status { get; set; }
 
-        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        [ManyToMany(typeof(ItemInLists)/*, CascadeOperations = CascadeOperation.All*/)]
         public List<ItemModel> Items { get; set; }
 
         public override string ToString()

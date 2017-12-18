@@ -120,6 +120,7 @@
     <Compile Include="Constants\ItemStatusEnum.cs" />
     <Compile Include="Constants\ListStatusEnum.cs" />
     <Compile Include="Constants\SampleData.cs" />
+    <Compile Include="Models\ItemInLists.cs" />
     <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Models\ItemStatus.cs" />
     <Compile Include="Models\ListModel.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Repositories\ItemStatusRepository.cs" />
     <Compile Include="Repositories\ListRepository.cs" />
     <Compile Include="Repositories\ListStatusRepository.cs" />
+    <Compile Include="Repositories\MainRepository.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <AndroidResource Include="Resources\layout\toolbar.axml">

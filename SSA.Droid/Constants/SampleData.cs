@@ -16,15 +16,12 @@ using SSA.Droid.Repositories;
 
 namespace SSA.Droid
 {
-    static class SampleData
+    public static class SampleData
     {
 
-        static ItemRepository _itemRepository = new ItemRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-        static ListRepository _listRepository = new ListRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-        static ItemStatusRepository _itemRepositoryStatus = new ItemStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-        static ListStatusRepository _listRepositoryStatus = new ListStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-
-        private static List<ItemStatus> itemStatus = new List<ItemStatus>()
+        static readonly MainRepository Repository = new MainRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        
+        private static List<ItemStatus> _itemStatus = new List<ItemStatus>()
         {
             new ItemStatus
             {
@@ -42,7 +39,7 @@ namespace SSA.Droid
                 Name = "Reserved",
             }
          };
-        private static List<ListStatus> listStatus = new List<ListStatus>()
+        private static readonly List<ListStatus> ListStatus = new List<ListStatus>()
         {
             new ListStatus
             {
@@ -62,127 +59,21 @@ namespace SSA.Droid
         };
         
 
-        private static List<ItemModel> items = new List<ItemModel>
-        {
-            new ItemModel()
-            {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1234",
-                Name = "Młotek",
-                Description = "500g żółty",
-                //ListId = 1
-            },
-            new ItemModel()
-            {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1235",
-                Name = "Siekiera",
-                Description = "kuta ręcznie",
-                //ListId = 1
-            },
-            new ItemModel()
-            {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1236",
-                Name = "Gwoździe calowae",
-                Description = "5kg",
-                //ListId = 1
-            },
-            new ItemModel()
-            {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1237",
-                Name = "Młotek",
-                Description = "250g żółty",
-                //ListId = 1
-            },
-            new ItemModel()
-            {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1238",
-                Name = "Łopata",
-                Description = "Fiskars",
-                //ListId = 1
-            },
-            new ItemModel()
-            {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1238",
-                Name = "Łopata",
-                Description = "Fiskars",
-                ListId = 2
-            },
-            new ItemModel()
-            {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1239",
-                Name = "Dołownik",
-                Description = "Romanik",
-                ListId = 2
-            },
-            new ItemModel()
-            {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1240",
-                Name = "Plandeka",
-                Description = "9m^2",
-                ListId = 2
-            },
-            new ItemModel()
-            {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1241",
-                Name = "Plandeka",
-                Description = "3m^2",
-                ListId = 2
-            },
-            new ItemModel()
-            {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1242",
-                Name = "Plandeka",
-                Description = "2m^2",
-                //ListId = 1
-            },
-            new ItemModel()
-            {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1242",
-                Name = "Latarka",
-                Description = "duża",
-                ListId = 2
-            },
-            new ItemModel()
-            {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Reserved),
-                KodEAN = "AB 1242",
-                Name = "Skrzynka narzędziowa",
-                Description = "niebieska",
-                ListId = 3
-            },
-            new ItemModel()
-            {
-                Status = itemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Unavailable),
-                KodEAN = "AB 1242",
-                Name = "Apteczka",
-                Description = "mała nr 2",
-                ListId = 3
-            },
+        
 
-        };
-
-        private static List<ListModel> lists = new List<ListModel>
+        private static readonly List<ListModel> Lists = new List<ListModel>
         {
             new ListModel()
             {
                 Name = "Magazyn Główny",
                 Description = "Rzeczy znajdujące się w magazynie nr 1 przy ulicy Głównej 1 w Bydgoszczy",
-                CreateDate = "2017-12-14", Person = "Michał Apanowicz", ListStatusId = 1,
+                CreateDate = "2017-12-14", Person = "Michał Apanowicz",
+                ListStatusId = 1,
                 Items = new List<ItemModel>
                 {
 
                 },
-                Status = listStatus[0]
+                Status = ListStatus[0]
             },
             new ListModel()
             {
@@ -193,7 +84,7 @@ namespace SSA.Droid
                 {
 
                 },
-                Status = listStatus[0]
+                Status = ListStatus[0]
             },
             new ListModel()
             {
@@ -204,35 +95,150 @@ namespace SSA.Droid
                 {
 
                 },
-                Status = listStatus[1]
+                Status = ListStatus[1]
             }
         };
 
+        private static readonly List<ItemModel> Items = new List<ItemModel>
+        {
+            new ItemModel()
+            {
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Reserved),
+                KodEAN = "AB 1234",
+                Name = "Młotek",
+                Description = "500g żółty",
+                Lists = new List<ListModel>()
+                {
+                    Lists[1]
+                }
+            },
+            new ItemModel()
+            {
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+                KodEAN = "AB 1235",
+                Name = "Siekiera",
+                Description = "kuta ręcznie",
+                Lists = new List<ListModel>()
+            },
+            new ItemModel()
+            {
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+                KodEAN = "AB 1236",
+                Name = "Gwoździe calowae",
+                Description = "5kg",
+                Lists = new List<ListModel>()
+            },
+            new ItemModel()
+            {
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+                KodEAN = "AB 1237",
+                Name = "Młotek",
+                Description = "250g żółty",
+                Lists = new List<ListModel>()
+            },
+            new ItemModel()
+            {
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+                KodEAN = "AB 1238",
+                Name = "Łopata",
+                Description = "Fiskars",
+                Lists = new List<ListModel>()
+            },
+            new ItemModel()
+            {
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+                KodEAN = "AB 1239",
+                Name = "Dołownik",
+                Description = "Romanik",
+                Lists = new List<ListModel>()
+            },
+            new ItemModel()
+            {
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+                KodEAN = "AB 1240",
+                Name = "Plandeka",
+                Description = "9m^2",
+                Lists = new List<ListModel>()
+            },
+            new ItemModel()
+            {
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+                KodEAN = "AB 1241",
+                Name = "Plandeka",
+                Description = "3m^2",
+                Lists = new List<ListModel>()
+            },
+            new ItemModel()
+            {
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+                KodEAN = "AB 1242",
+                Name = "Plandeka",
+                Description = "2m^2",
+                Lists = new List<ListModel>()
+            },
+            new ItemModel()
+            {
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+                KodEAN = "AB 1242",
+                Name = "Latarka",
+                Description = "duża",
+                Lists = new List<ListModel>()
+                {
+                    Lists[0]
+                }
+            },
+            new ItemModel()
+            {
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+                KodEAN = "AB 1242",
+                Name = "Skrzynka narzędziowa",
+                Description = "niebieska",
+                Lists = new List<ListModel>()
+                {
+                    Lists[1]
+                }
+            },
+            new ItemModel()
+            {
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Reserved),
+                KodEAN = "AB 1242",
+                Name = "Apteczka",
+                Description = "mała nr 2",
+                Lists = new List<ListModel>()
+                {
+                    Lists[2]
+                }
+            },
+
+        };
+
+        public static List<ItemStatus> ItemStatus { get => _itemStatus; set => _itemStatus = value; }
+
         public static void AddData()
         {
-            foreach (var status in listStatus)
+            foreach (var status in ListStatus)
             {
-                _listRepositoryStatus.Save(status);
+                Repository.Save<ListStatus>(status);
             }
-            foreach (var status in itemStatus)
+            foreach (var status in ItemStatus)
             {
-                _itemRepositoryStatus.Save(status);
+                Repository.Save<ItemStatus>(status);
             }
-            foreach (var list in lists)
+            foreach (var list in Lists)
             {
-                _listRepository.Save(list);
+                Repository.Save<ListModel>(list);
             }
-            foreach (var item in items)
+            foreach (var item in Items)
             {
-                _itemRepository.Save(item);
+                Repository.Save<ItemModel>(item);
             }
         }
         public static void DropData()
         {
-            _itemRepositoryStatus.DeleteAll();
-            _listRepositoryStatus.DeleteAll();
-            _listRepository.DeleteAll();
-            _itemRepository.DeleteAll();
+            Repository.DeleteAll<ItemStatus>();
+            Repository.DeleteAll<ListStatus>();
+            Repository.DeleteAll<ItemModel>();
+            Repository.DeleteAll<ListModel>();
         }
     }
 }

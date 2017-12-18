@@ -22,17 +22,8 @@ namespace SSA.Droid.Activities
     [Activity(Label = "ListDetailsActivity", WindowSoftInputMode = SoftInput.StateAlwaysHidden)]
     public class ListDetailsActivity : ListActivity
     {
-        private readonly ListRepository _listRepository =
-            new ListRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-
-        private readonly ItemRepository _itemRepository =
-            new ItemRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-
-        private readonly ItemStatusRepository _itemStatusRepository =
-            new ItemStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-
-        private readonly ListStatusRepository _listStatusRepository =
-            new ListStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        private readonly MainRepository _repository =
+            new MainRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
 
         private ListModel _list;
         private List<ItemModel> _items;
@@ -47,7 +38,7 @@ namespace SSA.Droid.Activities
             SetContentView(Resource.Layout.ListDetailsActivity);
             var text = Intent.GetStringExtra("List");
             _list = JsonConvert.DeserializeObject<ListModel>(text) ?? new ListModel();
-            _items = _list.Items;
+            _items = _repository.GetItemsFromList(_list.ListId);
 
 
             _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
@@ -93,16 +84,25 @@ namespace SSA.Droid.Activities
 
         private void CommitList()
         {
-            _listRepository.Delete(_list.ListId);
-            _list.Status = _listStatusRepository.Get(ListStatusEnum.Committed);
-            _listRepository.Save(_list);
-            foreach (var i in _items)
+            foreach (var item in _items)
             {
-                var x = _itemRepository.Delete(i.ItemId);
-                Log.Debug($"CommitList _itemRepository.Delete({i.ItemId})", x.ToString());
-                i.Status = _itemStatusRepository.Get(ItemStatusEnum.Reserved);
-                _itemRepository.Save(i);
+                try
+                {
+                    if (item.Status.ItemStatusId != (int) ItemStatusEnum.Available) continue;
+                    item.Status = _repository.GetItemStatus(ItemStatusEnum.Reserved);
+                    _repository.Update(item);
+                }
+                catch (Exception e)
+                {
+                    var x = e;
+                }
             }
+
+            _list.Status = _repository.GetListStatus(ListStatusEnum.Committed);
+            _list.Items = _items;
+            _repository.Update(_list);
+
+            var y = _repository.GetAllItemsWithCildren();
         }
     }
 }

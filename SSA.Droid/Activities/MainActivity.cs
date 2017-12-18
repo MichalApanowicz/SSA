@@ -25,17 +25,8 @@ namespace SSA.Droid
     [Activity(MainLauncher = true, ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class MainActivity : FragmentActivity
     {
-        private readonly ListRepository _listRepository =
-            new ListRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-
-        private readonly ItemRepository _itemRepository =
-            new ItemRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-
-        private readonly ItemStatusRepository _itemStatusRepository =
-            new ItemStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-
-        private readonly ListStatusRepository _listStatusRepository =
-            new ListStatusRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        private readonly MainRepository _repository =
+            new MainRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
 
         private Android.Support.V4.App.Fragment[] _fragments;
 
@@ -45,14 +36,11 @@ namespace SSA.Droid
 
         protected override void OnResume()
         {
-            Toast.MakeText(this, $"OnResume",
-                ToastLength.Long).Show();
             _fragments = new Android.Support.V4.App.Fragment[]
             {
-                AllListsFragment.NewInstance(_listRepository),
-                AllItemsFragment.NewInstance(_itemRepository),
-                TestFragment.NewInstance(_listRepository, _itemRepository, _itemStatusRepository,
-                    _listStatusRepository),
+                AllListsFragment.NewInstance(_repository),
+                AllItemsFragment.NewInstance(_repository),
+                TestFragment.NewInstance(_repository),
             };
             var currentItem = _viewPager.CurrentItem;
             
@@ -61,6 +49,8 @@ namespace SSA.Droid
                 new MainActivityFragmentAdapter(SupportFragmentManager, _fragments, _tabNames);
             base.OnResume();
             _viewPager.SetCurrentItem(currentItem, false);
+
+            ((AllItemsFragment)_fragments[1]).UpdateItems();
         }
 
         protected override void OnCreate(Bundle bundle)
@@ -74,10 +64,9 @@ namespace SSA.Droid
 
             _fragments = new Android.Support.V4.App.Fragment[]
             {
-                AllListsFragment.NewInstance(_listRepository),
-                AllItemsFragment.NewInstance(_itemRepository),
-                TestFragment.NewInstance(_listRepository, _itemRepository, _itemStatusRepository,
-                    _listStatusRepository),
+                AllListsFragment.NewInstance(_repository),
+                AllItemsFragment.NewInstance(_repository),
+                TestFragment.NewInstance(_repository),
             };
 
             _tabNames = new[]
@@ -132,12 +121,13 @@ namespace SSA.Droid
                         Name = "Nowa",
                         Description = "Opis",
                         ListStatusId = 1,
-                        Status = _listStatusRepository.Get(ListStatusEnum.Uncommitted),
+                        Status = _repository.GetListStatus(ListStatusEnum.Uncommitted),
                         Items = selectedItems,
                         Person = "Michał Apanowicz",
                         CreateDate = DateTime.Now.ToLongDateString()
                     };
-                    var result = _listRepository.Save(list);
+                    var result = _repository.Save<ListModel>(list);
+
                     Log.Debug("MainActivity",
                         $"menu_createNewList: {JsonConvert.SerializeObject(result, Formatting.Indented)}");
 

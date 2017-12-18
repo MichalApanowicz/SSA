@@ -44,7 +44,7 @@ namespace SSA.Droid.Activities
             _name.Text = _item.Name;
             _description.Text = _item.Description;
             _status.Text = _item.Status.Name;
-            _list.Text = _item.ListId.ToString();
+            _list.Text = JsonConvert.SerializeObject(_item.Lists);
         }
     }
 }
