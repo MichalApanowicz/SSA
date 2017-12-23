@@ -1,54 +1,41 @@
-var x = function() {
-const Sequelize = require('sequelize');
-const db = new Sequelize('database', 'username', 'password', {
-	host: 'localhost',
-	dialect: 'sqlite',
+var Sequelize = require('sequelize');
 
-	pool: {
-		max: 5,
-		min: 0,
-		acquire: 30000,
-		idle: 10000
-	},
-	storage: 'Database.db'
-});
+var Database =  {
+	db : new Sequelize('database', 'username', 'password', {
+			host: 'localhost',
+			dialect: 'sqlite',
 
-db.authenticate()
-	.then(() => {
-		console.log('Uzyskano połączenie!');
-	})
-	.catch( err => {
-		console.log('Wystąpił błąd przy autentykacji.');
-	});
+			pool: {
+				max: 5,
+				min: 0,
+				acquire: 30000,
+				idle: 10000
+			},
+			storage: 'Database.db'
+		}),
+	
+	ItemModel : function() { return this.db.define('ItemModel', {
+		},{ tableName: 'ItemModel'})},
 
+ 	ListModel : function() { return this.db.define('ListModel', {
+		}, { tableName: 'ListModel' })},
 
-const ItemModel = db.define('ItemModel', {
-},{ tableName: 'ItemModel'});
-ItemModel.removeAttribute('id');
+	ItemInLists : function() { return this.db.define('ItemInLists', {
+		}, { tableName: 'ItemInLists' })},
 
-const ListModel = db.define('ListModel', {
-}, { tableName: 'ListModel' });
-ListModel.removeAttribute('id');
+ 	ItemStatus : function() { return this.db.define('ItemStatus', {
+		}, { tableName: 'ItemStatus' })},
 
-const ItemInLists = db.define('ItemInLists', {
-}, { tableName: 'ItemInLists' });
-ItemInLists.removeAttribute('id');
-
-const ItemStatus = db.define('ItemStatus', {
-}, { tableName: 'ItemStatus' });
-ItemStatus.removeAttribute('id');
-
-const ListStatus = db.define('ListStatus', {
-}, { tableName: 'ListStatus' });
-ListStatus.removeAttribute('id');
+ 	ListStatus : function() { return this.db.define('ListStatus', {
+		}, { tableName: 'ListStatus' })},
 
 
-var findItem = function(id) {
-	ItemModel.findOne({
-		where: {ItemId: id},
-		attributes:['ItemId','Name','Description']
-		}).then(item => { return item; });
-	};
+	findItem : function(id) {
+		this.ItemModel.findOne({
+			where: {ItemId: id},
+			attributes:['ItemId','Name','Description']
+			}).then(item => { return item; });
+		},
 
-}
-exports.database = x;
+};
+module.exports = Database;
