@@ -1,7 +1,9 @@
 var Sequelize = require('sequelize');
 
 var Database =  {
-	db : new Sequelize('database', 'username', 'password', {
+	initialized : false,
+	findItem : function(id) {
+		this.db = new Sequelize('database', 'username', 'password', {
 			host: 'localhost',
 			dialect: 'sqlite',
 
@@ -12,9 +14,26 @@ var Database =  {
 				idle: 10000
 			},
 			storage: 'Database.db'
-		}),
+		});
+//		console.log(`-------db----> ${JSON.stringify()}`);
+		this.ItemModel = this.db.define('ItemModel', {},{ tableName: 'ItemModel'});
+		console.log(`-------db----> ${JSON.stringify(this.ItemModel)}`);
+		this.initialized = true;
+
+	//		if(!this.initialized) this.init();
+		console.log(`------ItemModel---------> ${this.ItemModel}`);
 	
-	ItemModel : function() { return this.db.define('ItemModel', {
+		this.ItemModel.removeAttribute('id');
+		this.ItemModel.findOne({
+			where: {ItemId: id},
+			attributes:['ItemId','Name','Description']
+			}).then(item => { return item; });
+	
+
+
+	},
+	
+	ItemModel : function() { console.log(`--------shis.db-----> ${this.db}`);return this.db.define('ItemModel', {
 		},{ tableName: 'ItemModel'})},
 
  	ListModel : function() { return this.db.define('ListModel', {
@@ -30,7 +49,10 @@ var Database =  {
 		}, { tableName: 'ListStatus' })},
 
 
-	findItem : function(id) {
+	aafindItem : function(id) 
+	{
+		if(!this.initialized) this.init();
+		console.log(`------ItemModel---------> ${this.ItemModel}`);
 		this.ItemModel.findOne({
 			where: {ItemId: id},
 			attributes:['ItemId','Name','Description']
