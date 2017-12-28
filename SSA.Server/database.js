@@ -1,41 +1,57 @@
 var Sequelize = require('sequelize');
 
-var Database =  {
-	db : new Sequelize('database', 'username', 'password', {
-			host: 'localhost',
-			dialect: 'sqlite',
+var database = {
+    db: new Sequelize('database', 'username', 'password', {
+        host: 'localhost',
+        dialect: 'sqlite',
 
-			pool: {
-				max: 5,
-				min: 0,
-				acquire: 30000,
-				idle: 10000
-			},
-			storage: 'Database.db'
-		}),
-	
-	ItemModel : function() { return this.db.define('ItemModel', {
-		},{ tableName: 'ItemModel'})},
+        pool: {
+            max: 5,
+            min: 0,
+            acquire: 30000,
+            idle: 10000
+        },
+        storage: 'Database.db'
+    }),
 
- 	ListModel : function() { return this.db.define('ListModel', {
-		}, { tableName: 'ListModel' })},
+    ItemModel: function () {
+        return this.db.define('ItemModel', {
+        }, { tableName: 'ItemModel' })
+    },
 
-	ItemInLists : function() { return this.db.define('ItemInLists', {
-		}, { tableName: 'ItemInLists' })},
+    ListModel: function () {
+        return this.db.define('ListModel', {
+        }, { tableName: 'ListModel' })
+    },
 
- 	ItemStatus : function() { return this.db.define('ItemStatus', {
-		}, { tableName: 'ItemStatus' })},
+    ItemInLists: function () {
+        return this.db.define('ItemInLists', {
+        }, { tableName: 'ItemInLists' })
+    },
 
- 	ListStatus : function() { return this.db.define('ListStatus', {
-		}, { tableName: 'ListStatus' })},
+    ItemStatus: function () {
+        return this.db.define('ItemStatus', {
+        }, { tableName: 'ItemStatus' })
+    },
+
+    ListStatus: function () {
+        return this.db.define('ListStatus', {
+        }, { tableName: 'ListStatus' })
+    },
 
 
-	findItem : function(id) {
-		this.ItemModel().findOne({
-			where: {ItemId: id},
-			attributes:['ItemId','Name','Description']
-			}).then(item => { console.log(item); });
-		},
+    findItem: function(id) {
+        return this.ItemModel().findOne({
+            where: { ItemId: id },
+            attributes: ['ItemId', 'Name', 'Description']
+        });
+    },
+
+    getAllItems: function () {
+        return this.ItemModel().findAll({
+            attributes: ['ItemId', 'Name', 'Description']
+        });
+    },
 
 };
-module.exports = Database;
+module.exports = database;

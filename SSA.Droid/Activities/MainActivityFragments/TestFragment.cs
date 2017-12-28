@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Json;
+using System.Net;
+using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using SQLite.Net;
@@ -13,8 +18,8 @@ namespace SSA.Droid.Activities.MainActivityFragments
 {
     public class TestFragment : Android.Support.V4.App.Fragment
     {
-        private EditText _outputText, _nameText, _descText, _listIdText, _eanText, _statusText;
-        private Button _addListButton, _deleteListButton, _addItemButton, _deleteItemButton, _getFromListButton, _getListButton;
+        private EditText _outputText, _nameText, _descText, _listIdText, _eanText, _statusText, _apiUrl;
+        private Button _addListButton, _deleteListButton, _addItemButton, _deleteItemButton, _getFromListButton, _getListButton, _apiCallButton;
 
         private MainRepository _repository;
       
@@ -40,6 +45,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
             _deleteItemButton = view.FindViewById<Button>(Resource.Id.deleteItemButton);
             _getFromListButton = view.FindViewById<Button>(Resource.Id.getFromListButton);
             _getListButton = view.FindViewById<Button>(Resource.Id.getListButton);
+            _apiCallButton = view.FindViewById<Button>(Resource.Id.callApi);
 
             _outputText = view.FindViewById<EditText>(Resource.Id.outputText);
             _nameText = view.FindViewById<EditText>(Resource.Id.editTextName);
@@ -47,6 +53,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
             _listIdText = view.FindViewById<EditText>(Resource.Id.editTextListId);
             _statusText = view.FindViewById<EditText>(Resource.Id.editTextStatus);
             _eanText = view.FindViewById<EditText>(Resource.Id.editTextEan);
+            _apiUrl = view.FindViewById<EditText>(Resource.Id.editApiUrl);
 
             try
             {
@@ -57,6 +64,33 @@ namespace SSA.Droid.Activities.MainActivityFragments
                 _outputText.Text += ex.Message;
             }
 
+            _apiCallButton.Click += (sender, e) =>
+            {
+                try
+                {
+                    var url = _apiUrl.Text;
+
+                    var request = (HttpWebRequest) WebRequest.Create(new Uri(url));
+                   // request.ContentType = "application/json";
+                    request.Method = "GET";
+                    Log.Debug("ApiCall", $"Request: {request}");
+                    using (var response = request.GetResponse())
+                    {
+                        using (var stream = response.GetResponseStream())
+                        {
+                            var json = JsonValue.Load(stream).ToString();
+                            _outputText.Text += json + System.Environment.NewLine;
+                            Log.Debug("ApiCall", $"Response: {json}");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Debug("ApiCall", $"Exception: {ex}");
+
+                    _outputText.Text += ex.ToString();
+                }
+            };
 
             _addItemButton.Click += (sender, e) =>
             {

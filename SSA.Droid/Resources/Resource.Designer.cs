@@ -1923,11 +1923,11 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0b001d
 			public const int add = 2131427357;
 			
-			// aapt resource value: 0x7f0b009e
-			public const int addItemButton = 2131427486;
+			// aapt resource value: 0x7f0b00a0
+			public const int addItemButton = 2131427488;
 			
-			// aapt resource value: 0x7f0b009c
-			public const int addListButton = 2131427484;
+			// aapt resource value: 0x7f0b009e
+			public const int addListButton = 2131427486;
 			
 			// aapt resource value: 0x7f0b004a
 			public const int alertTitle = 2131427402;
@@ -1949,6 +1949,9 @@ namespace SSA.Droid
 			
 			// aapt resource value: 0x7f0b003d
 			public const int buttonPanel = 2131427389;
+			
+			// aapt resource value: 0x7f0b00a5
+			public const int callApi = 2131427493;
 			
 			// aapt resource value: 0x7f0b008c
 			public const int cancel_action = 2131427468;
@@ -1980,35 +1983,38 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0b003a
 			public const int default_activity_button = 2131427386;
 			
-			// aapt resource value: 0x7f0b00a2
-			public const int deleteItemButton = 2131427490;
+			// aapt resource value: 0x7f0b00a4
+			public const int deleteItemButton = 2131427492;
 			
 			// aapt resource value: 0x7f0b007d
 			public const int deleteItemRadioButton = 2131427453;
 			
-			// aapt resource value: 0x7f0b009d
-			public const int deleteListButton = 2131427485;
+			// aapt resource value: 0x7f0b009f
+			public const int deleteListButton = 2131427487;
 			
 			// aapt resource value: 0x7f0b0011
 			public const int disableHome = 2131427345;
 			
+			// aapt resource value: 0x7f0b00ae
+			public const int editApiUrl = 2131427502;
+			
 			// aapt resource value: 0x7f0b007e
 			public const int editText1 = 2131427454;
 			
-			// aapt resource value: 0x7f0b00a4
-			public const int editTextDesc = 2131427492;
-			
 			// aapt resource value: 0x7f0b00a7
-			public const int editTextEan = 2131427495;
+			public const int editTextDesc = 2131427495;
 			
-			// aapt resource value: 0x7f0b00a5
-			public const int editTextListId = 2131427493;
+			// aapt resource value: 0x7f0b00aa
+			public const int editTextEan = 2131427498;
 			
-			// aapt resource value: 0x7f0b00a3
-			public const int editTextName = 2131427491;
+			// aapt resource value: 0x7f0b00a8
+			public const int editTextListId = 2131427496;
 			
-			// aapt resource value: 0x7f0b00a9
-			public const int editTextStatus = 2131427497;
+			// aapt resource value: 0x7f0b00a6
+			public const int editTextName = 2131427494;
+			
+			// aapt resource value: 0x7f0b00ac
+			public const int editTextStatus = 2131427500;
 			
 			// aapt resource value: 0x7f0b0058
 			public const int edit_query = 2131427416;
@@ -2031,14 +2037,14 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0b0087
 			public const int frameLayout1 = 2131427463;
 			
-			// aapt resource value: 0x7f0b009f
-			public const int getFromListButton = 2131427487;
+			// aapt resource value: 0x7f0b00a1
+			public const int getFromListButton = 2131427489;
 			
 			// aapt resource value: 0x7f0b007c
 			public const int getItemRadioButton = 2131427452;
 			
-			// aapt resource value: 0x7f0b00a1
-			public const int getListButton = 2131427489;
+			// aapt resource value: 0x7f0b00a3
+			public const int getListButton = 2131427491;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int home = 2131427332;
@@ -2073,11 +2079,14 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0b000a
 			public const int line3 = 2131427338;
 			
-			// aapt resource value: 0x7f0b009b
-			public const int linearLayout1 = 2131427483;
+			// aapt resource value: 0x7f0b009d
+			public const int linearLayout1 = 2131427485;
 			
-			// aapt resource value: 0x7f0b00a0
-			public const int linearLayout2 = 2131427488;
+			// aapt resource value: 0x7f0b009c
+			public const int linearLayout11 = 2131427484;
+			
+			// aapt resource value: 0x7f0b00a2
+			public const int linearLayout2 = 2131427490;
 			
 			// aapt resource value: 0x7f0b0072
 			public const int linearLayout3 = 2131427442;
@@ -2097,17 +2106,17 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0b008e
 			public const int media_actions = 2131427470;
 			
-			// aapt resource value: 0x7f0b00ac
-			public const int menu_commitList = 2131427500;
+			// aapt resource value: 0x7f0b00b1
+			public const int menu_commitList = 2131427505;
 			
-			// aapt resource value: 0x7f0b00ae
-			public const int menu_createNewList = 2131427502;
+			// aapt resource value: 0x7f0b00b3
+			public const int menu_createNewList = 2131427507;
 			
-			// aapt resource value: 0x7f0b00ad
-			public const int menu_terminateList = 2131427501;
+			// aapt resource value: 0x7f0b00b2
+			public const int menu_terminateList = 2131427506;
 			
-			// aapt resource value: 0x7f0b00ab
-			public const int message = 2131427499;
+			// aapt resource value: 0x7f0b00b0
+			public const int message = 2131427504;
 			
 			// aapt resource value: 0x7f0b0022
 			public const int middle = 2131427362;
@@ -2133,8 +2142,8 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0b0090
 			public const int notification_main_column_container = 2131427472;
 			
-			// aapt resource value: 0x7f0b00aa
-			public const int outputText = 2131427498;
+			// aapt resource value: 0x7f0b00af
+			public const int outputText = 2131427503;
 			
 			// aapt resource value: 0x7f0b003f
 			public const int parentPanel = 2131427391;
@@ -2174,6 +2183,9 @@ namespace SSA.Droid
 			
 			// aapt resource value: 0x7f0b0042
 			public const int scrollView = 2131427394;
+			
+			// aapt resource value: 0x7f0b009b
+			public const int scrollView2 = 2131427483;
 			
 			// aapt resource value: 0x7f0b005a
 			public const int search_badge = 2131427418;
@@ -2304,11 +2316,14 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0b0075
 			public const int textView3 = 2131427445;
 			
-			// aapt resource value: 0x7f0b00a6
-			public const int textView4 = 2131427494;
+			// aapt resource value: 0x7f0b00a9
+			public const int textView4 = 2131427497;
 			
-			// aapt resource value: 0x7f0b00a8
-			public const int textView5 = 2131427496;
+			// aapt resource value: 0x7f0b00ab
+			public const int textView5 = 2131427499;
+			
+			// aapt resource value: 0x7f0b00ad
+			public const int textView6 = 2131427501;
 			
 			// aapt resource value: 0x7f0b0093
 			public const int time = 2131427475;

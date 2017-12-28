@@ -17,12 +17,13 @@ namespace SSA.Droid.Adapters
     {
         private readonly List<ItemModel> _items;
         private readonly Activity _context;
-        private readonly List<int> _selected = new List<int>();
+        public List<int> Selected { get; set; }
 
-        public AllItemsAdapter(Activity context, List<ItemModel> items) : base()
+        public AllItemsAdapter(Activity context, List<ItemModel> items, List<int> selected = null) : base()
         {
             _context = context;
             _items = items;
+            Selected = selected ?? new List<int>();
         }
 
         public override long GetItemId(int position) => _items.ToArray()[position].ItemId;
@@ -50,9 +51,9 @@ namespace SSA.Droid.Adapters
 
                 holder.CheckBox.Click += (s, e) =>
                 {
-                    if (holder.CheckBox.Checked) _selected.Add(holder.Item.ItemId);
-                    else _selected.Remove(holder.Item.ItemId);
-                    Log.Debug("Adapter", $"_selected: {JsonConvert.SerializeObject(_selected, Formatting.Indented)}");
+                    if (holder.CheckBox.Checked) Selected.Add(holder.Item.ItemId);
+                    else Selected.Remove(holder.Item.ItemId);
+                    Log.Debug("Adapter", $"_selected: {JsonConvert.SerializeObject(Selected, Formatting.Indented)}");
                 };
                 holder.LinearLayout.Click += (sender, args) =>
                 {
@@ -70,14 +71,14 @@ namespace SSA.Droid.Adapters
             holder.Description.Text = item.Description;
             if (item.Status.ItemStatusId == (int)ItemStatusEnum.Available)
             {
-                holder.CheckBox.Checked = _selected.Contains(item.ItemId);
+                holder.CheckBox.Checked = Selected.Contains(item.ItemId);
                 holder.CheckBox.Visibility = ViewStates.Visible;
                 holder.Status.Visibility = ViewStates.Invisible;
             }
             else
             {
                 holder.Status.Text = item.Status.Name;
-                holder.CheckBox.Visibility = ViewStates.Invisible;
+                //holder.CheckBox.Visibility = ViewStates.Invisible;
                 holder.Status.Visibility = ViewStates.Visible;
             }
 
@@ -91,8 +92,8 @@ namespace SSA.Droid.Adapters
 
         public List<int> GetSelectedRows()
         {
-            var result = _selected.Select(x => x).ToList();// Select(item => item.Clone()).ToList(); ;
-            _selected.Clear();
+            var result = Selected.Select(x => x).ToList();// Select(item => item.Clone()).ToList(); ;
+            Selected.Clear();
             return result;
         }
     }

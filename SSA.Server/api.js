@@ -6,10 +6,20 @@ var database = require('./database');
 
 //app.use(express['static'](__dirname));
 
-app.get('/items/:id', function(req, res){
-	console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`)
-	res.status(200).send(database.findItem(req.params.id));
+app.get('/items/:id', function(req, res) {
+    console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`);
+     database.findItem(req.params.id).then(function(result) {
+         res.status(200).send(result);
+    });
 });
+
+app.get('/items/', function (req, res) {
+    console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`);
+    database.getAllItems().then(function (result) {
+        res.status(200).send(result);
+    });
+});
+
 
 app.get('*', function(req, res) {
 	res.status(404).send('Unrecogniset API call');

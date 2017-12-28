@@ -27,7 +27,7 @@ namespace SSA.Droid
     {
         private readonly MainRepository _repository =
             new MainRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-
+        
         private Android.Support.V4.App.Fragment[] _fragments;
 
         private ViewPager _viewPager;
@@ -36,6 +36,7 @@ namespace SSA.Droid
 
         protected override void OnResume()
         {
+            Log.Debug("Database", Constants.DatabasePath);
             _fragments = new Android.Support.V4.App.Fragment[]
             {
                 AllListsFragment.NewInstance(_repository),

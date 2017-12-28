@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using SQLite.Net;
 using SQLite.Net.Platform.XamarinAndroid;
 using SSA.Droid.Activities.MainActivityFragments;
+using SSA.Droid.Adapters;
 using SSA.Droid.Models;
 using SSA.Droid.Repositories;
 
@@ -31,6 +32,8 @@ namespace SSA.Droid.Activities
         private Toolbar _toolbar;
         //private TextView _person, _createDate;
         private ArrayAdapter _adapter;
+
+        private List<ItemModel> _selectedItems;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -52,10 +55,19 @@ namespace SSA.Droid.Activities
             //_person.Text = _list.Person;
             //_createDate.Text = DateTime.Parse(_list.CreateDate).ToLongDateString();
 
-            _adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItemChecked,
-                objects: _items.Select(x => x.Name).ToArray());
+            //_adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItemChecked,
+            //  objects: _items.Select(x => x.Name).ToArray());
 
-            ListAdapter = _adapter;
+            //ListAdapter = _adapter;
+            var selected = new List<int>();
+            foreach (var item in _items)
+            {
+                if (item.Status.ItemStatusId == (int)ItemStatusEnum.Unavailable)
+                {
+                    selected.Add(item.ItemId);
+                }
+            }
+            ListAdapter = new AllItemsAdapter(this, _items, selected);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -84,25 +96,43 @@ namespace SSA.Droid.Activities
 
         private void CommitList()
         {
+
             foreach (var item in _items)
             {
-                try
-                {
-                    if (item.Status.ItemStatusId != (int) ItemStatusEnum.Available) continue;
-                    item.Status = _repository.GetItemStatus(ItemStatusEnum.Reserved);
-                    _repository.Update(item);
-                }
-                catch (Exception e)
-                {
-                    var x = e;
-                }
+                    if (item.Status.ItemStatusId == (int) ItemStatusEnum.Available)
+                    {
+                        item.Status = _repository.GetItemStatus(ItemStatusEnum.Reserved);
+                        _repository.Update(item);
+                    }
             }
 
             _list.Status = _repository.GetListStatus(ListStatusEnum.Committed);
             _list.Items = _items;
             _repository.Update(_list);
 
-            var y = _repository.GetAllItemsWithCildren();
+            UpdateItemList();
+        }
+
+        private void UpdateItemList()
+        {
+            _items = _repository.GetItemsFromList(_list.ListId);
+            ListAdapter = new AllItemsAdapter(this, _items);
+            ((BaseAdapter)ListAdapter).NotifyDataSetChanged();
+        }
+
+        private List<ItemModel> GetSelectedItems()
+        {
+            _selectedItems.Clear();
+
+            var selected = ((AllItemsAdapter)ListAdapter).GetSelectedRows();
+            foreach (var i in selected)
+            {
+                _selectedItems.Add(_items.First(x => x.ItemId == i));
+            }
+            _adapter.NotifyDataSetChanged();
+            Log.Debug("ListDetailsActivity", $"_selectedItems[{_selectedItems.Count}]: {JsonConvert.SerializeObject(_selectedItems, Formatting.Indented)}");
+
+            return _selectedItems;
         }
     }
 }
