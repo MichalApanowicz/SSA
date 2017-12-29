@@ -107,7 +107,7 @@ namespace SSA.Droid
 
         private void CreateNewList()
         {
-            var selectedItems = ((AllItemsFragment) _fragments[1]).GetSelectedItems();
+            var selectedItems = ((AllItemsFragment)_fragments[1]).GetSelectedItems();
             if (selectedItems.Count == 0)
             {
                 Toast.MakeText(this, "Zaznacz przedmioty do dodania",
@@ -124,7 +124,7 @@ namespace SSA.Droid
                         ListStatusId = 1,
                         Status = _repository.GetListStatus(ListStatusEnum.Uncommitted),
                         Items = selectedItems,
-                        PersonId = 1,
+                        Person = _repository.GetPerson(1),
                         CreateDate = DateTime.Now.ToLongDateString()
                     };
                     var result = _repository.Save<ListModel>(list);
@@ -137,6 +137,9 @@ namespace SSA.Droid
 
                     var y =  x?.ListAdapter as AllListsAdapter; 
                     y?.NotifyDataSetChanged();
+
+                    Toast.MakeText(this, $"Utworzono listę z {selectedItems.Count} przedmiotami",
+                        ToastLength.Short).Show();
                 }
                 catch (Exception ex)
                 {

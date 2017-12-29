@@ -7,6 +7,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Text;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -33,7 +34,7 @@ namespace SSA.Droid.Activities
         private EditText _eanCodeText;
         private RadioButton _getItemRadioButton, _deleteItemRadioButton;
         private Toolbar _toolbar;
-        //private TextView _person, _createDate;
+  
         private ArrayAdapter _adapter;
 
         private List<ItemModel> _selectedItems;
@@ -49,38 +50,8 @@ namespace SSA.Droid.Activities
             _getItemRadioButton = FindViewById<RadioButton>(Resource.Id.getItemRadioButton);
             _deleteItemRadioButton = FindViewById<RadioButton>(Resource.Id.deleteItemRadioButton);
             _eanCodeText = FindViewById<EditText>(Resource.Id.eanCodeEditText);
-            _eanCodeText.TextChanged += (sender, e) =>
-            {
-                var typedEan = _eanCodeText.Text;
-                if (typedEan.Length == 8)
-                {
-                    var item = _repository.GetItemByEanCode(typedEan);
-                    if (_getItemRadioButton.Checked)
-                    {
-                        var actionString = "";
-                        if (_items.Select(x => x.ItemId).Contains(item.ItemId))
-                        {
-                            item.Status = _repository.GetItemStatus(ItemStatusEnum.Unavailable);
-                            actionString = "Pobrano :";
-                        }
-                        else
-                        {
-                            item.ListId = _list.ListId;
-                            actionString = "Dodano :";
-                        }
-                        _repository.Update(item);
-                        Toast.MakeText(this, actionString + item.Name, ToastLength.Long).Show();
-                    }
-                    else if (_deleteItemRadioButton.Checked)
-                    {
-                        item.ListId = 0;
-                        _repository.Update(item);
-                        Toast.MakeText(this, "Usunięto: " + item.Name, ToastLength.Long).Show();
-                    }
-                    //_eanCodeText.Text = "";
-                    UpdateItemList();
-                }
-            };
+            _eanCodeText.TextChanged += EanTextChanged;
+
             _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             _toolbar.Title = _list.Name;
             _toolbar.InflateMenu(Resource.Menu.listDetails_top_menu);
@@ -160,6 +131,46 @@ namespace SSA.Droid.Activities
             Log.Debug("ListDetailsActivity", $"_selectedItems[{_selectedItems.Count}]: {JsonConvert.SerializeObject(_selectedItems, Formatting.Indented)}");
 
             return _selectedItems;
+        }
+
+        private void EanTextChanged(object s, TextChangedEventArgs e)
+        {
+            try
+            {
+                var typedEan = _eanCodeText.Text;
+                if (typedEan.Length == 8)
+                {
+                    var item = _repository.GetItemByEanCode(typedEan);
+                    if (_getItemRadioButton.Checked)
+                    {
+                        var actionString = "";
+                        if (_items.Select(x => x.ItemId).Contains(item.ItemId))
+                        {
+                            item.Status = _repository.GetItemStatus(ItemStatusEnum.Unavailable);
+                            actionString = "Pobrano: ";
+                        }
+                        else
+                        {
+                            item.ListId = _list.ListId;
+                            actionString = "Dodano: ";
+                        }
+                        _repository.Update(item);
+                        Toast.MakeText(this, actionString + item.Name, ToastLength.Long).Show();
+                    }
+                    else if (_deleteItemRadioButton.Checked)
+                    {
+                        item.ListId = 0;
+                        _repository.Update(item);
+                        Toast.MakeText(this, "Usunięto: " + item.Name, ToastLength.Long).Show();
+                    }
+                    _eanCodeText.Text = "";
+                    UpdateItemList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Toast.MakeText(this, "Nie znleziono przedmotu o tym kodzie", ToastLength.Long).Show();
+            }
         }
     }
 }

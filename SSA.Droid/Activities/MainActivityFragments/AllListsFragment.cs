@@ -40,7 +40,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         public override void OnListItemClick(ListView l, View v, int position, long id)
         {
-            var list = _lists[position];
+            var list = _lists.Find(x => x.ListId == id);
             base.OnListItemClick(l, v, position, id);
             var intent = new Intent(Context, typeof(ListDetailsActivity));
             intent.PutExtra("List", JsonConvert.SerializeObject(list, new JsonSerializerSettings(){MaxDepth = 1}));

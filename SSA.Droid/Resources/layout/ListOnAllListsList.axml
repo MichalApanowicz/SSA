@@ -5,34 +5,66 @@
     android:id="@+id/ListRelativeLayout1"
     android:descendantFocusability="blocksDescendants">
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ListLinearLayout1">
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Nazwa"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ListNameText"
+                android:layout_margin="10px"
+                android:focusableInTouchMode="false"
+                android:clickable="false"
+                android:focusable="false" />
+            <TextView
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ListStatusText"
+                android:layout_marginLeft="10px"
+                android:layout_marginBottom="10px"
+                android:focusableInTouchMode="false"
+                android:clickable="false"
+                android:focusable="false" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="false"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp">
         <TextView
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ListNameText"
-            android:layout_margin="10px"
-            android:focusableInTouchMode="false"
-            android:clickable="false"
-            android:focusable="false" />
-        <TextView
-            android:text="Small Text"
+            android:text="Michał Apanowicz"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ListStatusText"
-            android:layout_marginLeft="10px"
-            android:layout_marginBottom="10px"
-            android:focusableInTouchMode="false"
-            android:clickable="false"
-            android:focusable="false" />
+            android:id="@+id/ListPersonText" />
+        <TextView
+            android:text="14 Grudnia 2010"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ListDateText" />
     </LinearLayout>
     <TextView
-        android:text="Large Text"
+        android:text="[X]"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/ListCountText"
         android:layout_width="wrap_content"

@@ -24,16 +24,16 @@ namespace SSA.Droid.Activities.MainActivityFragments
         private static List<ItemModel> _items;
         private static List<ItemModel> _selectedItems;
         private AllItemsAdapter _adapter;
+        private static AllItemsFragment _instance;
 
         private AllItemsFragment() { }
 
         public static AllItemsFragment NewInstance(MainRepository repository)
         {
-            var fragment = new AllItemsFragment
+            return _instance ?? (_instance = new AllItemsFragment
             {
                 _repository = repository
-            };
-            return fragment;
+            });
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -53,14 +53,15 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         public override void OnListItemClick(ListView l, View v, int position, long id)
         {
-            //Log.Debug("Fragment", $"_selectedItems[{_selectedItems.Count}]: {_selectedItems.ToArray().ToString()}");
+            Log.Debug("Fragment", $"_selectedItems[{_selectedItems.Count}]: {_selectedItems.ToArray().ToString()}");
         }
 
         public List<ItemModel> GetSelectedItems()
         {
             _selectedItems.Clear();
-            
-            var selected = ((AllItemsAdapter)ListAdapter).GetSelectedRows();
+
+            var adapter = ((AllItemsAdapter) ListAdapter) ?? _adapter;
+            var selected = adapter.GetSelectedRows();
             foreach (var i in selected)
             {
                 _selectedItems.Add(_items.First(x => x.ItemId == i));

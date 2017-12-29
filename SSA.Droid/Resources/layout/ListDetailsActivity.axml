@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/toolbar1">
-       <RadioGroup
+        <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radioGroup2">
@@ -24,16 +24,30 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Usuń"
+                android:text="Usuń / Zwróć"
                 android:id="@+id/deleteItemRadioButton" />
         </RadioGroup>
     </Toolbar>
-    <EditText
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/eanCodeEditText"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp" />
+        android:id="@+id/relativeLayout1">
+        <EditText
+            android:id="@+id/eanCodeEditText"
+            android:lines="1"
+            android:textSize="@dimen/abc_action_bar_stacked_max_height"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:minWidth="235dp"
+            android:maxLines="1"
+            android:minLines="1"
+            android:singleLine="true"
+            android:text="00000000" />
+    </RelativeLayout>
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"

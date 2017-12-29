@@ -24,7 +24,11 @@ namespace SSA.Droid.Models
 
         public string Description { get; set; }
 
+        [ForeignKey(typeof(PersonModel))]
         public int PersonId { get; set; }
+
+        [ManyToOne]
+        public PersonModel Person { get; set; }
 
         public string CreateDate { get; set; }
 

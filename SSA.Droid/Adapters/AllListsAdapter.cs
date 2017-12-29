@@ -22,7 +22,7 @@ namespace SSA.Droid.Adapters
         public AllListsAdapter(Activity context, List<ListModel> lists)
         {
             _context = context;
-            _lists = lists;
+            _lists = lists.OrderByDescending(x => DateTime.Parse(x.CreateDate)).ToList();
         }
 
         public override string this[int position] => _lists[position].Name;
@@ -44,6 +44,8 @@ namespace SSA.Droid.Adapters
                 holder.Name = view.FindViewById<TextView>(Resource.Id.ListNameText);
                 holder.Status = view.FindViewById<TextView>(Resource.Id.ListStatusText);
                 holder.Count = view.FindViewById<TextView>(Resource.Id.ListCountText);
+                holder.Person = view.FindViewById<TextView>(Resource.Id.ListPersonText);
+                holder.Date = view.FindViewById<TextView>(Resource.Id.ListDateText);
                 view.Tag = holder;
             }
 
@@ -51,7 +53,8 @@ namespace SSA.Droid.Adapters
             holder.Name.Text = list.Name;
             holder.Status.Text = list.Status.Name;
             holder.Count.Text = $"[{list.Items.Count}]";
-
+            holder.Person.Text = list.Person.Name;
+            holder.Date.Text = list.CreateDate;
             return view;
         }
         public override int Count => _lists.Count;
@@ -62,6 +65,8 @@ namespace SSA.Droid.Adapters
         public LinearLayout LinearLayout { get; set; }
         public TextView Name { get; set; }
         public TextView Status { get; set; }
+        public TextView Person { get; set; }
+        public TextView Date { get; set; }
         public TextView Count { get; set; }
     }
 }

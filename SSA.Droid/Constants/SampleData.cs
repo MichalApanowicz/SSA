@@ -20,25 +20,17 @@ namespace SSA.Droid
     {
 
         static readonly MainRepository Repository = new MainRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-        
-        private static List<ItemStatus> _itemStatus = new List<ItemStatus>()
+
+        private static readonly List<PersonModel> Persons = new List<PersonModel>()
         {
-            new ItemStatus
+            new PersonModel()
             {
-                ItemStatusId = (int)ItemStatusEnum.Available,
-                Name = "Available",
-            },
-            new ItemStatus
-            {
-                ItemStatusId = (int)ItemStatusEnum.Unavailable,
-                Name = "Unavailable",
-            },
-            new ItemStatus
-            {
-                ItemStatusId = (int)ItemStatusEnum.Reserved,
-                Name = "Reserved",
+                Name = "Michał Apanowicz",
+                Description = "Administrator",
+                Lists = new List<ListModel>()
             }
-         };
+        };
+
         private static readonly List<ListStatus> ListStatus = new List<ListStatus>()
         {
             new ListStatus
@@ -58,17 +50,14 @@ namespace SSA.Droid
             }
         };
         
-
-        
-
         private static readonly List<ListModel> Lists = new List<ListModel>
         {
             new ListModel()
             {
-                Name = "Magazyn Główny",
-                Description = "Rzeczy znajdujące się w magazynie nr 1 przy ulicy Głównej 1 w Bydgoszczy",
-                CreateDate = "2017-12-14",
-                PersonId = 1,
+                Name = "Na biwak",
+                Description = "Rzeczy do zabrania na biwak w Ostromecku",
+                CreateDate = DateTime.Parse(DateTime.Parse("2017-12-14").ToLongDateString()).ToLongDateString(),
+                Person = Persons[0],
                 Status = ListStatus[0],
                 Items = new List<ItemModel>
                 {
@@ -79,8 +68,8 @@ namespace SSA.Droid
             {
                 Name = "Lista obozowa 1",
                 Description = "Rzeczy zabrane na kwaterkę",
-                CreateDate = "2017-12-14",
-                PersonId = 1,
+                CreateDate = DateTime.Parse("2017-12-14").ToLongDateString(),
+                Person = Persons[0],
                 Status = ListStatus[0],
                 Items = new List<ItemModel>
                 {
@@ -91,8 +80,8 @@ namespace SSA.Droid
             {
                 Name = "Lista Jastrzębi",
                 Description = "Rzeczy zabrane na zbiórkę",
-                CreateDate = "2017-12-14",
-                PersonId = 1,
+                CreateDate = DateTime.Parse("2017-12-14").ToLongDateString(),
+                Person = Persons[0],
                 Status = ListStatus[0],
                 Items = new List<ItemModel>
                 {
@@ -101,11 +90,30 @@ namespace SSA.Droid
             }
         };
 
+        public static List<ItemStatus> ItemStatus = new List<ItemStatus>()
+        {
+            new ItemStatus
+            {
+                ItemStatusId = (int)ItemStatusEnum.Available,
+                Name = "Available",
+            },
+            new ItemStatus
+            {
+                ItemStatusId = (int)ItemStatusEnum.Unavailable,
+                Name = "Unavailable",
+            },
+            new ItemStatus
+            {
+                ItemStatusId = (int)ItemStatusEnum.Reserved,
+                Name = "Reserved",
+            }
+        };
+
         private static readonly List<ItemModel> Items = new List<ItemModel>
         {
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Reserved),
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000017",
                 Name = "Młotek",
                 Description = "500g żółty",
@@ -123,7 +131,7 @@ namespace SSA.Droid
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000031",
-                Name = "Gwoździe calowae",
+                Name = "Gwoździe calowe",
                 Description = "5kg",
                 ListId = 1
             },
@@ -192,7 +200,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Reserved),
+                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000147",
                 Name = "Apteczka",
                 Description = "mała nr 2",
@@ -201,10 +209,14 @@ namespace SSA.Droid
 
         };
 
-        public static List<ItemStatus> ItemStatus { get => _itemStatus; set => _itemStatus = value; }
+       
 
         public static void AddData()
         {
+            foreach (var person in Persons)
+            {
+                Repository.Save<PersonModel>(person);
+            }
             foreach (var status in ListStatus)
             {
                 Repository.Save<ListStatus>(status);
@@ -224,6 +236,7 @@ namespace SSA.Droid
         }
         public static void DropData()
         {
+            Repository.DeleteAll<PersonModel>();
             Repository.DeleteAll<ItemStatus>();
             Repository.DeleteAll<ListStatus>();
             Repository.DeleteAll<ItemModel>();

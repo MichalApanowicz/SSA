@@ -22,9 +22,10 @@ namespace SSA.Droid.Repositories
         public MainRepository(SQLiteConnection db)
         {
             _db = db;
+            _db.CreateTable<PersonModel>();
+
             _db.CreateTable<ItemModel>();
             _db.CreateTable<ListModel>();
-            _db.CreateTable<ItemInLists>();
 
             _db.CreateTable<ItemStatus>();
             _db.CreateTable<ListStatus>();
@@ -72,7 +73,7 @@ namespace SSA.Droid.Repositories
         public List<ItemModel> GetItemsFromList(int listId)
         {
             var itemsIds = GetList(listId).Items.Select(l => l.ItemId);
-            var result= new List<ItemModel>();
+            var result = new List<ItemModel>();
             foreach (var id in itemsIds)
             {
                 result.Add(GetItem(id));
@@ -149,6 +150,15 @@ namespace SSA.Droid.Repositories
         {
             var ids = _db.Query<ListStatus>("Select ListId From ListStatus").Select(x => x.ListStatusId);
             return ids.Select(id => _db.Get<ListStatus>(id)).ToList();
+        }
+
+        #endregion
+
+        #region Persons
+
+        public PersonModel GetPerson(int id)
+        {
+            return _db.Get<PersonModel>(id);
         }
 
         #endregion
