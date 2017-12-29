@@ -67,35 +67,37 @@ namespace SSA.Droid
             {
                 Name = "Magazyn Główny",
                 Description = "Rzeczy znajdujące się w magazynie nr 1 przy ulicy Głównej 1 w Bydgoszczy",
-                CreateDate = "2017-12-14", Person = "Michał Apanowicz",
-                ListStatusId = 1,
+                CreateDate = "2017-12-14",
+                PersonId = 1,
+                Status = ListStatus[0],
                 Items = new List<ItemModel>
                 {
 
                 },
-                Status = ListStatus[0]
             },
             new ListModel()
             {
                 Name = "Lista obozowa 1",
                 Description = "Rzeczy zabrane na kwaterkę",
-                CreateDate = "2017-12-14", Person = "Michał Apanowicz", ListStatusId = 1,
+                CreateDate = "2017-12-14",
+                PersonId = 1,
+                Status = ListStatus[0],
                 Items = new List<ItemModel>
                 {
 
                 },
-                Status = ListStatus[0]
             },
             new ListModel()
             {
                 Name = "Lista Jastrzębi",
                 Description = "Rzeczy zabrane na zbiórkę",
-                CreateDate = "2017-12-14", Person = "Michał Apanowicz", ListStatusId = 2,
+                CreateDate = "2017-12-14",
+                PersonId = 1,
+                Status = ListStatus[0],
                 Items = new List<ItemModel>
                 {
 
                 },
-                Status = ListStatus[1]
             }
         };
 
@@ -104,110 +106,97 @@ namespace SSA.Droid
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Reserved),
-                KodEAN = "AB 1234",
+                KodEAN = "00000017",
                 Name = "Młotek",
                 Description = "500g żółty",
-                Lists = new List<ListModel>()
-                {
-                    Lists[1]
-                }
+                ListId = 1
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1235",
+                KodEAN = "00000024",
                 Name = "Siekiera",
                 Description = "kuta ręcznie",
-                Lists = new List<ListModel>()
+                
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1236",
+                KodEAN = "00000031",
                 Name = "Gwoździe calowae",
                 Description = "5kg",
-                Lists = new List<ListModel>()
+                ListId = 1
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1237",
+                KodEAN = "00000048",
                 Name = "Młotek",
                 Description = "250g żółty",
-                Lists = new List<ListModel>()
+                ListId = 1
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1238",
+                KodEAN = "00000055",
                 Name = "Łopata",
                 Description = "Fiskars",
-                Lists = new List<ListModel>()
+                
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1239",
+                KodEAN = "00000079",
                 Name = "Dołownik",
                 Description = "Romanik",
-                Lists = new List<ListModel>()
+                
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1240",
+                KodEAN = "00000093",
                 Name = "Plandeka",
                 Description = "9m^2",
-                Lists = new List<ListModel>()
+                
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1241",
+                KodEAN = "00000109",
                 Name = "Plandeka",
                 Description = "3m^2",
-                Lists = new List<ListModel>()
+                
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1242",
+                KodEAN = "00000116",
                 Name = "Plandeka",
                 Description = "2m^2",
-                Lists = new List<ListModel>()
+                
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1242",
+                KodEAN = "00000123",
                 Name = "Latarka",
                 Description = "duża",
-                Lists = new List<ListModel>()
-                {
-                    Lists[0]
-                }
-            },
+                },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-                KodEAN = "AB 1242",
+                KodEAN = "00000130",
                 Name = "Skrzynka narzędziowa",
                 Description = "niebieska",
-                Lists = new List<ListModel>()
-                {
-                    Lists[1]
-                }
+              
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Reserved),
-                KodEAN = "AB 1242",
+                KodEAN = "00000147",
                 Name = "Apteczka",
                 Description = "mała nr 2",
-                Lists = new List<ListModel>()
-                {
-                    Lists[2]
-                }
+               
             },
 
         };

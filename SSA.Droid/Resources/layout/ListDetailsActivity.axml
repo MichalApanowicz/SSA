@@ -11,20 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/toolbar1">
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioGroup1">
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/space1" />
-        </RadioGroup>
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/space2" />
-        <RadioGroup
+       <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/radioGroup2">
@@ -44,7 +31,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText1"
+        android:id="@+id/eanCodeEditText"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp" />
     <ListView

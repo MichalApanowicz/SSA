@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Java.Interop;
 using Newtonsoft.Json;
 using SQLite.Net;
 using SQLite.Net.Platform.XamarinAndroid;
@@ -29,6 +30,8 @@ namespace SSA.Droid.Activities
         private ListModel _list;
         private List<ItemModel> _items;
 
+        private EditText _eanCodeText;
+        private RadioButton _getItemRadioButton, _deleteItemRadioButton;
         private Toolbar _toolbar;
         //private TextView _person, _createDate;
         private ArrayAdapter _adapter;
@@ -43,22 +46,46 @@ namespace SSA.Droid.Activities
             _list = JsonConvert.DeserializeObject<ListModel>(text) ?? new ListModel();
             _items = _repository.GetItemsFromList(_list.ListId);
 
-
+            _getItemRadioButton = FindViewById<RadioButton>(Resource.Id.getItemRadioButton);
+            _deleteItemRadioButton = FindViewById<RadioButton>(Resource.Id.deleteItemRadioButton);
+            _eanCodeText = FindViewById<EditText>(Resource.Id.eanCodeEditText);
+            _eanCodeText.TextChanged += (sender, e) =>
+            {
+                var typedEan = _eanCodeText.Text;
+                if (typedEan.Length == 8)
+                {
+                    var item = _repository.GetItemByEanCode(typedEan);
+                    if (_getItemRadioButton.Checked)
+                    {
+                        var actionString = "";
+                        if (_items.Select(x => x.ItemId).Contains(item.ItemId))
+                        {
+                            item.Status = _repository.GetItemStatus(ItemStatusEnum.Unavailable);
+                            actionString = "Pobrano :";
+                        }
+                        else
+                        {
+                            item.ListId = _list.ListId;
+                            actionString = "Dodano :";
+                        }
+                        _repository.Update(item);
+                        Toast.MakeText(this, actionString + item.Name, ToastLength.Long).Show();
+                    }
+                    else if (_deleteItemRadioButton.Checked)
+                    {
+                        item.ListId = 0;
+                        _repository.Update(item);
+                        Toast.MakeText(this, "Usunięto: " + item.Name, ToastLength.Long).Show();
+                    }
+                    //_eanCodeText.Text = "";
+                    UpdateItemList();
+                }
+            };
             _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             _toolbar.Title = _list.Name;
             _toolbar.InflateMenu(Resource.Menu.listDetails_top_menu);
             SetActionBar(_toolbar);
 
-            //_person = FindViewById<TextView>(Resource.Id.ListPersonText);
-            //_createDate = FindViewById<TextView>(Resource.Id.ListDateText);
-
-            //_person.Text = _list.Person;
-            //_createDate.Text = DateTime.Parse(_list.CreateDate).ToLongDateString();
-
-            //_adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItemChecked,
-            //  objects: _items.Select(x => x.Name).ToArray());
-
-            //ListAdapter = _adapter;
             var selected = new List<int>();
             foreach (var item in _items)
             {
@@ -99,11 +126,11 @@ namespace SSA.Droid.Activities
 
             foreach (var item in _items)
             {
-                    if (item.Status.ItemStatusId == (int) ItemStatusEnum.Available)
-                    {
-                        item.Status = _repository.GetItemStatus(ItemStatusEnum.Reserved);
-                        _repository.Update(item);
-                    }
+                if (item.Status.ItemStatusId == (int)ItemStatusEnum.Available)
+                {
+                    item.Status = _repository.GetItemStatus(ItemStatusEnum.Reserved);
+                    _repository.Update(item);
+                }
             }
 
             _list.Status = _repository.GetListStatus(ListStatusEnum.Committed);

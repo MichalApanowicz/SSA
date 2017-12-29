@@ -37,12 +37,12 @@ namespace SSA.Droid.Models
         [ManyToOne()]
         public ItemStatus Status { get; set; }
 
-        [ManyToMany(typeof(ItemInLists))]
-        public List<ListModel> Lists { get; set; }
+        [ForeignKey(typeof(ListModel))]
+        public int ListId { get; set; }
 
         public override string ToString()
         {
-            return $"[Item: ItemId={ItemId}, Name={Name}, Lists.Count={Lists.Count}, Status={ItemStatusId}]";
+            return $"[Item: ItemId={ItemId}, Name={Name}, ListId={ListId}, Status={ItemStatusId}]";
         }
     }
 }

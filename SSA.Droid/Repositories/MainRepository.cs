@@ -63,6 +63,12 @@ namespace SSA.Droid.Repositories
             return _db.GetWithChildren<ItemModel>(id);
         }
 
+        public ItemModel GetItemByEanCode(string eanCode)
+        {
+            var itemId = _db.Find<ItemModel>(x => x.KodEAN == eanCode).ItemId;
+            return GetItem(itemId);
+        }
+
         public List<ItemModel> GetItemsFromList(int listId)
         {
             var itemsIds = GetList(listId).Items.Select(l => l.ItemId);

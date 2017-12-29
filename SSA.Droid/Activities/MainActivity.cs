@@ -124,7 +124,7 @@ namespace SSA.Droid
                         ListStatusId = 1,
                         Status = _repository.GetListStatus(ListStatusEnum.Uncommitted),
                         Items = selectedItems,
-                        Person = "Michał Apanowicz",
+                        PersonId = 1,
                         CreateDate = DateTime.Now.ToLongDateString()
                     };
                     var result = _repository.Save<ListModel>(list);
