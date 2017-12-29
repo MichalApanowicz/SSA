@@ -22,7 +22,7 @@ using SSA.Droid.Adapters;
 namespace SSA.Droid
 {
 
-    [Activity(MainLauncher = true, ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
+    [Activity(ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class MainActivity : FragmentActivity
     {
         private readonly MainRepository _repository =
