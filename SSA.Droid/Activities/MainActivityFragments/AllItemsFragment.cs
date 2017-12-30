@@ -24,16 +24,13 @@ namespace SSA.Droid.Activities.MainActivityFragments
         private static List<ItemModel> _items;
         private static List<ItemModel> _selectedItems;
         private AllItemsAdapter _adapter;
-        private static AllItemsFragment _instance;
 
         private AllItemsFragment() { }
 
         public static AllItemsFragment NewInstance(MainRepository repository)
         {
-            return _instance ?? (_instance = new AllItemsFragment
-            {
-                _repository = repository
-            });
+            var fragment = new AllItemsFragment { _repository = repository };
+            return fragment;
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -72,11 +69,11 @@ namespace SSA.Droid.Activities.MainActivityFragments
             return _selectedItems;
         }
 
-        public void UpdateItems()
-        {
-            _items = _repository.GetAllItemsWithCildren();
-            _adapter = new AllItemsAdapter(Activity, _items);
-            _adapter.NotifyDataSetChanged();
-        }
+        //public void UpdateItems()
+        //{
+        //    _items = _repository.GetAllItemsWithCildren();
+        //    _adapter = new AllItemsAdapter(Activity, _items);
+        //    _adapter.NotifyDataSetChanged();
+        //}
     }
 }

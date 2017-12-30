@@ -38,6 +38,8 @@ namespace SSA.Droid
 
         protected override void OnResume()
         {
+            base.OnResume();
+
             Log.Debug("Database", Constants.DatabasePath);
             _fragments = new Android.Support.V4.App.Fragment[]
             {
@@ -50,10 +52,8 @@ namespace SSA.Droid
             _viewPager = FindViewById<ViewPager>(Resource.Id.mainviewpager);
             _viewPager.Adapter =
                 new MainActivityFragmentAdapter(SupportFragmentManager, _fragments, _tabNames);
-            base.OnResume();
+            
             _viewPager.SetCurrentItem(currentItem, false);
-
-            ((AllItemsFragment)_fragments[1]).UpdateItems();
         }
 
         protected override void OnCreate(Bundle bundle)
@@ -135,12 +135,6 @@ namespace SSA.Droid
                     Log.Debug("MainActivity",
                         $"menu_createNewList: {JsonConvert.SerializeObject(result, Formatting.Indented)}");
 
-                    var x = _fragments[0] as AllListsFragment;
-                    x?.UpdateLists();
-
-                    var y =  x?.ListAdapter as AllListsAdapter; 
-                    y?.NotifyDataSetChanged();
-
                     Toast.MakeText(this, $"Utworzono listę z {selectedItems.Count} przedmiotami",
                         ToastLength.Short).Show();
                 }
@@ -148,6 +142,7 @@ namespace SSA.Droid
                 {
                     Log.Error("MainActivity", $"{JsonConvert.SerializeObject(ex, Formatting.Indented)}");
                 }
+                OnResume();
             }
         }
 

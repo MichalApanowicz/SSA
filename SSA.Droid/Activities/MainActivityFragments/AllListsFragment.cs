@@ -3,6 +3,7 @@ using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
@@ -48,10 +49,10 @@ namespace SSA.Droid.Activities.MainActivityFragments
             StartActivity(intent);
         }
 
-        public void UpdateLists()
-        {
-            _lists = _repository.GetAllListsWithCildren();
-            ListAdapter = new AllListsAdapter(Activity, _lists);
-        }
+        //public void UpdateLists()
+        //{
+        //    _lists = _repository.GetAllListsWithCildren();
+        //    ListAdapter = new AllListsAdapter(Activity, _lists);
+        //}
     }
 }
