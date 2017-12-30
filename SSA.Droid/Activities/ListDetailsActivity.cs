@@ -65,7 +65,7 @@ namespace SSA.Droid.Activities
                     selected.Add(item.ItemId);
                 }
             }
-            ListAdapter = new AllItemsAdapter(this, _items, selected);
+            ListAdapter = new ItemsOnListDetailsAdapter(this, _items, selected);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -114,7 +114,7 @@ namespace SSA.Droid.Activities
         private void UpdateItemList()
         {
             _items = _repository.GetItemsFromList(_list.ListId);
-            ListAdapter = new AllItemsAdapter(this, _items);
+            ListAdapter = new ItemsOnListDetailsAdapter(this, _items);
             ((BaseAdapter)ListAdapter).NotifyDataSetChanged();
         }
 
@@ -122,7 +122,7 @@ namespace SSA.Droid.Activities
         {
             _selectedItems.Clear();
 
-            var selected = ((AllItemsAdapter)ListAdapter).GetSelectedRows();
+            var selected = ((ItemsOnListDetailsAdapter)ListAdapter).GetSelectedRows();
             foreach (var i in selected)
             {
                 _selectedItems.Add(_items.First(x => x.ItemId == i));

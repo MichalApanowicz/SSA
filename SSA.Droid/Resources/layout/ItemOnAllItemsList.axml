@@ -40,7 +40,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/textView3"
         android:layout_centerInParent="true"
-        android:layout_marginRight="150px"
+        android:layout_marginRight="15px"
         android:focusableInTouchMode="false"
         android:clickable="false"
         android:focusable="false" />

@@ -13,13 +13,13 @@ using SSA.Droid.Models;
 
 namespace SSA.Droid.Adapters
 {
-    public class AllItemsAdapter : BaseAdapter<string>
+    public class ItemsOnListDetailsAdapter : BaseAdapter<string>
     {
         private readonly List<ItemModel> _items;
         private readonly Activity _context;
         public List<int> Selected { get; set; }
 
-        public AllItemsAdapter(Activity context, List<ItemModel> items, List<int> selected = null) : base()
+        public ItemsOnListDetailsAdapter(Activity context, List<ItemModel> items, List<int> selected = null) : base()
         {
             _context = context;
             _items = items;
@@ -30,18 +30,18 @@ namespace SSA.Droid.Adapters
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            ItemOnListViewHolder holder = null;
+            ItemOnListDetailsViewHolder holder = null;
             var view = convertView;
 
             if (view != null)
-                holder = view.Tag as ItemOnListViewHolder;
+                holder = view.Tag as ItemOnListDetailsViewHolder;
 
             var item = _items[position];
 
             if (holder == null)
             {
-                holder = new ItemOnListViewHolder();
-                view = _context.LayoutInflater.Inflate(Resource.Layout.ItemOnAllItemsList, null);
+                holder = new ItemOnListDetailsViewHolder();
+                view = _context.LayoutInflater.Inflate(Resource.Layout.ItemOnListDetailsList, null);
                 holder.LinearLayout = view.FindViewById<LinearLayout>(Resource.Id.linearLayout3);
                 holder.Name = view.FindViewById<TextView>(Resource.Id.textView1);
                 holder.Description = view.FindViewById<TextView>(Resource.Id.textView2);
@@ -79,10 +79,9 @@ namespace SSA.Droid.Adapters
             else
             {
                 holder.Status.Text = item.Status.Name;
-                holder.CheckBox.Visibility = ViewStates.Invisible;
+                //holder.CheckBox.Visibility = ViewStates.Invisible;
                 holder.Status.Visibility = ViewStates.Visible;
             }
-
 
             return view;
         }
@@ -99,7 +98,7 @@ namespace SSA.Droid.Adapters
         }
     }
 
-    internal class ItemOnListViewHolder : Java.Lang.Object
+    internal class ItemOnListDetailsViewHolder : Java.Lang.Object
     {
         public ItemModel Item { get; set; }
         public LinearLayout LinearLayout { get; set; }

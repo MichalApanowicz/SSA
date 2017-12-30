@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativeLayout1"
+    android:descendantFocusability="blocksDescendants">
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/linearLayout3">
+    <TextView
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:layout_margin="10px"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:focusable="false" />
+    <TextView
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_marginLeft="10px"
+        android:layout_marginBottom="10px"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:focusable="false" />
+  </LinearLayout>
+  <TextView
+      android:text="Large Text"
+      android:textAppearance="?android:attr/textAppearanceLarge"
+      android:id="@+id/textView3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_below="@id/textView3"
+      android:layout_centerInParent="true"
+      android:layout_marginRight="150px"
+      android:focusableInTouchMode="false"
+      android:clickable="false"
+      android:focusable="false" />
+  <CheckBox
+      android:id="@+id/checkBox1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_below="@id/checkBox1"
+      android:layout_centerInParent="true"
+      android:layout_marginRight="15px"
+      android:focusableInTouchMode="false"
+      android:clickable="false"
+      android:focusable="false" />
+</RelativeLayout>
