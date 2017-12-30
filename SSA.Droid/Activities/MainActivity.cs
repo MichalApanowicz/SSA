@@ -41,12 +41,8 @@ namespace SSA.Droid
             base.OnResume();
 
             Log.Debug("Database", Constants.DatabasePath);
-            _fragments = new Android.Support.V4.App.Fragment[]
-            {
-                AllListsFragment.NewInstance(_repository),
-                AllItemsFragment.NewInstance(_repository),
-                TestFragment.NewInstance(_repository),
-            };
+            ((AllListsFragment) _fragments[0]).UpdateLists();
+            ((AllItemsFragment) _fragments[1]).UpdateItems();
             var currentItem = _viewPager.CurrentItem;
             
             _viewPager = FindViewById<ViewPager>(Resource.Id.mainviewpager);

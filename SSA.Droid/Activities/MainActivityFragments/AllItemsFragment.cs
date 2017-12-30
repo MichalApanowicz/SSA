@@ -22,8 +22,9 @@ namespace SSA.Droid.Activities.MainActivityFragments
     {
         private MainRepository _repository;
         private static List<ItemModel> _items;
-        private static List<ItemModel> _selectedItems;
+        public List<ItemModel> SelectedItems;
         private AllItemsAdapter _adapter;
+        private List<int> _selectedIds;
 
         private AllItemsFragment() { }
 
@@ -33,15 +34,23 @@ namespace SSA.Droid.Activities.MainActivityFragments
             return fragment;
         }
 
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            _items = _repository.GetAllItemsWithCildren();
+            _adapter = new AllItemsAdapter(Activity, _items);
+            ListAdapter = _adapter;
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.AllItems, null);
             var lv = view.FindViewById<ListView>(Android.Resource.Id.List);
-            _selectedItems = new List<ItemModel>();
+            SelectedItems = new List<ItemModel>();
 
             _items = _repository.GetAllItemsWithCildren();
 
-            _adapter = new AllItemsAdapter(Activity, _items);
+            _adapter = new AllItemsAdapter(Activity, _items, _selectedIds);
             ListAdapter = _adapter;
             lv.ChoiceMode = ChoiceMode.None;
 
@@ -50,30 +59,33 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         public override void OnListItemClick(ListView l, View v, int position, long id)
         {
-            Log.Debug("Fragment", $"_selectedItems[{_selectedItems.Count}]: {_selectedItems.ToArray().ToString()}");
+            SelectedItems.Add(_repository.GetItem((int)id));
+            Log.Debug("Fragment", $"_selectedItems[{SelectedItems.Count}]: {SelectedItems.ToArray()}");
         }
 
         public List<ItemModel> GetSelectedItems()
         {
-            _selectedItems.Clear();
+            SelectedItems.Clear();
 
             var adapter = ((AllItemsAdapter) ListAdapter) ?? _adapter;
-            var selected = adapter.GetSelectedRows();
-            foreach (var i in selected)
+            _selectedIds = adapter.GetSelectedRows();
+            foreach (var i in _selectedIds)
             {
-                _selectedItems.Add(_items.First(x => x.ItemId == i));
+                SelectedItems.Add(_items.First(x => x.ItemId == i));
             }
             _adapter.NotifyDataSetChanged();
-            Log.Debug("Fragment", $"_selectedItems[{_selectedItems.Count}]: {JsonConvert.SerializeObject(_selectedItems, Formatting.Indented)}");
+            Log.Debug("Fragment", $"_selectedItems[{SelectedItems.Count}]: {JsonConvert.SerializeObject(SelectedItems, Formatting.Indented)}");
             
-            return _selectedItems;
+            return SelectedItems;
         }
 
-        //public void UpdateItems()
-        //{
-        //    _items = _repository.GetAllItemsWithCildren();
-        //    _adapter = new AllItemsAdapter(Activity, _items);
-        //    _adapter.NotifyDataSetChanged();
-        //}
+        public void UpdateItems()
+        {
+            _selectedIds = _adapter?.GetSelectedRows();
+            _items = _repository.GetAllItemsWithCildren();
+            _adapter = new AllItemsAdapter(Activity, _items, _selectedIds);
+            _adapter.NotifyDataSetChanged();
+            ListAdapter =  _adapter;
+        }
     }
 }

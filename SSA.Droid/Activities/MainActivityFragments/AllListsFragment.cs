@@ -19,6 +19,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
     {
         private MainRepository _repository;
         private List<ListModel> _lists;
+        private AllListsAdapter _adapter;
 
         private AllListsFragment() { }
 
@@ -49,10 +50,12 @@ namespace SSA.Droid.Activities.MainActivityFragments
             StartActivity(intent);
         }
 
-        //public void UpdateLists()
-        //{
-        //    _lists = _repository.GetAllListsWithCildren();
-        //    ListAdapter = new AllListsAdapter(Activity, _lists);
-        //}
+        public void UpdateLists()
+        {
+            _lists = _repository.GetAllListsWithCildren();
+            _adapter = new AllListsAdapter(Activity, _lists);
+            _adapter.NotifyDataSetChanged();
+            ListAdapter = _adapter;
+        }
     }
 }
