@@ -78,10 +78,10 @@ namespace SSA.Droid.Activities
             };
             _secondToolbar.Click += (sender, e) =>
             {
-                if (((RadioButton) _toolbarRadioGroup.GetChildAt(0)).Checked)
+                if (((RadioButton)_toolbarRadioGroup.GetChildAt(0)).Checked)
                 {
                     _toolbarRadioGroup.ClearCheck();
-                    _toolbarRadioGroup.Check(((RadioButton) _toolbarRadioGroup.GetChildAt(1)).Id);
+                    _toolbarRadioGroup.Check(((RadioButton)_toolbarRadioGroup.GetChildAt(1)).Id);
                 }
                 else
                 {
@@ -118,7 +118,7 @@ namespace SSA.Droid.Activities
                     return true;
 
                 case Resource.Id.menu_terminateList:
-                    Toast.MakeText(this, $"Action selected: {item.TitleFormatted}",
+                    Toast.MakeText(this, $"{TerminateList()}",
                         ToastLength.Short).Show();
                     return true;
             }
@@ -127,7 +127,6 @@ namespace SSA.Droid.Activities
 
         private void CommitList()
         {
-
             foreach (var item in _items)
             {
                 if (item.Status.ItemStatusId == (int)ItemStatusEnum.Available)
@@ -144,26 +143,35 @@ namespace SSA.Droid.Activities
             UpdateItemList();
         }
 
+        private string TerminateList()
+        {
+            foreach (var item in _items)
+            {
+                if (item.Status.ItemStatusId != (int)ItemStatusEnum.Reserved)
+                {
+                    return "Zwróć wszystkie przedmioty!";
+                }
+            }
+            foreach (var item in _items)
+            {
+
+                item.Status = _repository.GetItemStatus(ItemStatusEnum.Available);
+                _repository.Update(item);
+            }
+
+            _list.Status = _repository.GetListStatus(ListStatusEnum.Terminated);
+            _list.Items = _items;
+            _repository.Update(_list);
+
+            UpdateItemList();
+            return "Rozwiązano listę: " + _list.Name;
+        }
+
         private void UpdateItemList()
         {
             _items = _repository.GetItemsFromList(_list.ListId);
             ListAdapter = new ItemsOnListDetailsAdapter(this, _items);
             ((BaseAdapter)ListAdapter).NotifyDataSetChanged();
-        }
-
-        private List<ItemModel> GetSelectedItems()
-        {
-            _selectedItems.Clear();
-
-            var selected = ((ItemsOnListDetailsAdapter)ListAdapter).GetSelectedRows();
-            foreach (var i in selected)
-            {
-                _selectedItems.Add(_items.First(x => x.ItemId == i));
-            }
-            _adapter.NotifyDataSetChanged();
-            Log.Debug("ListDetailsActivity", $"_selectedItems[{_selectedItems.Count}]: {JsonConvert.SerializeObject(_selectedItems, Formatting.Indented)}");
-
-            return _selectedItems;
         }
 
         private void EanTextChanged(object s, TextChangedEventArgs e)
@@ -173,38 +181,52 @@ namespace SSA.Droid.Activities
                 var typedEan = _eanCodeText.Text;
                 if (typedEan.Length == 8)
                 {
+                    var actionString = "";
                     var item = _repository.GetItemByEanCode(typedEan);
                     if (_getItemRadioButton.Checked)
                     {
-                        var actionString = "";
-                        if (_items.Select(x => x.ItemId).Contains(item.ItemId))
+                        if (_list.Status.ListStatusId == (int)ListStatusEnum.Uncommitted)
                         {
-                            item.Status = _repository.GetItemStatus(ItemStatusEnum.Unavailable);
-                            actionString = "Pobrano: ";
+                            if (!_items.Select(x => x.ItemId).Contains(item.ItemId))
+                            {
+                                item.ListId = _list.ListId;
+                                actionString = "Dodano: ";
+                            }
+                            _repository.Update(item);
                         }
-                        else
+                        else if (_list.Status.ListStatusId == (int)ListStatusEnum.Committed)
                         {
-                            item.ListId = _list.ListId;
-                            actionString = "Dodano: ";
+                            if (_items.Select(x => x.ItemId).Contains(item.ItemId))
+                            {
+                                item.Status = _repository.GetItemStatus(ItemStatusEnum.Unavailable);
+                                actionString = "Pobrano: ";
+                            }
                         }
-                        _repository.Update(item);
-                        Toast.MakeText(this, actionString + item.Name, ToastLength.Long).Show();
                     }
                     else if (_deleteItemRadioButton.Checked)
                     {
-                        if (item.Status.ItemStatusId == _repository.GetItemStatus(ItemStatusEnum.Available).ItemStatusId)
+                        if (_list.Status.ListStatusId == (int)ListStatusEnum.Uncommitted)
                         {
-                            item.ListId = 0;
-                            _repository.Update(item);
-                            Toast.MakeText(this, "Usunięto: " + item.Name, ToastLength.Long).Show();
+                            if (item.Status.ItemStatusId ==
+                                _repository.GetItemStatus(ItemStatusEnum.Available).ItemStatusId)
+                            {
+                                item.ListId = 0;
+                                actionString = "Usunięto: ";
+                            }
                         }
-                        else if (item.Status.ItemStatusId == _repository.GetItemStatus(ItemStatusEnum.Unavailable).ItemStatusId)
+                        else if (_list.Status.ListStatusId == (int)ListStatusEnum.Committed)
                         {
-                            item.Status = _repository.GetItemStatus(ItemStatusEnum.Reserved);
-                            _repository.Update(item);
-                            Toast.MakeText(this, "Oddano: " + item.Name, ToastLength.Long).Show();
+                            if (item.Status.ItemStatusId ==
+                                _repository.GetItemStatus(ItemStatusEnum.Unavailable).ItemStatusId)
+                            {
+                                item.Status = _repository.GetItemStatus(ItemStatusEnum.Reserved);
+
+                                actionString = "Oddano: ";
+                            }
                         }
                     }
+                    _repository.Update(item);
+                    Toast.MakeText(this, actionString + item.Name, ToastLength.Long).Show();
                     _eanCodeText.Text = "";
                     UpdateItemList();
                 }

@@ -28,7 +28,7 @@ namespace SSA.Droid
         {
             new PersonModel()
             {
-                Name = "Michał Apanowicz",
+                Name = "Michal Apanowicz",
                 Description = "Administrator",
                 Lists = new List<ListModel>()
             },

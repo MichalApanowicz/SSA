@@ -83,7 +83,6 @@ namespace SSA.Droid.Adapters
                 holder.Status.Visibility = ViewStates.Visible;
             }
 
-
             return view;
         }
 

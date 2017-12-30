@@ -45,7 +45,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
             var list = _lists.Find(x => x.ListId == id);
             base.OnListItemClick(l, v, position, id);
             var intent = new Intent(Context, typeof(ListDetailsActivity));
-            intent.PutExtra("List", JsonConvert.SerializeObject(list, new JsonSerializerSettings(){MaxDepth = 1}));
+            intent.PutExtra("List", JsonConvert.SerializeObject(list, new JsonSerializerSettings() { MaxDepth = 1 }));
 
             StartActivity(intent);
         }
