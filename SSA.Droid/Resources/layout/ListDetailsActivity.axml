@@ -43,9 +43,11 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:minWidth="235dp"
+            android:inputType="phone"
             android:maxLines="1"
             android:minLines="1"
             android:singleLine="true"
+            android:selectAllOnFocus="true"
             android:text="00000000" />
     </RelativeLayout>
     <ListView
