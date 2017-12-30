@@ -6,6 +6,7 @@ using System.Text;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Provider;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
@@ -21,12 +22,20 @@ namespace SSA.Droid
 
         static readonly MainRepository Repository = new MainRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
 
+        
+
         private static readonly List<PersonModel> Persons = new List<PersonModel>()
         {
             new PersonModel()
             {
                 Name = "Michał Apanowicz",
                 Description = "Administrator",
+                Lists = new List<ListModel>()
+            },
+            new PersonModel()
+            {
+                Name = "GetUserName()",
+                Description = "Pobrane dane",
                 Lists = new List<ListModel>()
             }
         };

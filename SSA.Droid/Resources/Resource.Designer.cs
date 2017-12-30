@@ -2103,6 +2103,9 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0b0072
 			public const int linearLayout3 = 2131427442;
 			
+			// aapt resource value: 0x7f0b0078
+			public const int listDetailsRadioGroup = 2131427448;
+			
 			// aapt resource value: 0x7f0b000e
 			public const int listMode = 2131427342;
 			
@@ -2169,8 +2172,8 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0b004f
 			public const int radio = 2131427407;
 			
-			// aapt resource value: 0x7f0b0078
-			public const int radioGroup2 = 2131427448;
+			// aapt resource value: 0x7f0b0077
+			public const int radioToolbar = 2131427447;
 			
 			// aapt resource value: 0x7f0b0071
 			public const int relativeLayout1 = 2131427441;
@@ -2342,9 +2345,6 @@ namespace SSA.Droid
 			
 			// aapt resource value: 0x7f0b0066
 			public const int toolbar = 2131427430;
-			
-			// aapt resource value: 0x7f0b0077
-			public const int toolbar1 = 2131427447;
 			
 			// aapt resource value: 0x7f0b0087
 			public const int toolbar_bottom = 2131427463;

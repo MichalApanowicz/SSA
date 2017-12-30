@@ -49,12 +49,6 @@ namespace SSA.Droid.Adapters
                 holder.Status = view.FindViewById<TextView>(Resource.Id.textView3);
                 holder.Item = item;
 
-                holder.CheckBox.Click += (s, e) =>
-                {
-                    if (holder.CheckBox.Checked) Selected.Add(holder.Item.ItemId);
-                    else Selected.Remove(holder.Item.ItemId);
-                    Log.Debug("Adapter", $"_selected: {JsonConvert.SerializeObject(Selected, Formatting.Indented)}");
-                };
                 holder.LinearLayout.Click += (sender, args) =>
                 {
                     var intent = new Intent(_context, typeof(ItemDetailsActivity));
@@ -70,18 +64,7 @@ namespace SSA.Droid.Adapters
             holder.Name.Text = $"{item.Name} [{item.KodEAN}]";
             if (item.ListId != 0) holder.Name.Text += $"[Lista nr {item.ListId}]";
             holder.Description.Text = item.Description;
-            if (item.Status.ItemStatusId == (int)ItemStatusEnum.Available)
-            {
-                holder.CheckBox.Checked = Selected.Contains(item.ItemId);
-                holder.CheckBox.Visibility = ViewStates.Visible;
-                holder.Status.Visibility = ViewStates.Invisible;
-            }
-            else
-            {
-                holder.Status.Text = item.Status.Name;
-                //holder.CheckBox.Visibility = ViewStates.Invisible;
-                holder.Status.Visibility = ViewStates.Visible;
-            }
+            holder.Status.Text = item.Status.Name;
 
             return view;
         }

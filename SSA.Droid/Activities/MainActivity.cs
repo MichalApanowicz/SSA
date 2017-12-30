@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.Nfc;
 using Android.Widget;
 using Android.OS;
+using Android.Provider;
 using Android.Util;
 using SQLite.Net;
 using SQLite.Net.Platform.XamarinAndroid;
@@ -33,6 +34,7 @@ namespace SSA.Droid
         private ViewPager _viewPager;
         private Toolbar _toolbar;
         private string[] _tabNames;
+        private PersonModel _loggedUser;
 
         protected override void OnResume()
         {
@@ -59,9 +61,10 @@ namespace SSA.Droid
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.Main);
-
+            
             SampleData.DropData();
             SampleData.AddData();
+            SaveUserNameToDatabase();
 
             _fragments = new Android.Support.V4.App.Fragment[]
             {
@@ -82,7 +85,7 @@ namespace SSA.Droid
                 new MainActivityFragmentAdapter(SupportFragmentManager, _fragments, _tabNames);
 
             _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            _toolbar.Title = "SSA";
+            _toolbar.Title = "SSA " + _loggedUser.Name;
             _toolbar.InflateMenu(Resource.Menu.top_menu);
             SetActionBar(_toolbar);
         }
@@ -124,7 +127,7 @@ namespace SSA.Droid
                         ListStatusId = 1,
                         Status = _repository.GetListStatus(ListStatusEnum.Uncommitted),
                         Items = selectedItems,
-                        Person = _repository.GetPerson(1),
+                        Person = _loggedUser,
                         CreateDate = DateTime.Now.ToLongDateString()
                     };
                     var result = _repository.Save<ListModel>(list);
@@ -146,6 +149,42 @@ namespace SSA.Droid
                     Log.Error("MainActivity", $"{JsonConvert.SerializeObject(ex, Formatting.Indented)}");
                 }
             }
+        }
+
+        private string GetUserName()
+        {
+            var uri = ContactsContract.Profile.ContentUri;
+
+            string[] projection =
+            {
+                ContactsContract.Contacts.InterfaceConsts.DisplayName
+            };
+
+            var cursor = ContentResolver.Query(uri, projection, null, null, null);
+
+            if (cursor.MoveToFirst())
+            {
+                return (cursor.GetString(cursor.GetColumnIndex(projection[0])));
+
+            }
+            return null;
+        }
+
+        private void SaveUserNameToDatabase()
+        {
+            var name = GetUserName();
+            var person = _repository.GetPerson(name);
+            if (person == null)
+            {
+                person = new PersonModel
+                {
+                    Name = name,
+                    Description = "Nowy uzytkownik",
+                    Lists = new List<ListModel>()
+                };
+                _repository.Save(person);
+            }
+            _loggedUser = person;
         }
     }
 }

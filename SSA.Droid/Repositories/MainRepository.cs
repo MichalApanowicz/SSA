@@ -161,6 +161,11 @@ namespace SSA.Droid.Repositories
             return _db.Get<PersonModel>(id);
         }
 
+        public PersonModel GetPerson(string name)
+        {
+            return _db.Find<PersonModel>(x => x.Name == name);
+        }
+
         #endregion
     }
 }

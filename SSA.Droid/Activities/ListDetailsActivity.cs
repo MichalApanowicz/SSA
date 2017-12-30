@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Text;
@@ -33,8 +34,9 @@ namespace SSA.Droid.Activities
 
         private EditText _eanCodeText;
         private RadioButton _getItemRadioButton, _deleteItemRadioButton;
-        private Toolbar _toolbar;
-  
+        private Toolbar _toolbar, _secondToolbar;
+        private RadioGroup _toolbarRadioGroup;
+
         private ArrayAdapter _adapter;
 
         private List<ItemModel> _selectedItems;
@@ -56,6 +58,37 @@ namespace SSA.Droid.Activities
             _toolbar.Title = _list.Name;
             _toolbar.InflateMenu(Resource.Menu.listDetails_top_menu);
             SetActionBar(_toolbar);
+
+            _secondToolbar = FindViewById<Toolbar>(Resource.Id.radioToolbar);
+            _toolbarRadioGroup = FindViewById<RadioGroup>(Resource.Id.listDetailsRadioGroup);
+            _toolbar.SetBackgroundColor(Color.DarkGreen);
+            _secondToolbar.SetBackgroundColor(Color.DarkGreen);
+            _toolbarRadioGroup.CheckedChange += (sender, e) =>
+            {
+                if (_getItemRadioButton.Checked)
+                {
+                    _secondToolbar.SetBackgroundColor(Color.DarkGreen);
+                    _toolbar.SetBackgroundColor(Color.DarkGreen);
+                }
+                else if (_deleteItemRadioButton.Checked)
+                {
+                    _secondToolbar.SetBackgroundColor(Color.OrangeRed);
+                    _toolbar.SetBackgroundColor(Color.OrangeRed);
+                }
+            };
+            _secondToolbar.Click += (sender, e) =>
+            {
+                if (((RadioButton) _toolbarRadioGroup.GetChildAt(0)).Checked)
+                {
+                    _toolbarRadioGroup.ClearCheck();
+                    _toolbarRadioGroup.Check(((RadioButton) _toolbarRadioGroup.GetChildAt(1)).Id);
+                }
+                else
+                {
+                    _toolbarRadioGroup.ClearCheck();
+                    _toolbarRadioGroup.Check(((RadioButton)_toolbarRadioGroup.GetChildAt(0)).Id);
+                }
+            };
 
             var selected = new List<int>();
             foreach (var item in _items)
@@ -159,9 +192,18 @@ namespace SSA.Droid.Activities
                     }
                     else if (_deleteItemRadioButton.Checked)
                     {
-                        item.ListId = 0;
-                        _repository.Update(item);
-                        Toast.MakeText(this, "Usunięto: " + item.Name, ToastLength.Long).Show();
+                        if (item.Status.ItemStatusId == _repository.GetItemStatus(ItemStatusEnum.Available).ItemStatusId)
+                        {
+                            item.ListId = 0;
+                            _repository.Update(item);
+                            Toast.MakeText(this, "Usunięto: " + item.Name, ToastLength.Long).Show();
+                        }
+                        else if (item.Status.ItemStatusId == _repository.GetItemStatus(ItemStatusEnum.Unavailable).ItemStatusId)
+                        {
+                            item.Status = _repository.GetItemStatus(ItemStatusEnum.Reserved);
+                            _repository.Update(item);
+                            Toast.MakeText(this, "Oddano: " + item.Name, ToastLength.Long).Show();
+                        }
                     }
                     _eanCodeText.Text = "";
                     UpdateItemList();
