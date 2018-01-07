@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Xml;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -18,7 +20,7 @@ namespace SSA.Droid.Activities
     public class ItemDetailsActivity : Activity
     {
         private ItemModel _item;
-        private TextView _ean, _name, _description, _status, _list;
+        private TextView _ean, _name, _description, _status, _list, _category, _localization;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,12 +41,18 @@ namespace SSA.Droid.Activities
             _description = FindViewById<TextView>(Resource.Id.textItemDetailsDescription);
             _status = FindViewById<TextView>(Resource.Id.textItemDetailsStatus);
             _list = FindViewById<TextView>(Resource.Id.textItemDetailsList);
+            _category = FindViewById<TextView>(Resource.Id.textItemDetailsCategory);
+            _localization = FindViewById<TextView>(Resource.Id.textItemDetailsLocalization);
 
             _ean.Text = _item.KodEAN;
             _name.Text = _item.Name;
-            _description.Text = _item.Description;
+            _description.Text = _item.Description.Replace(", ",System.Environment.NewLine).Replace(":", ":"+System.Environment.NewLine);
             _status.Text = _item.Status.Name;
             _list.Text = JsonConvert.SerializeObject(_item.ListId);
+            _category.Text = _item.Category.Name;
+            _category.SetBackgroundColor(new Color(_item.Category.ColorR, _item.Category.ColorG,
+                _item.Category.ColorB));
+            _localization.Text = _item.Localization.Name;
         }
     }
 }

@@ -222,7 +222,7 @@ namespace SSA.Droid
                 Name = "Ponton",
                 Description = "4-osobowy, łatany",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
            },
             new ItemModel()
             {
@@ -231,7 +231,7 @@ namespace SSA.Droid
                 Name = "Namiot armasport",
                 Description = "niebiesko-czerwony, 3-osobowy",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -240,7 +240,7 @@ namespace SSA.Droid
                 Name = "Namiot fjord nansen",
                 Description = "oliwkowy, 3-osobowy",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -249,7 +249,7 @@ namespace SSA.Droid
                 Name = "Namiot McKinley Stone 4",
                 Description = "srebrny, 4-osobowy",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -258,7 +258,7 @@ namespace SSA.Droid
                 Name = "Namiot Quechua",
                 Description = "oliwkowy, 6-osobowy",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -267,7 +267,7 @@ namespace SSA.Droid
                 Name = "Namiot Quechua",
                 Description = "błękitny, 4-osobowy",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -276,7 +276,7 @@ namespace SSA.Droid
                 Name = "Nikon 1 V1",
                 Description = "w zestawie z kartą pamięci 16GB",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -285,7 +285,7 @@ namespace SSA.Droid
                 Name = "Lampa błyskowa Nikon SB-N7",
                 Description = "w zestawie z 2 bateriami AAA",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -294,7 +294,7 @@ namespace SSA.Droid
                 Name = "Namiot harcerski SCOUT 1",
                 Description = "oliwkowy, 10-osoby, w zestawie z masztami",
                 Category = Categories[1],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -303,7 +303,7 @@ namespace SSA.Droid
                 Name = "Namiot harcerski SCOUT 2",
                 Description = "oliwkowy, 10-osoby, w zestawie z masztami",
                 Category = Categories[2],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -312,7 +312,7 @@ namespace SSA.Droid
                 Name = "Namiot harcerski SCOUT 3",
                 Description = "oliwkowy, 10-osoby, w zestawie z masztami",
                 Category = Categories[3],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -321,7 +321,7 @@ namespace SSA.Droid
                 Name = "Namiot harcerski SCOUT 4",
                 Description = "oliwkowy, 10-osoby, w zestawie z masztami",
                 Category = Categories[4],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -330,7 +330,7 @@ namespace SSA.Droid
                 Name = "Szpadel greenimil 1",
                 Description = "z widocznymi śladami użytkowania",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -339,7 +339,7 @@ namespace SSA.Droid
                 Name = "Szpadel greenimil 2",
                 Description = "z widocznymi śladami użytkowania",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -348,7 +348,7 @@ namespace SSA.Droid
                 Name = "Piła ramowa dwuręczna 1",
                 Description = "w zestawie z brzeszczotem",
                 Category = Categories[4],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -357,7 +357,7 @@ namespace SSA.Droid
                 Name = "Piła ramowa dwuręczna 2",
                 Description = "w zestawie z brzeszczotem",
                 Category = Categories[1],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -366,7 +366,7 @@ namespace SSA.Droid
                 Name = "Piła ramowa dwuręczna 3",
                 Description = "w zestawie z brzeszczotem",
                 Category = Categories[2],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -375,7 +375,7 @@ namespace SSA.Droid
                 Name = "Piła ramowa dwuręczna 4",
                 Description = "w zestawie z brzeszczotem",
                 Category = Categories[3],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -384,7 +384,7 @@ namespace SSA.Droid
                 Name = "Saperka fiskars 1",
                 Description = "mała z drewnianym trzonkiem",
                 Category = Categories[4],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -393,7 +393,7 @@ namespace SSA.Droid
                 Name = "Saperka fiskars 2",
                 Description = "mała z drewnianym trzonkiem",
                 Category = Categories[1],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -402,7 +402,7 @@ namespace SSA.Droid
                 Name = "Saperka fiskars 3",
                 Description = "mała z drewnianym trzonkiem",
                 Category = Categories[2],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -411,7 +411,7 @@ namespace SSA.Droid
                 Name = "Saperka fiskars 4",
                 Description = "mała z drewnianym trzonkiem",
                 Category = Categories[3],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -420,7 +420,7 @@ namespace SSA.Droid
                 Name = "Młot",
                 Description = "10 kg, z drewnianym trzonkiem",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -429,7 +429,7 @@ namespace SSA.Droid
                 Name = "Siekiera",
                 Description = "1.5 kg, kuta ręcznie",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -438,7 +438,7 @@ namespace SSA.Droid
                 Name = "Skrzynka do narzędzi 1",
                 Description = "16-calowa, w zestawie: młotek ślusarski, siekiera, łom, miara zwijana",
                 Category = Categories[4],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -447,7 +447,7 @@ namespace SSA.Droid
                 Name = "Skrzynka do narzędzi 2",
                 Description = "16-calowa, w zestawie: młotek ślusarski, siekiera, łom, miara zwijana",
                 Category = Categories[1],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -456,7 +456,7 @@ namespace SSA.Droid
                 Name = "Skrzynka do narzędzi 3",
                 Description = "16-calowa, w zestawie: młotek ślusarski, siekiera, łom, miara zwijana",
                 Category = Categories[2],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -465,7 +465,7 @@ namespace SSA.Droid
                 Name = "Skrzynka do narzędzi 4",
                 Description = "16-calowa, w zestawie: młotek ślusarski, siekiera, łom, miara zwijana",
                 Category = Categories[3],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -474,7 +474,7 @@ namespace SSA.Droid
                 Name = "Szpadel fiskars 1",
                 Description = "czarny",
                 Category = Categories[4],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -483,7 +483,7 @@ namespace SSA.Droid
                 Name = "Świder fiskars 2",
                 Description = "czarny",
                 Category = Categories[3],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -492,7 +492,7 @@ namespace SSA.Droid
                 Name = "Świder fiskars 3",
                 Description = "czarny",
                 Category = Categories[2],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -501,7 +501,7 @@ namespace SSA.Droid
                 Name = "Świder fiskars 4",
                 Description = "czarny",
                 Category = Categories[3],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -510,7 +510,7 @@ namespace SSA.Droid
                 Name = "Świder romanik 1",
                 Description = "szary",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -519,7 +519,7 @@ namespace SSA.Droid
                 Name = "Piła stanley jednoręczna",
                 Description = "rękojeść żółta",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -528,7 +528,7 @@ namespace SSA.Droid
                 Name = "Młotek ciesielski",
                 Description = "250g żółty",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -537,7 +537,7 @@ namespace SSA.Droid
                 Name = "Młotek stahlson",
                 Description = "500g grafitowy",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -546,7 +546,7 @@ namespace SSA.Droid
                 Name = "Poziomica",
                 Description = "50cm, żółta",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -555,7 +555,7 @@ namespace SSA.Droid
                 Name = "Zestaw dłut snycerskich",
                 Description = "w zestawie 7 sztuk",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -564,7 +564,7 @@ namespace SSA.Droid
                 Name = "Zszywacz tapicerski",
                 Description = "żółty",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -573,7 +573,7 @@ namespace SSA.Droid
                 Name = "Obcęgi 1",
                 Description = "szare",
                 Category = Categories[4],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -582,7 +582,7 @@ namespace SSA.Droid
                 Name = "Obcęgi 2",
                 Description = "szare",
                 Category = Categories[1],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -591,7 +591,7 @@ namespace SSA.Droid
                 Name = "Grabie",
                 Description = "niebieskie, drewniany trzonek",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -600,7 +600,7 @@ namespace SSA.Droid
                 Name = "Mała siekiera fiskars",
                 Description = "czarna",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -609,7 +609,7 @@ namespace SSA.Droid
                 Name = "Łuk",
                 Description = "szary w zestawie z 4 strzałami",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -618,7 +618,7 @@ namespace SSA.Droid
                 Name = "Zestaw do badmintona",
                 Description = "dwie paletki i dwie lotki",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -627,7 +627,7 @@ namespace SSA.Droid
                 Name = "Makaron pływacki 1",
                 Description = "zielony",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -636,7 +636,7 @@ namespace SSA.Droid
                 Name = "Makaron pływacki 2",
                 Description = "niebieski",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -645,7 +645,7 @@ namespace SSA.Droid
                 Name = "Piłka nożna kipsta",
                 Description = "elementy biąłe i niebieskie",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -654,7 +654,7 @@ namespace SSA.Droid
                 Name = "Zestaw do gry w boules",
                 Description = "kompletny",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -663,7 +663,7 @@ namespace SSA.Droid
                 Name = "Rękawice bokserskie para",
                 Description = "czerwone",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -672,7 +672,7 @@ namespace SSA.Droid
                 Name = "Rękawice bokserskie para",
                 Description = "białe",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -681,7 +681,7 @@ namespace SSA.Droid
                 Name = "Wiatrówka",
                 Description = "w zestawie ze śrutem",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -690,7 +690,7 @@ namespace SSA.Droid
                 Name = "Wykrywacz do metali",
                 Description = "czarny, w zestawie bateria 9V",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -699,7 +699,7 @@ namespace SSA.Droid
                 Name = "Patelnia",
                 Description = "czarna, teflonowa",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -708,7 +708,7 @@ namespace SSA.Droid
                 Name = "Garnek średniej wielkości",
                 Description = "pojemność 40 l",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -717,7 +717,7 @@ namespace SSA.Droid
                 Name = "Kociołek turystyczny 10l",
                 Description = "pojemność 15 l",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
            new ItemModel()
             {
@@ -726,7 +726,7 @@ namespace SSA.Droid
                 Name = "Pompka ręczna",
                 Description = "uniwersalna",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -735,7 +735,7 @@ namespace SSA.Droid
                 Name = "Siatka sportowa",
                 Description = "szerokość 3m",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -744,7 +744,7 @@ namespace SSA.Droid
                 Name = "Gaśnica p-poż",
                 Description = "ABC, 3 kg",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -753,7 +753,7 @@ namespace SSA.Droid
                 Name = "Bojka ratownicza",
                 Description = "pomarańczowa z pasem i liną",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -762,7 +762,7 @@ namespace SSA.Droid
                 Name = "Zestaw do nurkowania",
                 Description = "niebieskie, płetwy i maska",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -771,7 +771,7 @@ namespace SSA.Droid
                 Name = "Sygnałówka z ustnikiem",
                 Description = "złota",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -780,7 +780,7 @@ namespace SSA.Droid
                 Name = "Plandeka 4x8",
                 Description = "zielona",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -789,7 +789,7 @@ namespace SSA.Droid
                 Name = "Plandeka 4x5",
                 Description = "zielona",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -798,7 +798,7 @@ namespace SSA.Droid
                 Name = "Plandeka 5x8",
                 Description = "zielona",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -807,7 +807,7 @@ namespace SSA.Droid
                 Name = "Plandeka 2x1",
                 Description = "niebieska",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -816,7 +816,7 @@ namespace SSA.Droid
                 Name = "Koc gaśniczy",
                 Description = "czerwony",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -825,7 +825,7 @@ namespace SSA.Droid
                 Name = "Drabina linowa",
                 Description = "długość 2m",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -834,7 +834,7 @@ namespace SSA.Droid
                 Name = "Apteczka turystyczna 1",
                 Description = "mała",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -843,7 +843,7 @@ namespace SSA.Droid
                 Name = "Apteczka turystyczna 2",
                 Description = "mała",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -852,7 +852,7 @@ namespace SSA.Droid
                 Name = "Garnek dużej wielkości",
                 Description = "pojemność: 50 l",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -861,7 +861,7 @@ namespace SSA.Droid
                 Name = "Pojemniki plastikowe 31 l",
                 Description = "białe z kranikiem",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -870,7 +870,7 @@ namespace SSA.Droid
                 Name = "Piła kabłąkowa Fiskars",
                 Description = "czarna",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -879,7 +879,7 @@ namespace SSA.Droid
                 Name = "Piecyk żeliwny",
                 Description = "czarny w zestawie z kominem i iskrownikiem",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -888,7 +888,7 @@ namespace SSA.Droid
                 Name = "Kabel o długości 600m",
                 Description = "czarny",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -897,7 +897,7 @@ namespace SSA.Droid
                 Name = "Zestaw resuscytacyjno-tlenowy WOPR RT",
                 Description = "czerwona torba",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -906,7 +906,7 @@ namespace SSA.Droid
                 Name = "Laminator Fellowes Saturn 3i A4",
                 Description = "srebrny",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -915,7 +915,7 @@ namespace SSA.Droid
                 Name = "Stół Hendi",
                 Description = "nierdzewny 1.8x0.6cm",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -924,7 +924,7 @@ namespace SSA.Droid
                 Name = "Duża siekiera Fiskars X7",
                 Description = "czarna",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -933,7 +933,7 @@ namespace SSA.Droid
                 Name = "Apteczka plecakowa Janysport AP20 z zawartością",
                 Description = "czerwona",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -942,7 +942,7 @@ namespace SSA.Droid
                 Name = "Beczka plastikowa 250 l",
                 Description = "czarna",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -951,7 +951,7 @@ namespace SSA.Droid
                 Name = "AGREGAT HECHTGG2000i",
                 Description = "czerwony",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -960,7 +960,7 @@ namespace SSA.Droid
                 Name = "Pilarka spalinowa STIHL MS181",
                 Description = "pomarańczowa",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             //new ItemModel()
             //{
@@ -969,7 +969,7 @@ namespace SSA.Droid
             //    Name = "Spodnie ochronne Stihl",
             //    Description = "pomarańczowe",
             //    Category = Categories[0],
-            //    LocalizationId = 0
+            //    Localization = Localizations[1]
             //},
             new ItemModel()
             {
@@ -978,7 +978,7 @@ namespace SSA.Droid
                 Name = "Zestaw garnków",
                 Description = "4 sztuki 5-20 l",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -987,7 +987,7 @@ namespace SSA.Droid
                 Name = "Materac wojskowy podgumowany",
                 Description = "szary",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -996,7 +996,7 @@ namespace SSA.Droid
                 Name = "Rzutka ratownicza",
                 Description = "czarna z odblaskiem",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
             new ItemModel()
             {
@@ -1005,7 +1005,7 @@ namespace SSA.Droid
                 Name = "Lina torowa",
                 Description = "żółta 15 m",
                 Category = Categories[0],
-                LocalizationId = 0
+                Localization = Localizations[1]
             },
         };
 

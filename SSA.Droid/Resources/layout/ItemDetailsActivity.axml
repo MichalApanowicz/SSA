@@ -76,4 +76,32 @@
       android:layout_height="wrap_content"
       android:id="@+id/textItemDetailsList"
     android:layout_margin="15px"/>
+  <TextView
+    android:text="Kategoria"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/textItemDetails10"
+    android:layout_marginLeft="10px" />
+  <TextView
+    android:text="Large Text"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/textItemDetailsCategory"
+    android:layout_margin="15px"/>
+  <TextView
+    android:text="Lokalizacja"
+    android:textAppearance="?android:attr/textAppearanceSmall"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/textItemDetails11"
+    android:layout_marginLeft="10px" />
+  <TextView
+    android:text="Large Text"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/textItemDetailsLocalization"
+    android:layout_margin="15px"/>
 </LinearLayout>

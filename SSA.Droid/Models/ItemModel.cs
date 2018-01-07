@@ -49,6 +49,9 @@ namespace SSA.Droid.Models
         [ForeignKey(typeof(Localization))]
         public int LocalizationId { get; set; }
 
+        [ManyToOne()]
+        public Localization Localization { get; set; }
+
         public override string ToString()
         {
             return $"[Item: ItemId={ItemId}, Name={Name}, ListId={ListId}, Status={ItemStatusId}]";
