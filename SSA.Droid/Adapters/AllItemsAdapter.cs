@@ -42,11 +42,12 @@ namespace SSA.Droid.Adapters
             {
                 holder = new ItemOnListViewHolder();
                 view = _context.LayoutInflater.Inflate(Resource.Layout.ItemOnAllItemsList, null);
-                holder.LinearLayout = view.FindViewById<LinearLayout>(Resource.Id.linearLayout3);
+                holder.LinearLayout = view.FindViewById<LinearLayout>(Resource.Id.linearLayoutHeader);
                 holder.Name = view.FindViewById<TextView>(Resource.Id.textView1);
                 holder.Description = view.FindViewById<TextView>(Resource.Id.textView2);
                 holder.CheckBox = view.FindViewById<CheckBox>(Resource.Id.checkBox1);
                 holder.Status = view.FindViewById<TextView>(Resource.Id.textView3);
+                holder.ColorHandler = view.FindViewById<LinearLayout>(Resource.Id.linearLayoutColor);
                 holder.Item = item;
 
                 holder.CheckBox.Click += (s, e) =>
@@ -83,6 +84,9 @@ namespace SSA.Droid.Adapters
                 holder.Status.Visibility = ViewStates.Visible;
             }
 
+            var color = new Color(item.Category.ColorR, item.Category.ColorG, item.Category.ColorB);
+            holder.ColorHandler.SetBackgroundColor(color);
+
             return view;
         }
 
@@ -106,6 +110,8 @@ namespace SSA.Droid.Adapters
         public TextView Description { get; set; }
         public TextView Status { get; set; }
         public CheckBox CheckBox { get; set; }
+        public Color Color { get; set; }
+        public LinearLayout ColorHandler { get; set; }
     }
 }
 

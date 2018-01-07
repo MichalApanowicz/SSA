@@ -29,6 +29,9 @@ namespace SSA.Droid.Repositories
 
             _db.CreateTable<ItemStatus>();
             _db.CreateTable<ListStatus>();
+
+            _db.CreateTable<Category>();
+            _db.CreateTable<Localization>();
         }
 
         #region Common

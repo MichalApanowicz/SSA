@@ -28,7 +28,7 @@ namespace SSA.Droid.Models
         [NotNull]
         public string Description { get; set; }
 
-        [NotNull]
+        [NotNull, Unique]
         public string KodEAN { get; set; }
 
         [ForeignKey(typeof(ItemStatus))]
@@ -39,6 +39,15 @@ namespace SSA.Droid.Models
 
         [ForeignKey(typeof(ListModel))]
         public int ListId { get; set; }
+
+        [ForeignKey(typeof(Category))]
+        public int CategoryId { get; set; }
+
+        [ManyToOne()]
+        public Category Category { get; set; }
+
+        [ForeignKey(typeof(Localization))]
+        public int LocalizationId { get; set; }
 
         public override string ToString()
         {

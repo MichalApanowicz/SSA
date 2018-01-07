@@ -227,7 +227,7 @@ namespace SSA.Droid.Activities
                     }
                     _repository.Update(item);
                     Toast.MakeText(this, actionString + item.Name, ToastLength.Long).Show();
-                    _eanCodeText.Text = "";
+                    _eanCodeText.SelectAll();
                     UpdateItemList();
                 }
             }

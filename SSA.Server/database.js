@@ -24,11 +24,6 @@ var database = {
         }, { tableName: 'ListModel' })
     },
 
-    ItemInLists: function () {
-        return this.db.define('ItemInLists', {
-        }, { tableName: 'ItemInLists' })
-    },
-
     ItemStatus: function () {
         return this.db.define('ItemStatus', {
         }, { tableName: 'ItemStatus' })

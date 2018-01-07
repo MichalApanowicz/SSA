@@ -123,10 +123,12 @@
     <Compile Include="Constants\ItemStatusEnum.cs" />
     <Compile Include="Constants\ListStatusEnum.cs" />
     <Compile Include="Constants\SampleData.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Models\ItemStatus.cs" />
     <Compile Include="Models\ListModel.cs" />
     <Compile Include="Models\ListStatus.cs" />
+    <Compile Include="Models\LocalizationModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Repositories\MainRepository.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
