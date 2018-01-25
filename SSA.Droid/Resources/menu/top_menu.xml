@@ -5,8 +5,8 @@
         android:icon="@mipmap/ic_action_content_create"
         android:showAsAction="always"
         android:title="Utwórz nową listę" />
-  <!--<item android:id="@+id/menu_save"
-        android:icon="@mipmap/ic_action_content_save"
+  <item android:id="@+id/menu_refreshData"
+        android:icon="@mipmap/ic_menu_paste_holo_dark"
         android:showAsAction="always"
-        android:title="Save" />-->
+        android:title="Save" />
 </menu>

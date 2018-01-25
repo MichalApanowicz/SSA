@@ -38,13 +38,26 @@ var database = {
     findItem: function(id) {
         return this.ItemModel().findOne({
             where: { ItemId: id },
-            attributes: ['ItemId', 'Name', 'Description']
+            attributes: ['ItemId', 'Name', 'Description', 'KodEAN', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId']
         });
     },
 
     getAllItems: function () {
         return this.ItemModel().findAll({
-            attributes: ['ItemId', 'Name', 'Description']
+            attributes: ['ItemId', 'Name', 'Description' , 'KodEAN', 'ItemStatusId', 'ListId', 'CategoryId','LocalizationId']
+        });
+    },
+
+    findList: function (id) {
+        return this.ListModel().findOne({
+            where: { ListId: id },
+            attributes: ['ListId', 'Name', 'Description', 'PersonId', 'CreateDate', 'ListStatusId']
+        });
+    },
+
+    getAllLists: function () {
+        return this.ListModel().findAll({
+            attributes: ['ListId', 'Name', 'Description', 'PersonId', 'CreateDate', 'ListStatusId']
         });
     },
 

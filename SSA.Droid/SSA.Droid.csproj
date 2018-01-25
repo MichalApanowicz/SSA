@@ -113,6 +113,7 @@
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\MainActivityFragments\AllItemsFragment.cs" />
     <Compile Include="Activities\MainActivityFragments\AllListsFragment.cs" />
+    <Compile Include="Activities\MainActivityFragments\SettingsFragment.cs" />
     <Compile Include="Activities\MainActivityFragments\TestFragment.cs" />
     <Compile Include="Activities\SplashScreenActivity.cs" />
     <Compile Include="Adapters\AllItemsAdapter.cs" />
@@ -170,6 +171,7 @@
     <AndroidResource Include="Resources\layout\ItemOnListDetailsList.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\Settings.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

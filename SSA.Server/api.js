@@ -20,6 +20,19 @@ app.get('/items/', function (req, res) {
     });
 });
 
+app.get('/lists/:id', function (req, res) {
+    console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`);
+    database.findList(req.params.id).then(function (result) {
+        res.status(200).send(result);
+    });
+});
+
+app.get('/lists/', function (req, res) {
+    console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`);
+    database.getAllLists().then(function (result) {
+        res.status(200).send(result);
+    });
+});
 
 app.get('*', function(req, res) {
 	res.status(404).send('Unrecogniset API call');

@@ -42,6 +42,14 @@ namespace SSA.Droid.Repositories
             return obj;
         }
 
+        public void SaveAll<T>(List<T> objs)
+        {
+            foreach (var x in objs)
+            {
+                Save<T>(x);
+            }
+        }
+
         public void Update<T>(T obj)
         {
             _db.UpdateWithChildren(obj);
@@ -170,5 +178,15 @@ namespace SSA.Droid.Repositories
         }
 
         #endregion
+
+        public Localization GetLocalization(int id)
+        {
+            return _db.Get<Localization>(id);
+        }
+
+        public Category GetCategory(int id)
+        {
+            return _db.Get<Category>(id);
+        }
     }
 }

@@ -3,34 +3,47 @@
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/main_content"
-        android:layout_below="@id/toolbar">
-        <android.support.v4.view.ViewPager
-            android:id="@+id/mainviewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <android.support.v4.view.PagerTabStrip
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:textColor="?attr/colorPrimary"/>
-        </android.support.v4.view.ViewPager>
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            android:background="?attr/colorAccent"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            local:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-    </LinearLayout>
+  <include
+      android:id="@+id/toolbar"
+      layout="@layout/toolbar" />
+
+  <ProgressBar
+    style="?android:attr/progressBarStyleLarge"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/progressBar1"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+    android:indeterminate="false"
+    android:layout_gravity="center" 
+    android:visibility="gone"/>
+  
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:id="@+id/main_content"
+      android:layout_below="@id/toolbar">
+   
+    <android.support.v4.view.ViewPager
+        android:id="@+id/mainviewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+      <android.support.v4.view.PagerTabStrip
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="top"
+          android:paddingBottom="10dp"
+          android:paddingTop="10dp"
+          android:textColor="?attr/colorPrimary" />
+    </android.support.v4.view.ViewPager>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="?attr/colorAccent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        local:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+  </LinearLayout>
 </RelativeLayout>

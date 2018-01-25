@@ -226,9 +226,12 @@ namespace SSA.Droid.Activities
                         }
                     }
                     _repository.Update(item);
-                    Toast.MakeText(this, actionString + item.Name, ToastLength.Long).Show();
-                    _eanCodeText.SelectAll();
                     UpdateItemList();
+                    Toast.MakeText(this, actionString + item.Name, ToastLength.Short).Show();
+                    _eanCodeText.ClearFocus();
+                    _eanCodeText.SelectAll();
+                    _eanCodeText.FocusedByDefault = true;
+                    
                 }
             }
             catch (Exception ex)
