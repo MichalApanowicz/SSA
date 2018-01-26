@@ -22,10 +22,7 @@ namespace SSA.Droid
                 Environment.GetFolderPath(Environment.SpecialFolder.Personal),
                 "Database.db"
             );
-<<<<<<< HEAD
 
         public static string ApiPath = "http://192.168.0.13:3000/";
-=======
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
     }
 }

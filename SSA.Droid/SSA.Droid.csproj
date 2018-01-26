@@ -113,42 +113,24 @@
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\MainActivityFragments\AllItemsFragment.cs" />
     <Compile Include="Activities\MainActivityFragments\AllListsFragment.cs" />
-<<<<<<< HEAD
     <Compile Include="Activities\MainActivityFragments\SettingsFragment.cs" />
     <Compile Include="Activities\MainActivityFragments\TestFragment.cs" />
     <Compile Include="Activities\SplashScreenActivity.cs" />
     <Compile Include="Adapters\AllItemsAdapter.cs" />
     <Compile Include="Adapters\AllListsAdapter.cs" />
     <Compile Include="Adapters\ItemsOnListDetailsAdapter.cs" />
-=======
-    <Compile Include="Activities\MainActivityFragments\TestFragment.cs" />
-    <Compile Include="Adapters\AllItemsAdapter.cs" />
-    <Compile Include="Adapters\AllListsAdapter.cs" />
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
     <Compile Include="Adapters\MainActivityFragmentAdapter.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Constants\ItemStatusEnum.cs" />
     <Compile Include="Constants\ListStatusEnum.cs" />
     <Compile Include="Constants\SampleData.cs" />
-<<<<<<< HEAD
     <Compile Include="Models\CategoryModel.cs" />
-=======
-    <Compile Include="Models\ItemInLists.cs" />
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
     <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Models\ItemStatus.cs" />
     <Compile Include="Models\ListModel.cs" />
     <Compile Include="Models\ListStatus.cs" />
-<<<<<<< HEAD
     <Compile Include="Models\LocalizationModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
-=======
-    <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\ItemRepository.cs" />
-    <Compile Include="Repositories\ItemStatusRepository.cs" />
-    <Compile Include="Repositories\ListRepository.cs" />
-    <Compile Include="Repositories\ListStatusRepository.cs" />
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
     <Compile Include="Repositories\MainRepository.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -165,13 +147,9 @@
     <AndroidResource Include="Resources\layout\MainActivity.axml" />
     <AndroidResource Include="Resources\layout\MainListView.axml" />
     <AndroidResource Include="Resources\layout\Test.axml" />
-<<<<<<< HEAD
     <AndroidResource Include="Resources\layout\AllItems.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-=======
-    <AndroidResource Include="Resources\layout\AllItems.axml" />
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
     <AndroidResource Include="Resources\layout\AllLists.axml" />
     <AndroidResource Include="Resources\layout\Item.axml" />
     <AndroidResource Include="Resources\layout\ListDetailsActivity.axml">
@@ -187,7 +165,6 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ListOnAllListsList.axml" />
-<<<<<<< HEAD
     <AndroidResource Include="Resources\drawable\splashScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -195,8 +172,6 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Settings.axml" />
-=======
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -205,10 +180,6 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
-    <Folder Include="Resources\drawable\" />
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
     <Folder Include="Resources\mipmap-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
@@ -292,12 +263,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\menu\listDetails_top_menu.xml" />
   </ItemGroup>
-<<<<<<< HEAD
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\a.jpg" />
   </ItemGroup>
-=======
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

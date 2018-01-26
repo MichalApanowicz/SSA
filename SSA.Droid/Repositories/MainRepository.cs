@@ -22,7 +22,6 @@ namespace SSA.Droid.Repositories
         public MainRepository(SQLiteConnection db)
         {
             _db = db;
-<<<<<<< HEAD
             _db.CreateTable<PersonModel>();
 
             _db.CreateTable<ItemModel>();
@@ -33,14 +32,6 @@ namespace SSA.Droid.Repositories
 
             _db.CreateTable<Category>();
             _db.CreateTable<Localization>();
-=======
-            _db.CreateTable<ItemModel>();
-            _db.CreateTable<ListModel>();
-            _db.CreateTable<ItemInLists>();
-
-            _db.CreateTable<ItemStatus>();
-            _db.CreateTable<ListStatus>();
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         }
 
         #region Common
@@ -51,7 +42,6 @@ namespace SSA.Droid.Repositories
             return obj;
         }
 
-<<<<<<< HEAD
         public void SaveAll<T>(List<T> objs)
         {
             foreach (var x in objs)
@@ -60,8 +50,6 @@ namespace SSA.Droid.Repositories
             }
         }
 
-=======
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         public void Update<T>(T obj)
         {
             _db.UpdateWithChildren(obj);
@@ -87,7 +75,6 @@ namespace SSA.Droid.Repositories
             return _db.GetWithChildren<ItemModel>(id);
         }
 
-<<<<<<< HEAD
         public ItemModel GetItemByEanCode(string eanCode)
         {
             var itemId = _db.Find<ItemModel>(x => x.KodEAN == eanCode).ItemId;
@@ -98,12 +85,6 @@ namespace SSA.Droid.Repositories
         {
             var itemsIds = GetList(listId).Items.Select(l => l.ItemId);
             var result = new List<ItemModel>();
-=======
-        public List<ItemModel> GetItemsFromList(int listId)
-        {
-            var itemsIds = GetList(listId).Items.Select(l => l.ItemId);
-            var result= new List<ItemModel>();
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             foreach (var id in itemsIds)
             {
                 result.Add(GetItem(id));
@@ -183,7 +164,6 @@ namespace SSA.Droid.Repositories
         }
 
         #endregion
-<<<<<<< HEAD
 
         #region Persons
 
@@ -208,7 +188,5 @@ namespace SSA.Droid.Repositories
         {
             return _db.Get<Category>(id);
         }
-=======
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
     }
 }

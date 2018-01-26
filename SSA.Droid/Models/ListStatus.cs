@@ -24,11 +24,5 @@ namespace SSA.Droid.Models
 
         [NotNull]
         public string Name { get; set; }
-<<<<<<< HEAD
-=======
-
-        [OneToMany(CascadeOperations = CascadeOperation.All)]
-        public List<ListModel> ListModels { get; set; }
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
     }
 }

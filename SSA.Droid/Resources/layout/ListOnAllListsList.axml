@@ -5,7 +5,6 @@
     android:id="@+id/ListRelativeLayout1"
     android:descendantFocusability="blocksDescendants">
     <LinearLayout
-<<<<<<< HEAD
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
@@ -66,36 +65,6 @@
     </LinearLayout>
     <TextView
         android:text="[X]"
-=======
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ListLinearLayout1">
-        <TextView
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ListNameText"
-            android:layout_margin="10px"
-            android:focusableInTouchMode="false"
-            android:clickable="false"
-            android:focusable="false" />
-        <TextView
-            android:text="Small Text"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ListStatusText"
-            android:layout_marginLeft="10px"
-            android:layout_marginBottom="10px"
-            android:focusableInTouchMode="false"
-            android:clickable="false"
-            android:focusable="false" />
-    </LinearLayout>
-    <TextView
-        android:text="Large Text"
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/ListCountText"
         android:layout_width="wrap_content"

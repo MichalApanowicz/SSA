@@ -28,11 +28,7 @@ namespace SSA.Droid.Models
         [NotNull]
         public string Description { get; set; }
 
-<<<<<<< HEAD
         [NotNull, Unique]
-=======
-        [NotNull]
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         public string KodEAN { get; set; }
 
         [ForeignKey(typeof(ItemStatus))]
@@ -41,7 +37,6 @@ namespace SSA.Droid.Models
         [ManyToOne()]
         public ItemStatus Status { get; set; }
 
-<<<<<<< HEAD
         [ForeignKey(typeof(ListModel))]
         public int ListId { get; set; }
 
@@ -60,14 +55,6 @@ namespace SSA.Droid.Models
         public override string ToString()
         {
             return $"[Item: ItemId={ItemId}, Name={Name}, ListId={ListId}, Status={ItemStatusId}]";
-=======
-        [ManyToMany(typeof(ItemInLists))]
-        public List<ListModel> Lists { get; set; }
-
-        public override string ToString()
-        {
-            return $"[Item: ItemId={ItemId}, Name={Name}, Lists.Count={Lists.Count}, Status={ItemStatusId}]";
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         }
     }
 }

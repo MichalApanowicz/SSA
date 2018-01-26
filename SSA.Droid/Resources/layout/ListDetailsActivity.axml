@@ -10,32 +10,11 @@
         android:background="?android:attr/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:id="@+id/radioToolbar">
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/listDetailsRadioGroup">
-=======
-        android:id="@+id/toolbar1">
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioGroup1">
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/space1" />
-        </RadioGroup>
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/space2" />
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioGroup2">
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,7 +24,6 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-<<<<<<< HEAD
                 android:text="Usuń / Zwróć"
                 android:id="@+id/deleteItemRadioButton" />
         </RadioGroup>
@@ -72,18 +50,6 @@
             android:selectAllOnFocus="true"
             android:text="00000000" />
     </RelativeLayout>
-=======
-                android:text="Usuń"
-                android:id="@+id/deleteItemRadioButton" />
-        </RadioGroup>
-    </Toolbar>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText1"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp" />
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"

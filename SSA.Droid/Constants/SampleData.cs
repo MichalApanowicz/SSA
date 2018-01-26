@@ -6,10 +6,7 @@ using System.Text;
 using Android.App;
 using Android.Content;
 using Android.OS;
-<<<<<<< HEAD
 using Android.Provider;
-=======
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
@@ -24,7 +21,6 @@ namespace SSA.Droid
     {
 
         static readonly MainRepository Repository = new MainRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
-<<<<<<< HEAD
 
         public static List<Localization> Localizations = new List<Localization>()
         {
@@ -139,27 +135,6 @@ namespace SSA.Droid
             }
         };
 
-=======
-        
-        private static List<ItemStatus> _itemStatus = new List<ItemStatus>()
-        {
-            new ItemStatus
-            {
-                ItemStatusId = (int)ItemStatusEnum.Available,
-                Name = "Available",
-            },
-            new ItemStatus
-            {
-                ItemStatusId = (int)ItemStatusEnum.Unavailable,
-                Name = "Unavailable",
-            },
-            new ItemStatus
-            {
-                ItemStatusId = (int)ItemStatusEnum.Reserved,
-                Name = "Reserved",
-            }
-         };
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         private static readonly List<ListStatus> ListStatus = new List<ListStatus>()
         {
             new ListStatus
@@ -178,74 +153,44 @@ namespace SSA.Droid
                 Name = "Terminated",
             }
         };
-<<<<<<< HEAD
-=======
-        
-
-        
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 
         private static readonly List<ListModel> Lists = new List<ListModel>
         {
             new ListModel()
             {
-<<<<<<< HEAD
                 Name = "Na biwak",
                 Description = "Rzeczy do zabrania na biwak w Ostromecku",
                 CreateDate = DateTime.Parse(DateTime.Parse("2017-12-14").ToLongDateString()).ToLongDateString(),
                 Person = Persons[0],
                 Status = ListStatus[0],
-=======
-                Name = "Magazyn Główny",
-                Description = "Rzeczy znajdujące się w magazynie nr 1 przy ulicy Głównej 1 w Bydgoszczy",
-                CreateDate = "2017-12-14", Person = "Michał Apanowicz",
-                ListStatusId = 1,
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
                 Items = new List<ItemModel>
                 {
 
                 },
-<<<<<<< HEAD
-=======
-                Status = ListStatus[0]
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             },
             new ListModel()
             {
                 Name = "Lista obozowa 1",
                 Description = "Rzeczy zabrane na kwaterkę",
-<<<<<<< HEAD
                 CreateDate = DateTime.Parse("2017-12-14").ToLongDateString(),
                 Person = Persons[0],
                 Status = ListStatus[0],
-=======
-                CreateDate = "2017-12-14", Person = "Michał Apanowicz", ListStatusId = 1,
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
                 Items = new List<ItemModel>
                 {
 
                 },
-<<<<<<< HEAD
-=======
-                Status = ListStatus[0]
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             },
             new ListModel()
             {
                 Name = "Lista Jastrzębi",
                 Description = "Rzeczy zabrane na zbiórkę",
-<<<<<<< HEAD
                 CreateDate = DateTime.Parse("2017-12-14").ToLongDateString(),
                 Person = Persons[0],
                 Status = ListStatus[0],
-=======
-                CreateDate = "2017-12-14", Person = "Michał Apanowicz", ListStatusId = 2,
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
                 Items = new List<ItemModel>
                 {
 
                 },
-<<<<<<< HEAD
             }
         };
 
@@ -265,15 +210,11 @@ namespace SSA.Droid
             {
                 ItemStatusId = (int)ItemStatusEnum.Reserved,
                 Name = "Reserved",
-=======
-                Status = ListStatus[1]
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             }
         };
 
         private static readonly List<ItemModel> Items = new List<ItemModel>
         {
-<<<<<<< HEAD
            new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
@@ -480,23 +421,10 @@ namespace SSA.Droid
                 Description = "10 kg, z drewnianym trzonkiem",
                 Category = Categories[0],
                 Localization = Localizations[1]
-=======
-            new ItemModel()
-            {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Reserved),
-                KodEAN = "AB 1234",
-                Name = "Młotek",
-                Description = "500g żółty",
-                Lists = new List<ListModel>()
-                {
-                    Lists[1]
-                }
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-<<<<<<< HEAD
                 KodEAN = "00000253",
                 Name = "Siekiera",
                 Description = "1.5 kg, kuta ręcznie",
@@ -583,33 +511,19 @@ namespace SSA.Droid
                 Description = "szary",
                 Category = Categories[0],
                 Localization = Localizations[1]
-=======
-                KodEAN = "AB 1235",
-                Name = "Siekiera",
-                Description = "kuta ręcznie",
-                Lists = new List<ListModel>()
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-<<<<<<< HEAD
                 KodEAN = "00000352",
                 Name = "Piła stanley jednoręczna",
                 Description = "rękojeść żółta",
                 Category = Categories[0],
                 Localization = Localizations[1]
-=======
-                KodEAN = "AB 1236",
-                Name = "Gwoździe calowae",
-                Description = "5kg",
-                Lists = new List<ListModel>()
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-<<<<<<< HEAD
                 KodEAN = "00000369",
                 Name = "Młotek ciesielski",
                 Description = "250g żółty",
@@ -831,116 +745,64 @@ namespace SSA.Droid
                 Description = "ABC, 3 kg",
                 Category = Categories[0],
                 Localization = Localizations[1]
-=======
-                KodEAN = "AB 1237",
-                Name = "Młotek",
-                Description = "250g żółty",
-                Lists = new List<ListModel>()
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-<<<<<<< HEAD
                 KodEAN = "00000611",
                 Name = "Bojka ratownicza",
                 Description = "pomarańczowa z pasem i liną",
                 Category = Categories[0],
                 Localization = Localizations[1]
-=======
-                KodEAN = "AB 1238",
-                Name = "Łopata",
-                Description = "Fiskars",
-                Lists = new List<ListModel>()
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-<<<<<<< HEAD
                 KodEAN = "00000628",
                 Name = "Zestaw do nurkowania",
                 Description = "niebieskie, płetwy i maska",
                 Category = Categories[0],
                 Localization = Localizations[1]
-=======
-                KodEAN = "AB 1239",
-                Name = "Dołownik",
-                Description = "Romanik",
-                Lists = new List<ListModel>()
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-<<<<<<< HEAD
                 KodEAN = "00000635",
                 Name = "Sygnałówka z ustnikiem",
                 Description = "złota",
                 Category = Categories[0],
                 Localization = Localizations[1]
-=======
-                KodEAN = "AB 1240",
-                Name = "Plandeka",
-                Description = "9m^2",
-                Lists = new List<ListModel>()
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-<<<<<<< HEAD
                 KodEAN = "00000642",
                 Name = "Plandeka 4x8",
                 Description = "zielona",
                 Category = Categories[0],
                 Localization = Localizations[1]
-=======
-                KodEAN = "AB 1241",
-                Name = "Plandeka",
-                Description = "3m^2",
-                Lists = new List<ListModel>()
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-<<<<<<< HEAD
                 KodEAN = "00000659",
                 Name = "Plandeka 4x5",
                 Description = "zielona",
                 Category = Categories[0],
                 Localization = Localizations[1]
-=======
-                KodEAN = "AB 1242",
-                Name = "Plandeka",
-                Description = "2m^2",
-                Lists = new List<ListModel>()
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-<<<<<<< HEAD
                 KodEAN = "00000666",
                 Name = "Plandeka 5x8",
                 Description = "zielona",
                 Category = Categories[0],
                 Localization = Localizations[1]
-=======
-                KodEAN = "AB 1242",
-                Name = "Latarka",
-                Description = "duża",
-                Lists = new List<ListModel>()
-                {
-                    Lists[0]
-                }
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             },
             new ItemModel()
             {
                 Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
-<<<<<<< HEAD
                 KodEAN = "00000673",
                 Name = "Plandeka 2x1",
                 Description = "niebieska",
@@ -1163,34 +1025,6 @@ namespace SSA.Droid
             {
                 Repository.Save<PersonModel>(person);
             }
-=======
-                KodEAN = "AB 1242",
-                Name = "Skrzynka narzędziowa",
-                Description = "niebieska",
-                Lists = new List<ListModel>()
-                {
-                    Lists[1]
-                }
-            },
-            new ItemModel()
-            {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Reserved),
-                KodEAN = "AB 1242",
-                Name = "Apteczka",
-                Description = "mała nr 2",
-                Lists = new List<ListModel>()
-                {
-                    Lists[2]
-                }
-            },
-
-        };
-
-        public static List<ItemStatus> ItemStatus { get => _itemStatus; set => _itemStatus = value; }
-
-        public static void AddData()
-        {
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             foreach (var status in ListStatus)
             {
                 Repository.Save<ListStatus>(status);
@@ -1203,23 +1037,16 @@ namespace SSA.Droid
             {
                 Repository.Save<ListModel>(list);
             }
-<<<<<<< HEAD
             foreach (var item in Items.OrderBy(x => x.Name))
-=======
-            foreach (var item in Items)
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             {
                 Repository.Save<ItemModel>(item);
             }
         }
         public static void DropData()
         {
-<<<<<<< HEAD
             Repository.DeleteAll<Localization>();
             Repository.DeleteAll<Category>();
             Repository.DeleteAll<PersonModel>();
-=======
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             Repository.DeleteAll<ItemStatus>();
             Repository.DeleteAll<ListStatus>();
             Repository.DeleteAll<ItemModel>();

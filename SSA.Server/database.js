@@ -16,16 +16,10 @@ var database = {
 
     ItemModel: function () {
         return this.db.define('ItemModel', {
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         }, { tableName: 'ItemModel' })
     },
 
     ListModel: function () {
-<<<<<<< HEAD
         return this.db.define('ListModel',
             {
                 ListId: Sequelize.INTEGER,
@@ -36,15 +30,6 @@ var database = {
                 ListStatusId: Sequelize.INTEGER
             },
             { tableName: 'ListModel' });
-=======
-        return this.db.define('ListModel', {
-        }, { tableName: 'ListModel' })
-    },
-
-    ItemInLists: function () {
-        return this.db.define('ItemInLists', {
-        }, { tableName: 'ItemInLists' })
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
     },
 
     ItemStatus: function () {
@@ -57,24 +42,15 @@ var database = {
         }, { tableName: 'ListStatus' })
     },
 
-
-<<<<<<< HEAD
     findItem: function (id) {
         return this.ItemModel().findOne({
             where: { ItemId: id },
             attributes: ['ItemId', 'Name', 'Description', 'KodEAN', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId']
-=======
-    findItem: function(id) {
-        return this.ItemModel().findOne({
-            where: { ItemId: id },
-            attributes: ['ItemId', 'Name', 'Description']
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         });
     },
 
     getAllItems: function () {
         return this.ItemModel().findAll({
-<<<<<<< HEAD
             attributes: ['ItemId', 'Name', 'Description', 'KodEAN', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId']
         });
     },
@@ -98,12 +74,5 @@ var database = {
              Values ('${value.Name}','${value.Description}','${value.PersonId}','${value.CreateDate}','${value.ListStatusId}') `);
         //return this.ListModel().create(value);
     }
-
-=======
-            attributes: ['ItemId', 'Name', 'Description']
-        });
-    },
-
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 };
 module.exports = database;

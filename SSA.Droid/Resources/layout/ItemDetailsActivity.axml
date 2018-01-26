@@ -76,7 +76,6 @@
       android:layout_height="wrap_content"
       android:id="@+id/textItemDetailsList"
     android:layout_margin="15px"/>
-<<<<<<< HEAD
   <TextView
     android:text="Kategoria"
     android:textAppearance="?android:attr/textAppearanceSmall"
@@ -105,6 +104,4 @@
     android:layout_height="wrap_content"
     android:id="@+id/textItemDetailsLocalization"
     android:layout_margin="15px"/>
-=======
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 </LinearLayout>

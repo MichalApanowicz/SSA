@@ -9,10 +9,7 @@ using Android.OS;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-<<<<<<< HEAD
 using Newtonsoft.Json;
-=======
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 using SQLite.Net;
 using SQLite.Net.Platform.XamarinAndroid;
 using SSA.Droid.Models;
@@ -73,11 +70,8 @@ namespace SSA.Droid.Activities.MainActivityFragments
                 try
                 {
                     var url = _apiUrl.Text;
-<<<<<<< HEAD
                     var x = new List<ItemModel>();
                     var json = "";
-=======
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 
                     var request = (HttpWebRequest) WebRequest.Create(new Uri(url));
                    // request.ContentType = "application/json";
@@ -87,20 +81,13 @@ namespace SSA.Droid.Activities.MainActivityFragments
                     {
                         using (var stream = response.GetResponseStream())
                         {
-<<<<<<< HEAD
                             json = JsonValue.Load(stream).ToString();
-=======
-                            var json = JsonValue.Load(stream).ToString();
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
                             _outputText.Text += json + System.Environment.NewLine;
                             Log.Debug("ApiCall", $"Response: {json}");
                         }
                     }
-<<<<<<< HEAD
 
                     x = JsonConvert.DeserializeObject<List<ItemModel>>(json);
-=======
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
                 }
                 catch (Exception ex)
                 {
@@ -119,11 +106,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
                         {
                             Name = _nameText.Text,
                             Description = _descText.Text,
-<<<<<<< HEAD
                             ListId = int.Parse(_listIdText.Text),
-=======
-                            Lists = new List<ListModel>() { _repository.GetList(int.Parse(_listIdText.Text)) },
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
                             KodEAN = _eanText.Text,
                             Status = _repository.GetItemStatus(int.Parse(_statusText.Text)),
                             ItemStatusId = int.Parse(_statusText.Text),
@@ -172,11 +155,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
                         Status = _repository.GetListStatus(int.Parse(_statusText.Text)),
                         Items = new List<ItemModel>(),
                         CreateDate = DateTime.Now.ToLongDateString(),
-<<<<<<< HEAD
                         PersonId = 1
-=======
-                        Person = "Michał Apanowicz"
->>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
                     }).ToString() + System.Environment.NewLine;
                 }
                 catch (Exception ex)
