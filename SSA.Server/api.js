@@ -3,6 +3,7 @@ var express = require('express');
 var config = require('./config');
 var app = express();
 var database = require('./database');
+<<<<<<< HEAD
 var bodyParser = require('body-parser');
 //app.use(express['static'](__dirname));
 app.use(bodyParser.urlencoded());
@@ -15,6 +16,15 @@ app.get('/items/:id', function (req, res) {
     console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`);
     database.findItem(req.params.id).then(function (result) {
         res.status(200).send(result);
+=======
+
+//app.use(express['static'](__dirname));
+
+app.get('/items/:id', function(req, res) {
+    console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`);
+     database.findItem(req.params.id).then(function(result) {
+         res.status(200).send(result);
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
     });
 });
 
@@ -25,6 +35,7 @@ app.get('/items/', function (req, res) {
     });
 });
 
+<<<<<<< HEAD
 app.get('/lists/:id', function (req, res) {
     console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`);
     database.findList(req.params.id).then(function (result) {
@@ -61,6 +72,19 @@ app.use(function (err, req, res, next) {
     } else {
         next(err);
     }
+=======
+
+app.get('*', function(req, res) {
+	res.status(404).send('Unrecogniset API call');
+});
+
+app.use(function(err, req, res, next){
+	if(req.xhr) {
+		res.status(500).send('Oops, Something went wrong!');
+	} else {
+		next(err);
+	}
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 });
 
 app.listen(config.apiPort);

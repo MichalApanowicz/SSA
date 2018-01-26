@@ -42,12 +42,19 @@ namespace SSA.Droid.Adapters
             {
                 holder = new ItemOnListViewHolder();
                 view = _context.LayoutInflater.Inflate(Resource.Layout.ItemOnAllItemsList, null);
+<<<<<<< HEAD
                 holder.LinearLayout = view.FindViewById<LinearLayout>(Resource.Id.linearLayoutHeader);
+=======
+                holder.LinearLayout = view.FindViewById<LinearLayout>(Resource.Id.linearLayout3);
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
                 holder.Name = view.FindViewById<TextView>(Resource.Id.textView1);
                 holder.Description = view.FindViewById<TextView>(Resource.Id.textView2);
                 holder.CheckBox = view.FindViewById<CheckBox>(Resource.Id.checkBox1);
                 holder.Status = view.FindViewById<TextView>(Resource.Id.textView3);
+<<<<<<< HEAD
                 holder.ColorHandler = view.FindViewById<LinearLayout>(Resource.Id.linearLayoutColor);
+=======
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
                 holder.Item = item;
 
                 holder.CheckBox.Click += (s, e) =>
@@ -68,8 +75,12 @@ namespace SSA.Droid.Adapters
             }
 
             holder.Item = item;
+<<<<<<< HEAD
             holder.Name.Text = $"{item.Name} [{item.KodEAN}]";
             if (item.ListId != 0) holder.Name.Text += $"[Lista nr {item.ListId}]";
+=======
+            holder.Name.Text = $"{item.Name} [{item.ItemId}]";
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             holder.Description.Text = item.Description;
             if (item.Status.ItemStatusId == (int)ItemStatusEnum.Available)
             {
@@ -80,12 +91,19 @@ namespace SSA.Droid.Adapters
             else
             {
                 holder.Status.Text = item.Status.Name;
+<<<<<<< HEAD
                 holder.CheckBox.Visibility = ViewStates.Invisible;
                 holder.Status.Visibility = ViewStates.Visible;
             }
 
             var color = new Color(item.Category.ColorR, item.Category.ColorG, item.Category.ColorB);
             holder.ColorHandler.SetBackgroundColor(color);
+=======
+                //holder.CheckBox.Visibility = ViewStates.Invisible;
+                holder.Status.Visibility = ViewStates.Visible;
+            }
+
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 
             return view;
         }
@@ -110,8 +128,11 @@ namespace SSA.Droid.Adapters
         public TextView Description { get; set; }
         public TextView Status { get; set; }
         public CheckBox CheckBox { get; set; }
+<<<<<<< HEAD
         public Color Color { get; set; }
         public LinearLayout ColorHandler { get; set; }
+=======
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
     }
 }
 

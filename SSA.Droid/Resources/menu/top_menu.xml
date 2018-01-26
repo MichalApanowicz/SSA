@@ -5,8 +5,15 @@
         android:icon="@mipmap/ic_action_content_create"
         android:showAsAction="always"
         android:title="Utwórz nową listę" />
+<<<<<<< HEAD
   <item android:id="@+id/menu_refreshData"
         android:icon="@mipmap/ic_menu_paste_holo_dark"
         android:showAsAction="always"
         android:title="Save" />
+=======
+  <!--<item android:id="@+id/menu_save"
+        android:icon="@mipmap/ic_action_content_save"
+        android:showAsAction="always"
+        android:title="Save" />-->
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 </menu>

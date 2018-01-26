@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+<<<<<<< HEAD
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
@@ -13,6 +14,13 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Java.Interop;
+=======
+using Android.OS;
+using Android.Runtime;
+using Android.Util;
+using Android.Views;
+using Android.Widget;
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 using Newtonsoft.Json;
 using SQLite.Net;
 using SQLite.Net.Platform.XamarinAndroid;
@@ -32,11 +40,16 @@ namespace SSA.Droid.Activities
         private ListModel _list;
         private List<ItemModel> _items;
 
+<<<<<<< HEAD
         private EditText _eanCodeText;
         private RadioButton _getItemRadioButton, _deleteItemRadioButton;
         private Toolbar _toolbar, _secondToolbar;
         private RadioGroup _toolbarRadioGroup;
 
+=======
+        private Toolbar _toolbar;
+        //private TextView _person, _createDate;
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         private ArrayAdapter _adapter;
 
         private List<ItemModel> _selectedItems;
@@ -49,16 +62,20 @@ namespace SSA.Droid.Activities
             _list = JsonConvert.DeserializeObject<ListModel>(text) ?? new ListModel();
             _items = _repository.GetItemsFromList(_list.ListId);
 
+<<<<<<< HEAD
             _getItemRadioButton = FindViewById<RadioButton>(Resource.Id.getItemRadioButton);
             _deleteItemRadioButton = FindViewById<RadioButton>(Resource.Id.deleteItemRadioButton);
             _eanCodeText = FindViewById<EditText>(Resource.Id.eanCodeEditText);
             _eanCodeText.TextChanged += EanTextChanged;
+=======
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 
             _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             _toolbar.Title = _list.Name;
             _toolbar.InflateMenu(Resource.Menu.listDetails_top_menu);
             SetActionBar(_toolbar);
 
+<<<<<<< HEAD
             _secondToolbar = FindViewById<Toolbar>(Resource.Id.radioToolbar);
             _toolbarRadioGroup = FindViewById<RadioGroup>(Resource.Id.listDetailsRadioGroup);
             _toolbar.SetBackgroundColor(Color.DarkGreen);
@@ -90,6 +107,18 @@ namespace SSA.Droid.Activities
                 }
             };
 
+=======
+            //_person = FindViewById<TextView>(Resource.Id.ListPersonText);
+            //_createDate = FindViewById<TextView>(Resource.Id.ListDateText);
+
+            //_person.Text = _list.Person;
+            //_createDate.Text = DateTime.Parse(_list.CreateDate).ToLongDateString();
+
+            //_adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItemChecked,
+            //  objects: _items.Select(x => x.Name).ToArray());
+
+            //ListAdapter = _adapter;
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             var selected = new List<int>();
             foreach (var item in _items)
             {
@@ -98,7 +127,11 @@ namespace SSA.Droid.Activities
                     selected.Add(item.ItemId);
                 }
             }
+<<<<<<< HEAD
             ListAdapter = new ItemsOnListDetailsAdapter(this, _items, selected);
+=======
+            ListAdapter = new AllItemsAdapter(this, _items, selected);
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -118,7 +151,11 @@ namespace SSA.Droid.Activities
                     return true;
 
                 case Resource.Id.menu_terminateList:
+<<<<<<< HEAD
                     Toast.MakeText(this, $"{TerminateList()}",
+=======
+                    Toast.MakeText(this, $"Action selected: {item.TitleFormatted}",
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
                         ToastLength.Short).Show();
                     return true;
             }
@@ -127,6 +164,7 @@ namespace SSA.Droid.Activities
 
         private void CommitList()
         {
+<<<<<<< HEAD
             foreach (var item in _items)
             {
                 if (item.Status.ItemStatusId == (int)ItemStatusEnum.Available)
@@ -160,16 +198,33 @@ namespace SSA.Droid.Activities
             }
 
             _list.Status = _repository.GetListStatus(ListStatusEnum.Terminated);
+=======
+
+            foreach (var item in _items)
+            {
+                    if (item.Status.ItemStatusId == (int) ItemStatusEnum.Available)
+                    {
+                        item.Status = _repository.GetItemStatus(ItemStatusEnum.Reserved);
+                        _repository.Update(item);
+                    }
+            }
+
+            _list.Status = _repository.GetListStatus(ListStatusEnum.Committed);
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             _list.Items = _items;
             _repository.Update(_list);
 
             UpdateItemList();
+<<<<<<< HEAD
             return "Rozwiązano listę: " + _list.Name;
+=======
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         }
 
         private void UpdateItemList()
         {
             _items = _repository.GetItemsFromList(_list.ListId);
+<<<<<<< HEAD
             ListAdapter = new ItemsOnListDetailsAdapter(this, _items);
             ((BaseAdapter)ListAdapter).NotifyDataSetChanged();
         }
@@ -238,6 +293,25 @@ namespace SSA.Droid.Activities
             {
                 Toast.MakeText(this, "Nie znleziono przedmotu o tym kodzie", ToastLength.Long).Show();
             }
+=======
+            ListAdapter = new AllItemsAdapter(this, _items);
+            ((BaseAdapter)ListAdapter).NotifyDataSetChanged();
+        }
+
+        private List<ItemModel> GetSelectedItems()
+        {
+            _selectedItems.Clear();
+
+            var selected = ((AllItemsAdapter)ListAdapter).GetSelectedRows();
+            foreach (var i in selected)
+            {
+                _selectedItems.Add(_items.First(x => x.ItemId == i));
+            }
+            _adapter.NotifyDataSetChanged();
+            Log.Debug("ListDetailsActivity", $"_selectedItems[{_selectedItems.Count}]: {JsonConvert.SerializeObject(_selectedItems, Formatting.Indented)}");
+
+            return _selectedItems;
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         }
     }
 }

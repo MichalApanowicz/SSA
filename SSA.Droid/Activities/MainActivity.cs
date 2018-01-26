@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.Json;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+=======
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 using Android.App;
 using Android.Content.PM;
 using Android.Nfc;
 using Android.Widget;
 using Android.OS;
+<<<<<<< HEAD
 using Android.Provider;
+=======
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 using Android.Util;
 using SQLite.Net;
 using SQLite.Net.Platform.XamarinAndroid;
@@ -27,16 +33,25 @@ using SSA.Droid.Adapters;
 namespace SSA.Droid
 {
 
+<<<<<<< HEAD
     [Activity(ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
+=======
+    [Activity(MainLauncher = true, ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
     public class MainActivity : FragmentActivity
     {
         private readonly MainRepository _repository =
             new MainRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         private Android.Support.V4.App.Fragment[] _fragments;
 
         private ViewPager _viewPager;
         private Toolbar _toolbar;
+<<<<<<< HEAD
         private ProgressBar _headerProgress;
         private LinearLayout _mainContent;
 
@@ -58,6 +73,28 @@ namespace SSA.Droid
                 new MainActivityFragmentAdapter(SupportFragmentManager, _fragments, _tabNames);
 
             _viewPager.SetCurrentItem(currentItem, false);
+=======
+        private string[] _tabNames;
+
+        protected override void OnResume()
+        {
+            Log.Debug("Database", Constants.DatabasePath);
+            _fragments = new Android.Support.V4.App.Fragment[]
+            {
+                AllListsFragment.NewInstance(_repository),
+                AllItemsFragment.NewInstance(_repository),
+                TestFragment.NewInstance(_repository),
+            };
+            var currentItem = _viewPager.CurrentItem;
+            
+            _viewPager = FindViewById<ViewPager>(Resource.Id.mainviewpager);
+            _viewPager.Adapter =
+                new MainActivityFragmentAdapter(SupportFragmentManager, _fragments, _tabNames);
+            base.OnResume();
+            _viewPager.SetCurrentItem(currentItem, false);
+
+            ((AllItemsFragment)_fragments[1]).UpdateItems();
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         }
 
         protected override void OnCreate(Bundle bundle)
@@ -68,13 +105,19 @@ namespace SSA.Droid
 
             SampleData.DropData();
             SampleData.AddData();
+<<<<<<< HEAD
             SaveUserNameToDatabase();
+=======
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
 
             _fragments = new Android.Support.V4.App.Fragment[]
             {
                 AllListsFragment.NewInstance(_repository),
                 AllItemsFragment.NewInstance(_repository),
+<<<<<<< HEAD
                 SettingsFragment.NewInstance(_repository),
+=======
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
                 TestFragment.NewInstance(_repository),
             };
 
@@ -82,7 +125,10 @@ namespace SSA.Droid
             {
                 "Listy",
                 "Wszystkie przedmioty",
+<<<<<<< HEAD
                 "Ustawienia",
+=======
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
                 "Test"
             };
 
@@ -91,12 +137,18 @@ namespace SSA.Droid
                 new MainActivityFragmentAdapter(SupportFragmentManager, _fragments, _tabNames);
 
             _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+<<<<<<< HEAD
             _toolbar.Title = "SSA " + _loggedUser.Name;
             _toolbar.InflateMenu(Resource.Menu.top_menu);
             SetActionBar(_toolbar);
 
             _headerProgress = FindViewById<ProgressBar>(Resource.Id.progressBar1);
             _mainContent = FindViewById<LinearLayout>(Resource.Id.main_content); 
+=======
+            _toolbar.Title = "SSA";
+            _toolbar.InflateMenu(Resource.Menu.top_menu);
+            SetActionBar(_toolbar);
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -107,11 +159,15 @@ namespace SSA.Droid
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
+<<<<<<< HEAD
            
+=======
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
             switch (item.ItemId)
             {
                 case Resource.Id.menu_createNewList:
                     CreateNewList();
+<<<<<<< HEAD
                     break;
                 case Resource.Id.menu_refreshData:
                     RefreshData();
@@ -299,6 +355,52 @@ namespace SSA.Droid
                 _repository.Save(person);
             }
             _loggedUser = person;
+=======
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+        }
+
+        private void CreateNewList()
+        {
+            var selectedItems = ((AllItemsFragment) _fragments[1]).GetSelectedItems();
+            if (selectedItems.Count == 0)
+            {
+                Toast.MakeText(this, "Zaznacz przedmioty do dodania",
+                    ToastLength.Short).Show();
+            }
+            else
+            {
+                try
+                {
+                    var list = new ListModel()
+                    {
+                        Name = "Nowa",
+                        Description = "Opis",
+                        ListStatusId = 1,
+                        Status = _repository.GetListStatus(ListStatusEnum.Uncommitted),
+                        Items = selectedItems,
+                        Person = "Michał Apanowicz",
+                        CreateDate = DateTime.Now.ToLongDateString()
+                    };
+                    var result = _repository.Save<ListModel>(list);
+
+                    Log.Debug("MainActivity",
+                        $"menu_createNewList: {JsonConvert.SerializeObject(result, Formatting.Indented)}");
+
+                    var x = _fragments[0] as AllListsFragment;
+                    x?.UpdateLists();
+
+                    var y =  x?.ListAdapter as AllListsAdapter; 
+                    y?.NotifyDataSetChanged();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("MainActivity", $"{JsonConvert.SerializeObject(ex, Formatting.Indented)}");
+                }
+            }
+>>>>>>> 154b55bd9b64ec661a2dc3029f209795697e6681
         }
     }
 }
