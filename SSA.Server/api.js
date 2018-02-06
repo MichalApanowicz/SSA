@@ -70,7 +70,13 @@ app.post('/lists/terminate/:id', function (req, res) {
         });
 });
 
-
+app.post('/persons/new', function (req, res) {
+    console.log(`Otrzymałem request. Body:  ${JSON.stringify(req.body)}`);
+    database.saveNewPerson(req.body).then(
+        function (result) {
+            res.status(200).send(result);
+        });
+});
 
 app.get('*', function (req, res) {
     res.status(404).send('Unrecogniset API call');

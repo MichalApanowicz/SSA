@@ -162,7 +162,7 @@ namespace SSA.Droid
                 Description = "Rzeczy do zabrania na biwak w Ostromecku",
                 CreateDate = DateTime.Parse(DateTime.Parse("2017-12-14").ToLongDateString()).ToLongDateString(),
                 Person = Persons[0],
-                Status = ListStatus[0],
+               Status =ListStatus[0],
                 Items = new List<ItemModel>
                 {
 
@@ -174,7 +174,7 @@ namespace SSA.Droid
                 Description = "Rzeczy zabrane na kwaterkę",
                 CreateDate = DateTime.Parse("2017-12-14").ToLongDateString(),
                 Person = Persons[0],
-                Status = ListStatus[0],
+               Status =ListStatus[0],
                 Items = new List<ItemModel>
                 {
 
@@ -186,7 +186,7 @@ namespace SSA.Droid
                 Description = "Rzeczy zabrane na zbiórkę",
                 CreateDate = DateTime.Parse("2017-12-14").ToLongDateString(),
                 Person = Persons[0],
-                Status = ListStatus[0],
+               Status =ListStatus[0],
                 Items = new List<ItemModel>
                 {
 
@@ -217,7 +217,7 @@ namespace SSA.Droid
         {
            new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000017",
                 Name = "Ponton",
                 Description = "4-osobowy, łatany",
@@ -226,7 +226,7 @@ namespace SSA.Droid
            },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000024",
                 Name = "Namiot armasport",
                 Description = "niebiesko-czerwony, 3-osobowy",
@@ -235,7 +235,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000031",
                 Name = "Namiot fjord nansen",
                 Description = "oliwkowy, 3-osobowy",
@@ -244,7 +244,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000048",
                 Name = "Namiot McKinley Stone 4",
                 Description = "srebrny, 4-osobowy",
@@ -253,7 +253,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000055",
                 Name = "Namiot Quechua",
                 Description = "oliwkowy, 6-osobowy",
@@ -262,7 +262,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000062",
                 Name = "Namiot Quechua",
                 Description = "błękitny, 4-osobowy",
@@ -271,7 +271,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000079",
                 Name = "Nikon 1 V1",
                 Description = "w zestawie z kartą pamięci 16GB",
@@ -280,7 +280,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000086",
                 Name = "Lampa błyskowa Nikon SB-N7",
                 Description = "w zestawie z 2 bateriami AAA",
@@ -289,7 +289,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000093",
                 Name = "Namiot harcerski SCOUT 1",
                 Description = "oliwkowy, 10-osoby, w zestawie z masztami",
@@ -298,7 +298,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000116",
                 Name = "Namiot harcerski SCOUT 2",
                 Description = "oliwkowy, 10-osoby, w zestawie z masztami",
@@ -307,7 +307,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000123",
                 Name = "Namiot harcerski SCOUT 3",
                 Description = "oliwkowy, 10-osoby, w zestawie z masztami",
@@ -316,7 +316,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000130",
                 Name = "Namiot harcerski SCOUT 4",
                 Description = "oliwkowy, 10-osoby, w zestawie z masztami",
@@ -325,7 +325,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000147",
                 Name = "Szpadel greenimil 1",
                 Description = "z widocznymi śladami użytkowania",
@@ -334,7 +334,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000154",
                 Name = "Szpadel greenimil 2",
                 Description = "z widocznymi śladami użytkowania",
@@ -343,7 +343,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000161",
                 Name = "Piła ramowa dwuręczna 1",
                 Description = "w zestawie z brzeszczotem",
@@ -352,7 +352,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000178",
                 Name = "Piła ramowa dwuręczna 2",
                 Description = "w zestawie z brzeszczotem",
@@ -361,7 +361,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000185",
                 Name = "Piła ramowa dwuręczna 3",
                 Description = "w zestawie z brzeszczotem",
@@ -370,7 +370,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000192",
                 Name = "Piła ramowa dwuręczna 4",
                 Description = "w zestawie z brzeszczotem",
@@ -379,7 +379,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000208",
                 Name = "Saperka fiskars 1",
                 Description = "mała z drewnianym trzonkiem",
@@ -388,7 +388,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000215",
                 Name = "Saperka fiskars 2",
                 Description = "mała z drewnianym trzonkiem",
@@ -397,7 +397,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000222",
                 Name = "Saperka fiskars 3",
                 Description = "mała z drewnianym trzonkiem",
@@ -406,7 +406,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000239",
                 Name = "Saperka fiskars 4",
                 Description = "mała z drewnianym trzonkiem",
@@ -415,7 +415,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000246",
                 Name = "Młot",
                 Description = "10 kg, z drewnianym trzonkiem",
@@ -424,7 +424,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000253",
                 Name = "Siekiera",
                 Description = "1.5 kg, kuta ręcznie",
@@ -433,7 +433,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000260",
                 Name = "Skrzynka do narzędzi 1",
                 Description = "16-calowa, w zestawie: młotek ślusarski, siekiera, łom, miara zwijana",
@@ -442,7 +442,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000277",
                 Name = "Skrzynka do narzędzi 2",
                 Description = "16-calowa, w zestawie: młotek ślusarski, siekiera, łom, miara zwijana",
@@ -451,7 +451,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000284",
                 Name = "Skrzynka do narzędzi 3",
                 Description = "16-calowa, w zestawie: młotek ślusarski, siekiera, łom, miara zwijana",
@@ -460,7 +460,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000291",
                 Name = "Skrzynka do narzędzi 4",
                 Description = "16-calowa, w zestawie: młotek ślusarski, siekiera, łom, miara zwijana",
@@ -469,7 +469,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000307",
                 Name = "Szpadel fiskars 1",
                 Description = "czarny",
@@ -478,7 +478,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000314",
                 Name = "Świder fiskars 2",
                 Description = "czarny",
@@ -487,7 +487,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000321",
                 Name = "Świder fiskars 3",
                 Description = "czarny",
@@ -496,7 +496,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000338",
                 Name = "Świder fiskars 4",
                 Description = "czarny",
@@ -505,7 +505,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000345",
                 Name = "Świder romanik 1",
                 Description = "szary",
@@ -514,7 +514,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000352",
                 Name = "Piła stanley jednoręczna",
                 Description = "rękojeść żółta",
@@ -523,7 +523,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000369",
                 Name = "Młotek ciesielski",
                 Description = "250g żółty",
@@ -532,7 +532,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000376",
                 Name = "Młotek stahlson",
                 Description = "500g grafitowy",
@@ -541,7 +541,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000383",
                 Name = "Poziomica",
                 Description = "50cm, żółta",
@@ -550,7 +550,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000390",
                 Name = "Zestaw dłut snycerskich",
                 Description = "w zestawie 7 sztuk",
@@ -559,7 +559,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000406",
                 Name = "Zszywacz tapicerski",
                 Description = "żółty",
@@ -568,7 +568,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000413",
                 Name = "Obcęgi 1",
                 Description = "szare",
@@ -577,7 +577,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000420",
                 Name = "Obcęgi 2",
                 Description = "szare",
@@ -586,7 +586,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000437",
                 Name = "Grabie",
                 Description = "niebieskie, drewniany trzonek",
@@ -595,7 +595,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000444",
                 Name = "Mała siekiera fiskars",
                 Description = "czarna",
@@ -604,7 +604,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000451",
                 Name = "Łuk",
                 Description = "szary w zestawie z 4 strzałami",
@@ -613,7 +613,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000468",
                 Name = "Zestaw do badmintona",
                 Description = "dwie paletki i dwie lotki",
@@ -622,7 +622,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000475",
                 Name = "Makaron pływacki 1",
                 Description = "zielony",
@@ -631,7 +631,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000482",
                 Name = "Makaron pływacki 2",
                 Description = "niebieski",
@@ -640,7 +640,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000499",
                 Name = "Piłka nożna kipsta",
                 Description = "elementy biąłe i niebieskie",
@@ -649,7 +649,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000505",
                 Name = "Zestaw do gry w boules",
                 Description = "kompletny",
@@ -658,7 +658,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000512",
                 Name = "Rękawice bokserskie para",
                 Description = "czerwone",
@@ -667,7 +667,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000529",
                 Name = "Rękawice bokserskie para",
                 Description = "białe",
@@ -676,7 +676,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000536",
                 Name = "Wiatrówka",
                 Description = "w zestawie ze śrutem",
@@ -685,7 +685,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000543",
                 Name = "Wykrywacz do metali",
                 Description = "czarny, w zestawie bateria 9V",
@@ -694,7 +694,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000550",
                 Name = "Patelnia",
                 Description = "czarna, teflonowa",
@@ -703,7 +703,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000567",
                 Name = "Garnek średniej wielkości",
                 Description = "pojemność 40 l",
@@ -712,7 +712,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000574",
                 Name = "Kociołek turystyczny 10l",
                 Description = "pojemność 15 l",
@@ -721,7 +721,7 @@ namespace SSA.Droid
             },
            new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000581",
                 Name = "Pompka ręczna",
                 Description = "uniwersalna",
@@ -730,7 +730,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000598",
                 Name = "Siatka sportowa",
                 Description = "szerokość 3m",
@@ -739,7 +739,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000604",
                 Name = "Gaśnica p-poż",
                 Description = "ABC, 3 kg",
@@ -748,7 +748,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000611",
                 Name = "Bojka ratownicza",
                 Description = "pomarańczowa z pasem i liną",
@@ -757,7 +757,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000628",
                 Name = "Zestaw do nurkowania",
                 Description = "niebieskie, płetwy i maska",
@@ -766,7 +766,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000635",
                 Name = "Sygnałówka z ustnikiem",
                 Description = "złota",
@@ -775,7 +775,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000642",
                 Name = "Plandeka 4x8",
                 Description = "zielona",
@@ -784,7 +784,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000659",
                 Name = "Plandeka 4x5",
                 Description = "zielona",
@@ -793,7 +793,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000666",
                 Name = "Plandeka 5x8",
                 Description = "zielona",
@@ -802,7 +802,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000673",
                 Name = "Plandeka 2x1",
                 Description = "niebieska",
@@ -811,7 +811,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000680",
                 Name = "Koc gaśniczy",
                 Description = "czerwony",
@@ -820,7 +820,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000697",
                 Name = "Drabina linowa",
                 Description = "długość 2m",
@@ -829,7 +829,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000703",
                 Name = "Apteczka turystyczna 1",
                 Description = "mała",
@@ -838,7 +838,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000710",
                 Name = "Apteczka turystyczna 2",
                 Description = "mała",
@@ -847,7 +847,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000727",
                 Name = "Garnek dużej wielkości",
                 Description = "pojemność: 50 l",
@@ -856,7 +856,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000734",
                 Name = "Pojemniki plastikowe 31 l",
                 Description = "białe z kranikiem",
@@ -865,7 +865,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000741",
                 Name = "Piła kabłąkowa Fiskars",
                 Description = "czarna",
@@ -874,7 +874,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000758",
                 Name = "Piecyk żeliwny",
                 Description = "czarny w zestawie z kominem i iskrownikiem",
@@ -883,7 +883,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000765",
                 Name = "Kabel o długości 600m",
                 Description = "czarny",
@@ -892,7 +892,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000772",
                 Name = "Zestaw resuscytacyjno-tlenowy WOPR RT",
                 Description = "czerwona torba",
@@ -901,7 +901,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000789",
                 Name = "Laminator Fellowes Saturn 3i A4",
                 Description = "srebrny",
@@ -910,7 +910,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000796",
                 Name = "Stół Hendi",
                 Description = "nierdzewny 1.8x0.6cm",
@@ -919,7 +919,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000802",
                 Name = "Duża siekiera Fiskars X7",
                 Description = "czarna",
@@ -928,7 +928,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000819",
                 Name = "Apteczka plecakowa Janysport AP20 z zawartością",
                 Description = "czerwona",
@@ -937,7 +937,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000826",
                 Name = "Beczka plastikowa 250 l",
                 Description = "czarna",
@@ -946,7 +946,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000833",
                 Name = "AGREGAT HECHTGG2000i",
                 Description = "czerwony",
@@ -955,7 +955,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000840",
                 Name = "Pilarka spalinowa STIHL MS181",
                 Description = "pomarańczowa",
@@ -964,7 +964,7 @@ namespace SSA.Droid
             },
             //new ItemModel()
             //{
-            //    Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+            //   Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
             //    KodEAN = "00000840",
             //    Name = "Spodnie ochronne Stihl",
             //    Description = "pomarańczowe",
@@ -973,7 +973,7 @@ namespace SSA.Droid
             //},
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000857",
                 Name = "Zestaw garnków",
                 Description = "4 sztuki 5-20 l",
@@ -982,7 +982,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000864",
                 Name = "Materac wojskowy podgumowany",
                 Description = "szary",
@@ -991,7 +991,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000871",
                 Name = "Rzutka ratownicza",
                 Description = "czarna z odblaskiem",
@@ -1000,7 +1000,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-                Status = ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000888",
                 Name = "Lina torowa",
                 Description = "żółta 15 m",

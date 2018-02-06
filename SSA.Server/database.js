@@ -1,88 +1,98 @@
 var Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+const db = new Sequelize('database',
+    'username',
+    'password',
+    {
+        host: 'localhost',
+        dialect: 'sqlite',
+
+        pool: {
+            max: 5,
+            min: 0,
+            acquire: 30000,
+            idle: 10000
+        },
+        storage: 'Database.db'
+});
+
+const ItemModel = function() {
+    return db.define('ItemModel',
+        {
+            ItemId: Sequelize.INTEGER,
+            Name: Sequelize.STRING,
+            Description: Sequelize.STRING,
+            KodEAN: Sequelize.STRING,
+            ItemStatusId: Sequelize.INTEGER,
+            ListId: Sequelize.INTEGER,
+            CategoryId: Sequelize.INTEGER,
+            LocalizationId: Sequelize.INTEGER,
+            Damaged: Sequelize.INTEGER
+        },
+        { tableName: 'ItemModel', timestamps: false })
+};
+
+const ListModel = function() {
+    return db.define('ListModel',
+        {
+            ListId: Sequelize.INTEGER,
+            Name: Sequelize.STRING,
+            Description: Sequelize.STRING,
+            PersonId: Sequelize.STRING,
+            CreateDate: Sequelize.STRING,
+            ListStatusId: Sequelize.INTEGER
+        },
+        { tableName: 'ListModel', timestamps: false });
+};
+
+const ItemStatus = function() {
+    return db.define('ItemStatus',
+        {
+        },
+        { tableName: 'ItemStatus' })
+};
+
+const ListStatus = function() {
+    return db.define('ListStatus',
+        {
+        },
+        { tableName: 'ListStatus' })
+};
 
 var database = {
-    db: new Sequelize('database',
-        'username',
-        'password',
-        {
-            host: 'localhost',
-            dialect: 'sqlite',
-
-            pool: {
-                max: 5,
-                min: 0,
-                acquire: 30000,
-                idle: 10000
-            },
-            storage: 'Database.db'
-        }),
-
-    ItemModel: function() {
-        return this.db.define('ItemModel',
-            {
-            },
-            { tableName: 'ItemModel' })
-    },
-
-    ListModel: function() {
-        return this.db.define('ListModel',
-            {
-                ListId: Sequelize.INTEGER,
-                Name: Sequelize.STRING,
-                Description: Sequelize.STRING,
-                PersonId: Sequelize.STRING,
-                CreateDate: Sequelize.STRING,
-                ListStatusId: Sequelize.INTEGER
-            },
-            { tableName: 'ListModel' });
-    },
-
-    ItemStatus: function() {
-        return this.db.define('ItemStatus',
-            {
-            },
-            { tableName: 'ItemStatus' })
-    },
-
-    ListStatus: function() {
-        return this.db.define('ListStatus',
-            {
-            },
-            { tableName: 'ListStatus' })
-    },
-
+   
     findItem: function(id) {
-        return this.ItemModel().findOne({
+        return ItemModel().findOne({
             where: { ItemId: id },
             attributes: [
-                'ItemId', 'Name', 'Description', 'KodEAN', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId'
+                'ItemId', 'Name', 'Description', 'KodEAN', 'Damaged', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId'
             ]
         });
     },
 
     getAllItems: function() {
-        return this.ItemModel().findAll({
+        return ItemModel().findAll({
             attributes: [
-                'ItemId', 'Name', 'Description', 'KodEAN', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId'
+                'ItemId', 'Name', 'Description', 'KodEAN', 'Damaged', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId'
             ]
         });
     },
 
     findList: function(id) {
-        return this.ListModel().findOne({
+        return ListModel().findOne({
             where: { ListId: id },
             attributes: ['ListId', 'Name', 'Description', 'PersonId', 'CreateDate', 'ListStatusId']
         });
     },
 
     getAllLists: function() {
-        return this.ListModel().findAll({
+        return ListModel().findAll({
             attributes: ['ListId', 'Name', 'Description', 'PersonId', 'CreateDate', 'ListStatusId']
         });
     },
 
     saveNewList: function(value) {
-        return this.db.query(
+        return db.query(
             `Insert Into 'ListModel' ('Name', 'Description', 'PersonId', 'CreateDate', 'ListStatusId') 
              Values (:name, :description, :personId, :createDate, :listStatusId)`,
             {
@@ -98,15 +108,111 @@ var database = {
         //return this.ListModel().create(value);
     },
 
-    updateItem: function (id, newIitem) {
-        return this.dbfind({ where: { ItemId: id } })
-            .on('success', function (item) {
-                if (item) {
-                    item.updateAttributes({
-                            title: 'a very different title now'
-                    }).success(function () { })
+    commitList: function (id) {
+
+        return db.transaction(function (t) {
+
+            return ListModel().update(
+                {
+                    ListStatusId: 2 
+                },
+                {
+                    where: { ListId: id },
+                    transaction: t 
                 }
-            })
+            ).then(function(val) {
+                return ItemModel().update(
+                    {
+                        ItemStatusId: 3
+                    },
+                    {
+                        where: {
+                            ListId: id,
+                            ItemStatusId: 1
+                        },
+                        transaction: t
+                    }
+                )
+            }).then(function (val) {
+                    return ItemModel().update(
+                        {
+                            ListId: 0
+                        },
+                        {
+                            where: {
+                                ListId: id,
+                                [Op.or]: [{ ItemStatusId: 3 }, { ItemStatusId: 2 }]
+                            },
+                            transaction: t
+                        }
+                    )
+            });
+        }).then(function (result) {
+            console.log("SUCCESS - Commited")
+        }).catch(function (err) {
+            console.log(`FAIL - Rollback: ${err}`);
+        });
+    },
+
+    terminateList: function (id) {
+
+        return db.transaction(function (t) {
+
+            return ItemModel().findAll({
+                    attributes: [
+                        'ItemId', 'Name', 'Description', 'KodEAN', 'Damaged', 'ItemStatusId', 'ListId', 'CategoryId',
+                        'LocalizationId'
+                    ],
+                    where: {
+                        ListId: id,
+                        ItemStatusId: { [Op.or]: [3, 2] }
+                    }
+            }).then(function (items) {
+                console.log(`items: ${items}`)
+                items.forEach(function(item) {
+                    if (item.ItemStatusId !== 3)
+                        return;
+                });
+
+                return ItemModel().update(
+                    {
+                        ItemStatusId: 1
+                    },
+                    {
+                        where: {
+                            ListId: id,
+                            ItemStatusId: 3
+                        },
+                        transaction: t
+                    }
+                )
+            }).then(function (val) {
+                return ListModel().update(
+                    {
+                        ListStatusId: 3
+                    },
+                    {
+                        where: {
+                            ListId: id,
+                        },
+                        transaction: t
+                    }
+                )
+            });
+        }).then(function (result) {
+            console.log("SUCCESS - Commited")
+        }).catch(function (err) {
+            console.log(`FAIL - Rollback: ${err}`);
+        });
+    },
+
+    updateItem: function (id, newIitem) {
+        return ItemModel().update({ Damaged: newIitem.Damaged },{
+                where: { ItemId: id },
+                attributes: [
+                    'ItemId', 'Name', 'Description', 'KodEAN', 'Damaged', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId'
+                ]
+        });
     }
 };
 module.exports = database;
