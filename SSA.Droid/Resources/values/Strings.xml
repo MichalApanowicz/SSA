@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">SSA.Droid</string>
+  <string name="app_name">Magazyn</string>
   <string name="main_tab_test">Test</string>
   <string name="main_tab_all_listRepository">Wszytkie listy</string>
   <string name="main_tab_all_itemRepository">Wszytkie przedmioty</string>

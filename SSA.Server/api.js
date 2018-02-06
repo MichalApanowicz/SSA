@@ -18,9 +18,23 @@ app.get('/items/:id', function (req, res) {
     });
 });
 
+app.post('/items/:id', function (req, res) {
+    console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}\n Body:  ${JSON.stringify(req.body)}`);
+    database.updateItem(req.params.id, req.body).then(function (result) {
+        res.status(200).send(result);
+    });
+});
+
 app.get('/items/', function (req, res) {
     console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`);
     database.getAllItems().then(function (result) {
+        res.status(200).send(result);
+    });
+});
+
+app.get('/lists/', function (req, res) {
+    console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`);
+    database.getAllLists().then(function (result) {
         res.status(200).send(result);
     });
 });
@@ -32,24 +46,31 @@ app.get('/lists/:id', function (req, res) {
     });
 });
 
-app.get('/lists/', function (req, res) {
-    console.log(`Otrzymałem request. Body:  ${JSON.stringify(req.params)}`);
-    database.getAllLists().then(function (result) {
-        res.status(200).send(result);
-    });
-});
-
-app.post('/', function (request, response) {
-    console.log(request.body);      // your JSON
-    response.send(request.body);    // echo the result back
-});
-
-app.post('/new/list', function (req, res) {
+app.post('/lists/new', function (req, res) {
     console.log(`Otrzymałem request. Body:  ${JSON.stringify(req.body)}`);
-    database.saveNewList(req.body).then(function (result) {
-        res.status(200).send(result);
-    });
+    database.saveNewList(req.body).then(
+        function (result) {
+            res.status(200).send(result);
+        });
 });
+
+app.post('/lists/commit/:id', function (req, res) {
+    console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`);
+    database.commitList(req.params.id).then(
+        function (result) {
+            res.status(200).send(result);
+        });
+});
+
+app.post('/lists/terminate/:id', function (req, res) {
+    console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`);
+    database.terminateList(req.params.id).then(
+        function (result) {
+            res.status(200).send(result);
+        });
+});
+
+
 
 app.get('*', function (req, res) {
     res.status(404).send('Unrecogniset API call');
