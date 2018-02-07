@@ -13,7 +13,8 @@ const db = new Sequelize('database',
             acquire: 30000,
             idle: 10000
         },
-        storage: 'Database.db'
+        storage: 'Database.db',
+        operatorsAliases: false
 });
 
 const ItemModel = function() {
@@ -67,11 +68,29 @@ const ListStatus = function() {
         { tableName: 'ListStatus' })
 };
 
+const PersonModel = function () {
+    return db.define('ItemModel',
+        {
+            PersonId: {
+                type: Sequelize.INTEGER,
+                primaryKey: true,
+                autoIncrement: true
+            },
+            Name: Sequelize.STRING,
+            Description: Sequelize.STRING
+        },
+        { tableName: 'PersonModel', timestamps: false })
+};
+
 var database = {
    
     findItem: function(id) {
         return ItemModel().findOne({
-            where: { ItemId: id },
+            where: {
+                ItemId: {
+                    [Op.eq]: id
+                }
+            },
             attributes: [
                 'ItemId', 'Name', 'Description', 'KodEAN', 'Damaged', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId'
             ]
@@ -92,14 +111,22 @@ var database = {
                 ListId: listId
             },
             {
-                where: { ItemId: itemId }
+                where: {
+                    ItemId: {
+                        [Op.eq]: itemId
+                    } 
+                }
             }
         )
     },
 
     findList: function(id) {
         return ListModel().findOne({
-            where: { ListId: id },
+            where: {
+                ListId: {
+                    [Op.eq]: id
+                }
+            },
             attributes: ['ListId', 'Name', 'Description', 'PersonId', 'CreateDate', 'ListStatusId']
         });
     },
@@ -144,7 +171,11 @@ var database = {
                     ListStatusId: 2 
                 },
                 {
-                    where: { ListId: id },
+                    where: {
+                        ListId: {
+                            [Op.eq]: id
+                        } 
+                    },
                     transaction: t 
                 }
             ).then(function(val) {
@@ -154,8 +185,12 @@ var database = {
                     },
                     {
                         where: {
-                            ListId: id,
-                            ItemStatusId: 1
+                            ListId: {
+                                [Op.eq]: id
+                            },
+                            ItemStatusId: {
+                                [Op.eq]: 1
+                            } 
                         },
                         transaction: t
                     }
@@ -167,7 +202,9 @@ var database = {
                         },
                         {
                             where: {
-                                ListId: id,
+                                ListId: {
+                                    [Op.eq]: id
+                                },
                                 [Op.or]: [{ ItemStatusId: 3 }, { ItemStatusId: 2 }]
                             },
                             transaction: t
@@ -191,7 +228,9 @@ var database = {
                         'LocalizationId'
                     ],
                     where: {
-                        ListId: id,
+                        ListId: {
+                            [Op.eq]: id
+                        },
                         ItemStatusId: { [Op.or]: [3, 2] }
                     }
             }).then(function (items) {
@@ -207,7 +246,9 @@ var database = {
                     },
                     {
                         where: {
-                            ListId: id,
+                            ListId: {
+                                [Op.eq]: id
+                            },
                             ItemStatusId: 3
                         },
                         transaction: t
@@ -220,7 +261,9 @@ var database = {
                     },
                     {
                         where: {
-                            ListId: id,
+                            ListId: {
+                                [Op.eq]: id
+                            },
                         },
                         transaction: t
                     }
@@ -235,11 +278,47 @@ var database = {
 
     updateItem: function (id, newItem) {
         return ItemModel().update({ Damaged: newItem.Damaged, ListId: newItem.ListId },{
-                where: { ItemId: id },
+            where: {
+                ItemId: {
+                    [Op.eq]: id
+                }
+            },
                 attributes: [
                     'ItemId', 'Name', 'Description', 'KodEAN', 'Damaged', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId'
                 ]
         });
-    }
+    },
+
+    findPerson: function (id) {
+        var x = parseInt(id);
+        if (Number.isInteger(x)) {
+            var condition = {
+                PersonId: x
+            }
+        } else {
+            var condition = {
+                Name: {
+                    [Op.eq]: id
+                }
+            }
+        }
+        return PersonModel().findOne({
+            where: condition,
+            attributes: ['PersonId', 'Name', 'Description']
+        });
+    },
+
+    findAllPersons: function (id) {
+        return PersonModel().findAll({
+            attributes: ['PersonId', 'Name', 'Description']
+        });
+    },
+    
+    saveNewPerson: function (value) {
+        return PersonModel().create({
+            Name: value.Name,
+            Description: value.Description,
+        })
+    },
 };
 module.exports = database;

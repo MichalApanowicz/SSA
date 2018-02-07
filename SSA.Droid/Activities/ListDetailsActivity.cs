@@ -49,7 +49,7 @@ namespace SSA.Droid.Activities
             SetContentView(Resource.Layout.ListDetailsActivity);
             var text = Intent.GetStringExtra("List");
             _list = JsonConvert.DeserializeObject<ListModel>(text) ?? new ListModel();
-            _items = _list.Items;
+            _items = DataProvider.GetItemsFromList(_list.ListId);
 
             _getItemRadioButton = FindViewById<RadioButton>(Resource.Id.getItemRadioButton);
             _deleteItemRadioButton = FindViewById<RadioButton>(Resource.Id.deleteItemRadioButton);

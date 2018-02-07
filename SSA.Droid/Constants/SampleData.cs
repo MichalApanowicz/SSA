@@ -1033,14 +1033,14 @@ namespace SSA.Droid
             {
                 Repository.Save<ItemStatus>(status);
             }
-            foreach (var list in Lists)
-            {
-                Repository.Save<ListModel>(list);
-            }
-            foreach (var item in Items.OrderBy(x => x.Name))
-            {
-                Repository.Save<ItemModel>(item);
-            }
+            //foreach (var list in Lists)
+            //{
+            //    Repository.Save<ListModel>(list);
+            //}
+            //foreach (var item in Items.OrderBy(x => x.Name))
+            //{
+            //    Repository.Save<ItemModel>(item);
+            //}
         }
         public static void DropData()
         {

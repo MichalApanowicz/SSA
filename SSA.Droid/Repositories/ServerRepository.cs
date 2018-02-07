@@ -168,6 +168,73 @@ namespace SSA.Droid.Repositories
                 var result = streamReader.ReadToEnd();
             }
         }
+
+        public static PersonModel GetPerson(int id)
+        {
+            var url = Constants.ApiPath + "persons/" + id;
+            var json = "";
+
+            var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
+
+            request.Method = "GET";
+            Log.Debug("ApiCall", $"Request: {request}");
+            using (var response = request.GetResponse())
+            {
+                using (var stream = response.GetResponseStream())
+                {
+                    json = JsonValue.Load(stream).ToString();
+
+                    Log.Debug("ApiCall", $"Response: {json}");
+                }
+            }
+            return JsonConvert.DeserializeObject<PersonModel>(json);
+        }
+
+        public static PersonModel GetPerson(string name)
+        {
+            var url = Constants.ApiPath + "persons/" + name;
+            var json = "";
+
+            var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
+
+            request.Method = "GET";
+            Log.Debug("ApiCall", $"Request: {request}");
+            using (var response = request.GetResponse())
+            {
+                using (var stream = response.GetResponseStream())
+                {
+                    json = JsonValue.Load(stream).ToString();
+
+                    Log.Debug("ApiCall", $"Response: {json}");
+                }
+            }
+            return JsonConvert.DeserializeObject<PersonModel>(json);
+        }
+
+        public static PersonModel SavePerson(PersonModel person)
+        {
+            var url = Constants.ApiPath + "persons/new";
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.ContentType = "application/json";
+            request.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                string json = JsonConvert.SerializeObject(person);
+
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+
+            var response = (HttpWebResponse)request.GetResponse();
+            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+                var insertedPerson = JsonConvert.DeserializeObject<PersonModel>(result);
+                return insertedPerson;
+            }
+        }
     }
 
 

@@ -16,8 +16,6 @@ namespace SSA.Droid.Repositories
 
         public static void UpdateItemsAndLists()
         {
-            if (_needRefresh)
-            {
                 var items = GetItems();
                 var lists = GetLists();
 
@@ -26,9 +24,6 @@ namespace SSA.Droid.Repositories
 
                 LocalData.SaveAll(items);
                 LocalData.SaveAll(lists);
-
-                _needRefresh = false;
-            }
         }
 
         public static ItemModel GetItem(int itemId)
@@ -62,7 +57,12 @@ namespace SSA.Droid.Repositories
 
         public static List<ListModel> GetListsFromLocal()
         {
-            return LocalData.GetAllLists();
+            var lists = LocalData.GetAllLists();
+            foreach (var list in lists)
+            {
+                list.Person = GetPerson(list.PersonId);
+            }
+            return lists;
         }
 
         public static bool AddItemToList(ItemModel item, ListModel list)
@@ -109,7 +109,7 @@ namespace SSA.Droid.Repositories
             var lists = ServerRepository.GetLists();
             foreach (var list in lists)
             {
-                list.Person = LocalData.GetPerson(list.PersonId);
+                list.Person = GetPerson(list.PersonId);
                 list.Status = LocalData.GetListStatus(list.ListStatusId);
                 list.Items = GetItemsFromList(list.ListId);
             }
@@ -130,6 +130,22 @@ namespace SSA.Droid.Repositories
             LocalData.DeleteAll<ListModel>();
             LocalData.SaveAll(GetLists());
             return true;
+        }
+
+        public static PersonModel GetPerson(int personId)
+        {
+            return ServerRepository.GetPerson(personId);
+        }
+
+        public static PersonModel GetPerson(string name)
+        {
+            return ServerRepository.GetPerson(name);
+        }
+
+        public static PersonModel SavePerson(PersonModel person)
+        {
+            LocalData.Save(person);
+            return ServerRepository.SavePerson(person);
         }
     }
 }

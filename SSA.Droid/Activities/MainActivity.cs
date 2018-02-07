@@ -69,8 +69,8 @@ namespace SSA.Droid
 
             SetContentView(Resource.Layout.Main);
 
-            //SampleData.DropData();
-            //SampleData.AddData();
+            SampleData.DropData();
+            SampleData.AddData();
 
 
             _fragments = new Android.Support.V4.App.Fragment[]
@@ -170,6 +170,7 @@ namespace SSA.Droid
                                 Status = _repository.GetListStatus(ListStatusEnum.Uncommitted),
                                 Items = selectedItems,
                                 PersonId = _loggedUser.PersonId,
+                                Person = _loggedUser,
                                 CreateDate = DateTime.Now.ToLongDateString()
                             };
                             DataProvider.AddNewList(list);
@@ -292,7 +293,7 @@ namespace SSA.Droid
         private void SaveUserNameToDatabase()
         {
             var name = GetUserName();
-            var person = _repository.GetPerson(name);
+            var person = DataProvider.GetPerson(name);
             if (person == null)
             {
                 person = new PersonModel
@@ -301,7 +302,7 @@ namespace SSA.Droid
                     Description = "Nowy uzytkownik",
                     //Lists = new List<ListModel>()
                 };
-                _repository.Save(person);
+                DataProvider.SavePerson(person);
             }
             _loggedUser = person;
             _toolbar.Title = _loggedUser.Name;

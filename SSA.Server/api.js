@@ -5,7 +5,7 @@ var app = express();
 var database = require('./database');
 var bodyParser = require('body-parser');
 //app.use(express['static'](__dirname));
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -77,9 +77,26 @@ app.post('/lists/terminate/:id', function (req, res) {
         });
 });
 
+
+app.get('/persons/', function (req, res) {
+    console.log(`Otrzymałem request na '/persons/:id', Parametry:  ${JSON.stringify(req.params)}`);
+    database.findAllPersons().then(
+        function (result) {
+            res.status(200).send(result);
+        });
+});
+
+app.get('/persons/:id', function (req, res) {
+    console.log(`Otrzymałem request na '/persons/:id', Parametry:  ${JSON.stringify(req.params)}`);
+    database.findPerson(req.params.id).then(
+        function (result) {
+            res.status(200).send(result);
+        });
+});
+
 app.post('/persons/new', function (req, res) {
-    console.log(`Otrzymałem request. Body:  ${JSON.stringify(req.body)}`);
-    database.saveNewPerson(req.body).then(
+    console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`);
+    database.saveNewPerson(req.params.id).then(
         function (result) {
             res.status(200).send(result);
         });
