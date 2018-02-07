@@ -9,7 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using SQLite.Net;
+using SQLite;
 using SQLiteNetExtensions.Extensions;
 using SSA.Droid.Models;
 

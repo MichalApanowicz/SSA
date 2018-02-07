@@ -14,7 +14,6 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
-using SQLite.Net;
 using SQLiteNetExtensions.Extensions;
 using SSA.Droid.Models;
 

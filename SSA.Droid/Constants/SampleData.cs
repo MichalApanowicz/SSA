@@ -10,8 +10,7 @@ using Android.Provider;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using SQLite.Net;
-using SQLite.Net.Platform.XamarinAndroid;
+using SQLite;
 using SSA.Droid.Models;
 using SSA.Droid.Repositories;
 
@@ -20,7 +19,7 @@ namespace SSA.Droid
     public static class SampleData
     {
 
-        static readonly MainRepository Repository = new MainRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        static readonly MainRepository Repository = new MainRepository(new SQLiteConnection(Constants.DatabasePath));
 
         public static List<Localization> Localizations = new List<Localization>()
         {
@@ -1033,14 +1032,14 @@ namespace SSA.Droid
             {
                 Repository.Save<ItemStatus>(status);
             }
-            //foreach (var list in Lists)
-            //{
-            //    Repository.Save<ListModel>(list);
-            //}
-            //foreach (var item in Items.OrderBy(x => x.Name))
-            //{
-            //    Repository.Save<ItemModel>(item);
-            //}
+            foreach (var list in Lists)
+            {
+                Repository.Save<ListModel>(list);
+            }
+            foreach (var item in Items.OrderBy(x => x.Name))
+            {
+                Repository.Save<ItemModel>(item);
+            }
         }
         public static void DropData()
         {

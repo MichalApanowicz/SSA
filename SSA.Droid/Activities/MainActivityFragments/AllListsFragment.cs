@@ -7,8 +7,6 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
-using SQLite.Net;
-using SQLite.Net.Platform.XamarinAndroid;
 using SSA.Droid.Adapters;
 using SSA.Droid.Models;
 using SSA.Droid.Repositories;

@@ -16,8 +16,7 @@ using Android.Views;
 using Android.Widget;
 using Java.Interop;
 using Newtonsoft.Json;
-using SQLite.Net;
-using SQLite.Net.Platform.XamarinAndroid;
+using SQLite;
 using SSA.Droid.Activities.MainActivityFragments;
 using SSA.Droid.Adapters;
 using SSA.Droid.Models;
@@ -29,7 +28,7 @@ namespace SSA.Droid.Activities
     public class ListDetailsActivity : ListActivity
     {
         private readonly MainRepository _repository =
-            new MainRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+            new MainRepository(new SQLiteConnection(Constants.DatabasePath));
 
         private ListModel _list;
         private List<ItemModel> _items;

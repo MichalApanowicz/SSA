@@ -9,9 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using SQLite.Net;
-using SQLite.Net.Attributes;
-using SQLite.Net.Interop;
+using SQLite;
 using SQLiteNetExtensions.Attributes;
 
 namespace SSA.Droid.Models

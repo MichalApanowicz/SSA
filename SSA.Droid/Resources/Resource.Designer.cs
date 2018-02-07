@@ -26,8 +26,6 @@ namespace SSA.Droid
 		
 		public static void UpdateIdValues()
 		{
-			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::SSA.Droid.Resource.String.ApplicationName;
-			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::SSA.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Animation
@@ -3423,12 +3421,6 @@ namespace SSA.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f09002a
-			public const int ApplicationName = 2131296298;
-			
-			// aapt resource value: 0x7f090029
-			public const int Hello = 2131296297;
-			
 			// aapt resource value: 0x7f090000
 			public const int abc_action_bar_home_description = 2131296256;
 			
@@ -3522,8 +3514,8 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f090012
 			public const int abc_toolbar_collapse_description = 2131296274;
 			
-			// aapt resource value: 0x7f09002b
-			public const int app_name = 2131296299;
+			// aapt resource value: 0x7f090029
+			public const int app_name = 2131296297;
 			
 			// aapt resource value: 0x7f090021
 			public const int appbar_scrolling_view_behavior = 2131296289;
@@ -3534,17 +3526,17 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f090023
 			public const int character_counter_pattern = 2131296291;
 			
-			// aapt resource value: 0x7f09002f
-			public const int main_tab_3 = 2131296303;
-			
-			// aapt resource value: 0x7f09002e
-			public const int main_tab_all_itemRepository = 2131296302;
-			
 			// aapt resource value: 0x7f09002d
-			public const int main_tab_all_listRepository = 2131296301;
+			public const int main_tab_3 = 2131296301;
 			
 			// aapt resource value: 0x7f09002c
-			public const int main_tab_test = 2131296300;
+			public const int main_tab_all_itemRepository = 2131296300;
+			
+			// aapt resource value: 0x7f09002b
+			public const int main_tab_all_listRepository = 2131296299;
+			
+			// aapt resource value: 0x7f09002a
+			public const int main_tab_test = 2131296298;
 			
 			// aapt resource value: 0x7f090024
 			public const int password_toggle_content_description = 2131296292;

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SQLite.Net;
-using SQLite.Net.Platform.XamarinAndroid;
+using SQLite;
 using SSA.Droid.Models;
 
 namespace SSA.Droid.Repositories
@@ -10,7 +9,7 @@ namespace SSA.Droid.Repositories
 
     public class DataProvider
     {
-        public static MainRepository LocalData = new MainRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+        public static MainRepository LocalData = new MainRepository(new SQLiteConnection(Constants.DatabasePath));
         private static bool _needRefresh = true;
 
 

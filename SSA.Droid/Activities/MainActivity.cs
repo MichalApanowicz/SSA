@@ -14,8 +14,6 @@ using Android.OS;
 using Android.Provider;
 using Android.Support.Design.Widget;
 using Android.Util;
-using SQLite.Net;
-using SQLite.Net.Platform.XamarinAndroid;
 using SSA.Droid.Activities.MainActivityFragments;
 using SSA.Droid.Models;
 using SSA.Droid.Repositories;
@@ -24,6 +22,7 @@ using Android.Support.V4.App;
 using Android.Support.V7.App;
 using Android.Views;
 using Newtonsoft.Json;
+using SQLite;
 using SSA.Droid.Adapters;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
 
@@ -35,7 +34,7 @@ namespace SSA.Droid
     public class MainActivity : FragmentActivity
     {
         private readonly MainRepository _repository =
-            new MainRepository(new SQLiteConnection(new SQLitePlatformAndroid(), Constants.DatabasePath));
+            new MainRepository(new SQLiteConnection(Constants.DatabasePath));
 
         private Android.Support.V4.App.Fragment[] _fragments;
 
