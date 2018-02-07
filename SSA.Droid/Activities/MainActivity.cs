@@ -25,6 +25,7 @@ using Android.Support.V7.App;
 using Android.Views;
 using Newtonsoft.Json;
 using SSA.Droid.Adapters;
+using AlertDialog = Android.Support.V7.App.AlertDialog;
 
 
 namespace SSA.Droid
@@ -51,7 +52,6 @@ namespace SSA.Droid
         {
             base.OnResume();
 
-            Log.Debug("Database", Constants.DatabasePath);
             ((AllListsFragment)_fragments[0]).UpdateLists();
             ((AllItemsFragment)_fragments[1]).UpdateItems();
             var currentItem = _viewPager.CurrentItem;
@@ -69,14 +69,14 @@ namespace SSA.Droid
 
             SetContentView(Resource.Layout.Main);
 
-            SampleData.DropData();
-            SampleData.AddData();
+            //SampleData.DropData();
+            //SampleData.AddData();
 
 
             _fragments = new Android.Support.V4.App.Fragment[]
             {
-                AllListsFragment.NewInstance(_repository),
-                AllItemsFragment.NewInstance(_repository),
+                AllListsFragment.NewInstance(),
+                AllItemsFragment.NewInstance(),
                 SettingsFragment.NewInstance(_repository),
                 TestFragment.NewInstance(_repository),
             };
@@ -92,9 +92,7 @@ namespace SSA.Droid
             _viewPager = FindViewById<ViewPager>(Resource.Id.mainviewpager);
             _viewPager.Adapter =
                 new MainActivityFragmentAdapter(SupportFragmentManager, _fragments, _tabNames);
-
-
-
+            
             _headerProgress = FindViewById<ProgressBar>(Resource.Id.progressBar1);
             _mainContent = FindViewById<LinearLayout>(Resource.Id.main_content);
 
@@ -129,15 +127,22 @@ namespace SSA.Droid
             return base.OnOptionsItemSelected(item);
         }
 
-        private async void CreateNewList()
+        private bool UserOk()
         {
             if (_loggedUser == null)
             {
                 Toast.MakeText(this,
-                    "Aplikacja nie jest w stanie zweryfikować użytkownika. Udstępnij aplikacji kontakty", ToastLength.Long)
+                        "Aplikacja nie jest w stanie zweryfikować użytkownika. Udstępnij aplikacji kontakty", ToastLength.Long)
                     .Show();
-                return;
+                return false;
             }
+            return true;
+        }
+
+        private async void CreateNewList()
+        {
+            if (!UserOk()) return;
+
             RunOnUiThread(() =>
             {
                 _mainContent.Visibility = ViewStates.Gone;
@@ -148,53 +153,41 @@ namespace SSA.Droid
             {
                 try
                 {
-                    if (selectedItems.Count == 0)
-                    {
-                        Toast.MakeText(this, "Zaznacz przedmioty do dodania",
-                            ToastLength.Short).Show();
-                    }
-                    else
-                    {
-
-                        var list = new ListModel()
+                    RunOnUiThread(() => {
+                        View dialogView = LayoutInflater.Inflate(Resource.Layout.NewListDialog, null);
+                        EditText name = dialogView.FindViewById<EditText>(Resource.Id.editNameNewList);
+                        EditText description = dialogView.FindViewById<EditText>(Resource.Id.editDescNewList);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.SetTitle("Nowa lista");
+                        builder.SetView(dialogView);
+                        builder.SetPositiveButton("Zapisz", (s,e) =>
                         {
-                            Name = "Nowa",
-                            Description = "Opis",
-                            ListStatusId = 1,
-                            Status = _repository.GetListStatus(ListStatusEnum.Uncommitted),
-                            Items = selectedItems,
-                            Person = _loggedUser,
-                            CreateDate = DateTime.Now.ToLongDateString()
-                        };
-
-
-                        var url = Constants.ApiPath + "new/list";
-                        var request = (HttpWebRequest)WebRequest.Create(url);
-                        request.ContentType = "application/json";
-                        request.Method = "POST";
-
-                        using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                            var list = new ListModel()
+                            {
+                                Name = name.Text,
+                                Description = description.Text,
+                                ListStatusId = 1,
+                                Status = _repository.GetListStatus(ListStatusEnum.Uncommitted),
+                                Items = selectedItems,
+                                PersonId = _loggedUser.PersonId,
+                                CreateDate = DateTime.Now.ToLongDateString()
+                            };
+                            DataProvider.AddNewList(list);
+                            Toast.MakeText(this, $"Utworzono listę z {selectedItems.Count} przedmiotami",
+                                ToastLength.Short).Show();
+                        });
+                        builder.SetNegativeButton("Anuluj", (s, e) =>
                         {
-                            string json = JsonConvert.SerializeObject(list);
-
-                            streamWriter.Write(json);
-                            streamWriter.Flush();
-                            streamWriter.Close();
-                        }
-
-                        var response = (HttpWebResponse)request.GetResponse();
-                        using (var streamReader = new StreamReader(response.GetResponseStream()))
-                        {
-                            var result = streamReader.ReadToEnd();
-                            _repository.Save<ListModel>(list);
-                        }
-                        Toast.MakeText(this, $"Utworzono listę z {selectedItems.Count} przedmiotami",
-                            ToastLength.Short).Show();
-                    }
+                            
+                        });
+                        builder.Show();
+                    });
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-
+                    Log.Debug("MainActivity", e.ToString());
+                    Toast.MakeText(this, $"Wystąpił problem podczas dodawania listy! Zgłoś problem administratorowi.",
+                        ToastLength.Short).Show();
                 }
             });
             OnResume();
@@ -212,8 +205,7 @@ namespace SSA.Droid
                 _mainContent.Visibility = ViewStates.Gone;
                 _headerProgress.Visibility = ViewStates.Visible;
             });
-            await Task.Factory.StartNew(RefreshItems);
-            await Task.Factory.StartNew(RefreshLists);
+            await Task.Factory.StartNew(DataProvider.UpdateItemsAndLists);
             OnResume();
             RunOnUiThread(() =>
             {
@@ -222,89 +214,8 @@ namespace SSA.Droid
             });
         }
 
-        private void RefreshItems()
-        {
-            try
-            {
-                var url = Constants.ApiPath + "items";
-                var json = "";
 
-                var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
-
-                request.Method = "GET";
-                Log.Debug("ApiCall", $"Request: {request}");
-                using (var response = request.GetResponse())
-                {
-                    using (var stream = response.GetResponseStream())
-                    {
-                        json = JsonValue.Load(stream).ToString();
-
-                        Log.Debug("ApiCall", $"Response: {json}");
-                    }
-                }
-                _repository.DeleteAll<ItemModel>();
-                var items = JsonConvert.DeserializeObject<List<ItemModel>>(json);
-
-                foreach (var item in items)
-                {
-                    item.Localization = _repository.GetLocalization(item.LocalizationId);
-                    item.Category = _repository.GetCategory(item.CategoryId);
-                    item.Status = _repository.GetItemStatus(item.ItemStatusId);
-                    _repository.Save(item);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Debug("ApiCall", $"Exception: {ex}");
-            }
-        }
-
-        private void RefreshLists()
-        {
-            try
-            {
-                var url = Constants.ApiPath + "lists";
-                var json = "";
-
-                var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
-
-                request.Method = "GET";
-                Log.Debug("ApiCall", $"Request: {request}");
-                using (var response = request.GetResponse())
-                {
-                    using (var stream = response.GetResponseStream())
-                    {
-                        json = JsonValue.Load(stream).ToString();
-
-                        Log.Debug("ApiCall", $"Response: {json}");
-                    }
-                }
-                _repository.DeleteAll<ListModel>();
-                var lists = JsonConvert.DeserializeObject<List<ListModel>>(json);
-
-                foreach (var list in lists)
-                {
-                    try
-                    {
-                        list.Person = _repository.GetPerson(1);
-                        list.Status = _repository.GetListStatus(1);
-                    }
-                    catch
-                    {
-                        list.Person = new PersonModel();
-                        list.Status = new ListStatus();
-                    }
-                    _repository.Save(list);
-                }
-                var x = _repository.GetAllLists();
-            }
-            catch (Exception ex)
-            {
-                Log.Debug("ApiCall", $"Exception: {ex}");
-            }
-        }
-
-
+       
         readonly string[] PermissionsLocation =
         {
             Manifest.Permission.ReadContacts,
@@ -352,7 +263,6 @@ namespace SSA.Droid
                         {
                             Snackbar.Make(_mainContent, "Kontakty nie są dostęne. Nie można pobrać użytkownika", Snackbar.LengthShort)
                                     .Show();
-
                         }
                     }
                     break;

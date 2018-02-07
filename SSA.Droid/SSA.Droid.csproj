@@ -144,7 +144,10 @@
     <Compile Include="Models\ListStatus.cs" />
     <Compile Include="Models\LocalizationModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
+    <Compile Include="Repositories\DataEditor.cs" />
+    <Compile Include="Repositories\DataProvider.cs" />
     <Compile Include="Repositories\MainRepository.cs" />
+    <Compile Include="Repositories\ServerRepository.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <AndroidResource Include="Resources\layout\toolbar.axml">
@@ -185,6 +188,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Settings.axml" />
+    <AndroidResource Include="Resources\layout\NewListDialog.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

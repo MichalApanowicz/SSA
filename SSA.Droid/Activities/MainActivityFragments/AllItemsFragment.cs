@@ -20,7 +20,6 @@ namespace SSA.Droid.Activities.MainActivityFragments
 {
     public class AllItemsFragment : Android.Support.V4.App.ListFragment
     {
-        private MainRepository _repository;
         private static List<ItemModel> _items;
         public List<ItemModel> SelectedItems;
         private AllItemsAdapter _adapter;
@@ -28,16 +27,16 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         private AllItemsFragment() { }
 
-        public static AllItemsFragment NewInstance(MainRepository repository)
+        public static AllItemsFragment NewInstance()
         {
-            var fragment = new AllItemsFragment { _repository = repository };
+            var fragment = new AllItemsFragment();
             return fragment;
         }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            _items = _repository.GetAllItemsWithCildren();
+            _items = DataProvider.GetItemsFromLocal();
             _adapter = new AllItemsAdapter(Activity, _items);
             ListAdapter = _adapter;
         }
@@ -48,8 +47,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
             var lv = view.FindViewById<ListView>(Android.Resource.Id.List);
             SelectedItems = new List<ItemModel>();
 
-            _items = _repository.GetAllItemsWithCildren();
-
+            _items = DataProvider.GetItems();
             _adapter = new AllItemsAdapter(Activity, _items, _selectedIds);
             ListAdapter = _adapter;
             lv.ChoiceMode = ChoiceMode.None;
@@ -57,9 +55,10 @@ namespace SSA.Droid.Activities.MainActivityFragments
             return view;
         }
 
+
         public override void OnListItemClick(ListView l, View v, int position, long id)
         {
-            SelectedItems.Add(_repository.GetItem((int)id));
+            SelectedItems.Add(DataProvider.GetItem((int)id));
             Log.Debug("Fragment", $"_selectedItems[{SelectedItems.Count}]: {SelectedItems.ToArray()}");
         }
 
@@ -67,25 +66,25 @@ namespace SSA.Droid.Activities.MainActivityFragments
         {
             SelectedItems.Clear();
 
-            var adapter = ((AllItemsAdapter) ListAdapter) ?? _adapter;
+            var adapter = ((AllItemsAdapter)ListAdapter) ?? _adapter;
             _selectedIds = adapter.GetSelectedRows();
             foreach (var i in _selectedIds)
             {
                 SelectedItems.Add(_items.First(x => x.ItemId == i));
             }
-            _adapter.NotifyDataSetChanged();
+            Activity.RunOnUiThread(() => _adapter.NotifyDataSetChanged());
             Log.Debug("Fragment", $"_selectedItems[{SelectedItems.Count}]: {JsonConvert.SerializeObject(SelectedItems, Formatting.Indented)}");
-            
+
             return SelectedItems;
         }
 
         public void UpdateItems()
         {
             _selectedIds = _adapter?.GetSelectedRows();
-            _items = _repository.GetAllItemsWithCildren();
+            _items = DataProvider.GetItemsFromLocal();
             _adapter = new AllItemsAdapter(Activity, _items, _selectedIds);
             _adapter.NotifyDataSetChanged();
-            ListAdapter =  _adapter;
+            ListAdapter = _adapter;
         }
     }
 }

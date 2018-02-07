@@ -1,0 +1,174 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Json;
+using System.Linq;
+using System.Net;
+using System.Text;
+
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Util;
+using Android.Views;
+using Android.Widget;
+using Newtonsoft.Json;
+using SQLite.Net;
+using SQLiteNetExtensions.Extensions;
+using SSA.Droid.Models;
+
+namespace SSA.Droid.Repositories
+{
+    public static class ServerRepository
+    {
+        public static bool AddItemToList(ItemModel item, ListModel list)
+        {
+            var url = Constants.ApiPath + "items/" + item.ItemId + "/addToList/" + list.ListId;
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.ContentType = "application/json";
+            request.Method = "POST";
+
+            var response = (HttpWebResponse)request.GetResponse();
+            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+            }
+            return true;
+        }
+
+        public static bool UpdateItem(ItemModel item)
+        {
+            var id = item.ItemId;
+            var url = Constants.ApiPath + "items/" + id;
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.ContentType = "application/json";
+            request.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                string json = JsonConvert.SerializeObject(item);
+
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+
+            var response = (HttpWebResponse)request.GetResponse();
+            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+                return true;
+            }
+        }
+
+        public static ItemModel GetItem(int id)
+        {
+            var url = Constants.ApiPath + "items/" + id;
+            var json = "";
+
+            var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
+
+            request.Method = "GET";
+            Log.Debug("ApiCall", $"Request: {request}");
+            using (var response = request.GetResponse())
+            {
+                using (var stream = response.GetResponseStream())
+                {
+                    json = JsonValue.Load(stream).ToString();
+
+                    Log.Debug("ApiCall", $"Response: {json}");
+                }
+            }
+            return JsonConvert.DeserializeObject<ItemModel>(json);
+        }
+
+        public static List<ItemModel> GetItems()
+        {
+            var url = Constants.ApiPath + "items";
+            var json = "";
+
+            var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
+
+            request.Method = "GET";
+            Log.Debug("ApiCall", $"Request: {request}");
+            using (var response = request.GetResponse())
+            {
+                using (var stream = response.GetResponseStream())
+                {
+                    json = JsonValue.Load(stream).ToString();
+
+                    Log.Debug("ApiCall", $"Response: {json}");
+                }
+            }
+            return JsonConvert.DeserializeObject<List<ItemModel>>(json);
+        }
+
+        public static List<ItemModel> GetItemsFromList(int listId)
+        {
+            return GetItems().Where(i => i.ListId == listId).ToList();
+        }
+
+        public static ListModel AddNewList(ListModel list)
+        {
+            var url = Constants.ApiPath + "lists/new";
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.ContentType = "application/json";
+            request.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                string json = JsonConvert.SerializeObject(list);
+
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+
+            var response = (HttpWebResponse)request.GetResponse();
+            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+                var insertedList = JsonConvert.DeserializeObject<ListModel>(result);
+                return insertedList;
+            }
+        }
+
+        public static List<ListModel> GetLists()
+        {
+            var url = Constants.ApiPath + "lists";
+            var json = "";
+
+            var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
+
+            request.Method = "GET";
+            Log.Debug("ApiCall", $"Request: {request}");
+            using (var response = request.GetResponse())
+            {
+                using (var stream = response.GetResponseStream())
+                {
+                    json = JsonValue.Load(stream).ToString();
+
+                    Log.Debug("ApiCall", $"Response: {json}");
+                }
+            }
+            return JsonConvert.DeserializeObject<List<ListModel>>(json);
+        }
+
+        public static void TerminateList(ListModel list)
+        {
+            var url = Constants.ApiPath + "lists/terminate/" + list.ListId;
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.ContentType = "application/json";
+            request.Method = "POST";
+
+            var response = (HttpWebResponse)request.GetResponse();
+            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+            }
+        }
+    }
+
+
+}

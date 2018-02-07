@@ -10,6 +10,7 @@ using Android.Widget;
 using Newtonsoft.Json;
 using SSA.Droid.Activities;
 using SSA.Droid.Models;
+using SSA.Droid.Repositories;
 
 namespace SSA.Droid.Adapters
 {
@@ -71,7 +72,7 @@ namespace SSA.Droid.Adapters
             holder.Name.Text = $"{item.Name} [{item.KodEAN}]";
             if (item.ListId != 0) holder.Name.Text += $"[Lista nr {item.ListId}]";
             holder.Description.Text = item.Description;
-            if (item.Status.ItemStatusId == (int)ItemStatusEnum.Available)
+            if (item.ItemStatusId == (int)ItemStatusEnum.Available)
             {
                 holder.CheckBox.Checked = Selected.Contains(item.ItemId);
                 holder.CheckBox.Visibility = ViewStates.Visible;
@@ -79,7 +80,7 @@ namespace SSA.Droid.Adapters
             }
             else
             {
-                holder.Status.Text = item.Status.Name;
+                holder.Status.Text = ((ItemStatusEnum)item.ItemStatusId).ToString();
                 holder.CheckBox.Visibility = ViewStates.Invisible;
                 holder.Status.Visibility = ViewStates.Visible;
             }

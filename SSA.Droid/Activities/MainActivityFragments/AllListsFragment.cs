@@ -17,15 +17,14 @@ namespace SSA.Droid.Activities.MainActivityFragments
 {
     public class AllListsFragment : Android.Support.V4.App.ListFragment
     {
-        private MainRepository _repository;
         private List<ListModel> _lists;
         private AllListsAdapter _adapter;
 
         private AllListsFragment() { }
 
-        public static AllListsFragment NewInstance(MainRepository repository)
+        public static AllListsFragment NewInstance()
         {
-            var fragment = new AllListsFragment { _repository = repository };
+            var fragment = new AllListsFragment();
             return fragment;
         }
 
@@ -33,7 +32,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
         {
             var view = inflater.Inflate(Resource.Layout.AllLists, null);
 
-            _lists = _repository.GetAllListsWithCildren();
+            _lists = DataProvider.GetListsFromLocal();
 
             ListAdapter = new AllListsAdapter(Activity, _lists);
 
@@ -52,7 +51,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         public void UpdateLists()
         {
-            _lists = _repository.GetAllListsWithCildren();
+            _lists = DataProvider.GetListsFromLocal();
             _adapter = new AllListsAdapter(Activity, _lists);
             _adapter.NotifyDataSetChanged();
             ListAdapter = _adapter;

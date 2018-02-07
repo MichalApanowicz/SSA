@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 
 using Android.App;
@@ -47,7 +49,7 @@ namespace SSA.Droid.Activities
             SetContentView(Resource.Layout.ListDetailsActivity);
             var text = Intent.GetStringExtra("List");
             _list = JsonConvert.DeserializeObject<ListModel>(text) ?? new ListModel();
-            _items = _repository.GetItemsFromList(_list.ListId);
+            _items = _list.Items;
 
             _getItemRadioButton = FindViewById<RadioButton>(Resource.Id.getItemRadioButton);
             _deleteItemRadioButton = FindViewById<RadioButton>(Resource.Id.deleteItemRadioButton);
@@ -145,31 +147,59 @@ namespace SSA.Droid.Activities
 
         private string TerminateList()
         {
-            foreach (var item in _items)
+
+
+            //foreach (var item in _items)
+            //{
+            //    if (item.Status.ItemStatusId != (int)ItemStatusEnum.Reserved)
+            //    {
+            //        return "Zwróć wszystkie przedmioty!";
+            //    }
+            //}
+            //foreach (var item in _items)
+            //{
+
+            //    item.Status = _repository.GetItemStatus(ItemStatusEnum.Available);
+            //    _repository.Update(item);
+            //}
+
+            //_list.Status = _repository.GetListStatus(ListStatusEnum.Terminated);
+            //_list.Items = _items;
+            //_repository.Update(_list);
+
+            //UpdateItemList();
+
+            var url = Constants.ApiPath + "lists/terminate/" + _list.ListId;
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.ContentType = "application/json";
+            request.Method = "POST";
+
+            var response = (HttpWebResponse)request.GetResponse();
+            using (var streamReader = new StreamReader(response.GetResponseStream()))
             {
-                if (item.Status.ItemStatusId != (int)ItemStatusEnum.Reserved)
-                {
-                    return "Zwróć wszystkie przedmioty!";
-                }
-            }
-            foreach (var item in _items)
-            {
-
-                item.Status = _repository.GetItemStatus(ItemStatusEnum.Available);
-                _repository.Update(item);
+                var result = streamReader.ReadToEnd();
+                //_repository.Save<ListModel>(list);
             }
 
-            _list.Status = _repository.GetListStatus(ListStatusEnum.Terminated);
-            _list.Items = _items;
-            _repository.Update(_list);
 
-            UpdateItemList();
             return "Rozwiązano listę: " + _list.Name;
+        }
+
+        public void RefreshItems()
+        {
+            _items = DataProvider.GetItemsFromList(_list.ListId);
+            foreach (var item in _items)
+            {
+                item.Category = _repository.GetCategory(item.CategoryId);
+                item.Localization = _repository.GetLocalization(item.LocalizationId);
+                item.Status = _repository.GetItemStatus(item.ItemStatusId);
+            }
         }
 
         private void UpdateItemList()
         {
-            _items = _repository.GetItemsFromList(_list.ListId);
+            RefreshItems();
+
             ListAdapter = new ItemsOnListDetailsAdapter(this, _items);
             ((BaseAdapter)ListAdapter).NotifyDataSetChanged();
         }
@@ -192,7 +222,8 @@ namespace SSA.Droid.Activities
                                 item.ListId = _list.ListId;
                                 actionString = "Dodano: ";
                             }
-                            _repository.Update(item);
+                            DataProvider.AddItemToList(item, _list);
+                            
                         }
                         else if (_list.Status.ListStatusId == (int)ListStatusEnum.Committed)
                         {
@@ -231,7 +262,7 @@ namespace SSA.Droid.Activities
                     _eanCodeText.ClearFocus();
                     _eanCodeText.SelectAll();
                     _eanCodeText.FocusedByDefault = true;
-                    
+
                 }
             }
             catch (Exception ex)

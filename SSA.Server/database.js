@@ -19,7 +19,11 @@ const db = new Sequelize('database',
 const ItemModel = function() {
     return db.define('ItemModel',
         {
-            ItemId: Sequelize.INTEGER,
+            ItemId: {
+                type: Sequelize.INTEGER,
+                primaryKey: true,
+                autoIncrement: true
+            },
             Name: Sequelize.STRING,
             Description: Sequelize.STRING,
             KodEAN: Sequelize.STRING,
@@ -35,7 +39,11 @@ const ItemModel = function() {
 const ListModel = function() {
     return db.define('ListModel',
         {
-            ListId: Sequelize.INTEGER,
+            ListId: {
+                type: Sequelize.INTEGER,
+                primaryKey: true,
+                autoIncrement: true
+            },
             Name: Sequelize.STRING,
             Description: Sequelize.STRING,
             PersonId: Sequelize.STRING,
@@ -78,6 +86,17 @@ var database = {
         });
     },
 
+    addItemToList: function(itemId, listId) {
+        return ItemModel().update(
+            {
+                ListId: listId
+            },
+            {
+                where: { ItemId: itemId }
+            }
+        )
+    },
+
     findList: function(id) {
         return ListModel().findOne({
             where: { ListId: id },
@@ -92,19 +111,27 @@ var database = {
     },
 
     saveNewList: function(value) {
-        return db.query(
-            `Insert Into 'ListModel' ('Name', 'Description', 'PersonId', 'CreateDate', 'ListStatusId') 
-             Values (:name, :description, :personId, :createDate, :listStatusId)`,
-            {
-                replacements:
-                {
-                    name: value.Name,
-                    description: value.Description,
-                    personId: value.PersonId,
-                    createDate: value.CreateDate,
-                    listStatusId: value.ListStatusId
-                }
-            });
+        return ListModel().create({
+            Name: value.Name,
+            Description: value.Description,
+            PersonId: value.PersonId,
+            CreateDate: value.CreateDate,
+            ListStatusId: value.ListStatusId
+        })
+
+        //db.query(
+        //    `Insert Into 'ListModel' ('Name', 'Description', 'PersonId', 'CreateDate', 'ListStatusId') 
+        //     Values (:name, :description, :personId, :createDate, :listStatusId)`,
+        //    {
+        //        replacements:
+        //        {
+        //            name: value.Name,
+        //            description: value.Description,
+        //            personId: value.PersonId,
+        //            createDate: value.CreateDate,
+        //            listStatusId: value.ListStatusId
+        //        }
+        //    });
         //return this.ListModel().create(value);
     },
 
@@ -206,8 +233,8 @@ var database = {
         });
     },
 
-    updateItem: function (id, newIitem) {
-        return ItemModel().update({ Damaged: newIitem.Damaged },{
+    updateItem: function (id, newItem) {
+        return ItemModel().update({ Damaged: newItem.Damaged, ListId: newItem.ListId },{
                 where: { ItemId: id },
                 attributes: [
                     'ItemId', 'Name', 'Description', 'KodEAN', 'Damaged', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId'

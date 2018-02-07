@@ -25,6 +25,13 @@ app.post('/items/:id', function (req, res) {
     });
 });
 
+app.post('/items/:id/addToList/:listId', function (req, res) {
+    console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}\n Params:  ${JSON.stringify(req.params)}`);
+    database.addItemToList(req.params.id, req.params.listId).then(function (result) {
+        res.status(200).send(result);
+    });
+});
+
 app.get('/items/', function (req, res) {
     console.log(`Otrzymałem request. Parametry:  ${JSON.stringify(req.params)}`);
     database.getAllItems().then(function (result) {
