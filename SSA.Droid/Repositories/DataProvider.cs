@@ -15,14 +15,26 @@ namespace SSA.Droid.Repositories
 
         public static void UpdateItemsAndLists()
         {
-                var items = GetItems();
-                var lists = GetLists();
+            var items = GetItems();
+            var lists = GetLists();
 
-                LocalData.DeleteAll<ItemModel>();
-                LocalData.DeleteAll<ListModel>();
+            LocalData.DeleteAll<ItemModel>();
+            LocalData.DeleteAll<ListModel>();
 
-                LocalData.SaveAll(items);
-                LocalData.SaveAll(lists);
+            LocalData.SaveAll(items);
+            LocalData.SaveAll(lists);
+        }
+
+        public static void UpdateItem(ItemModel item)
+        {
+            LocalData.Update(item);
+            ServerRepository.UpdateItem(item);
+        }
+
+        public static void UpdateList(ListModel list)
+        {
+            LocalData.Update(list);
+            ServerRepository.UpdateList(list);
         }
 
         public static ItemModel GetItem(int itemId)
@@ -59,7 +71,9 @@ namespace SSA.Droid.Repositories
             var lists = LocalData.GetAllLists();
             foreach (var list in lists)
             {
-                list.Person = GetPerson(list.PersonId);
+                list.Person = GetPersonLocal(list.PersonId);
+                list.Status = LocalData.GetListStatus(list.ListStatusId);
+                list.Items = GetItemsFromList(list.ListId);
             }
             return lists;
         }
@@ -93,7 +107,7 @@ namespace SSA.Droid.Repositories
 
         public static List<ItemModel> GetItemsFromList(int listId)
         {
-            var items = ServerRepository.GetItemsFromList(listId);
+            var items = LocalData.GetAllItemsWithCildren().Where(i => i.ListId == listId).ToList();
             foreach (var item in items)
             {
                 item.Category = LocalData.GetCategory(item.CategoryId);
@@ -114,6 +128,11 @@ namespace SSA.Droid.Repositories
             }
 
             return lists;
+        }
+
+        public static void CommitList(ListModel list)
+        {
+            ServerRepository.CommitList(list);
         }
 
         public static bool TerminateList(ListModel list)
@@ -138,13 +157,27 @@ namespace SSA.Droid.Repositories
 
         public static PersonModel GetPerson(string name)
         {
-            return ServerRepository.GetPerson(name);
+            return LocalData.GetPerson(name);
         }
 
         public static PersonModel SavePerson(PersonModel person)
         {
-            LocalData.Save(person);
             return ServerRepository.SavePerson(person);
+        }
+
+        public static PersonModel GetPersonLocal(int personId)
+        {
+            return LocalData.GetPerson(personId);
+        }
+
+        public static PersonModel GetPersonLocal(string name)
+        {
+            return LocalData.GetPerson(name);
+        }
+
+        public static PersonModel SavePersonLocal(PersonModel person)
+        {
+            return LocalData.Save(person);
         }
     }
 }

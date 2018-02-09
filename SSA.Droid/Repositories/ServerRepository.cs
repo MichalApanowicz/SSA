@@ -61,6 +61,31 @@ namespace SSA.Droid.Repositories
             }
         }
 
+        public static bool UpdateList(ListModel list)
+        {
+            var id = list.ListId;
+            var url = Constants.ApiPath + "lists/" + id;
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.ContentType = "application/json";
+            request.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                string json = JsonConvert.SerializeObject(list);
+
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+
+            var response = (HttpWebResponse)request.GetResponse();
+            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+                return true;
+            }
+        }
+
         public static ItemModel GetItem(int id)
         {
             var url = Constants.ApiPath + "items/" + id;
@@ -157,6 +182,20 @@ namespace SSA.Droid.Repositories
         public static void TerminateList(ListModel list)
         {
             var url = Constants.ApiPath + "lists/terminate/" + list.ListId;
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.ContentType = "application/json";
+            request.Method = "POST";
+
+            var response = (HttpWebResponse)request.GetResponse();
+            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+            }
+        }
+
+        public static void CommitList(ListModel list)
+        {
+            var url = Constants.ApiPath + "lists/commit/" + list.ListId;
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.ContentType = "application/json";
             request.Method = "POST";

@@ -50,11 +50,12 @@ namespace SSA.Droid.Adapters
             }
 
             var list = _lists[position];
-            holder.Name.Text = list.Name;
+            holder.Name.Text = $"({list.ListId}) {list.Name}";
             holder.Status.Text = list.Status.Name;
             holder.Count.Text = $"[{list.Items.Count}]";
             holder.Person.Text = list.Person.Name;
-            holder.Date.Text = list.CreateDate;
+            var date = DateTime.Parse(list.CreateDate).ToString("dd-MM-yyyy");
+            holder.Date.Text = date;
             return view;
         }
         public override int Count => _lists.Count;

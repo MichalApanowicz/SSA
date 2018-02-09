@@ -45,8 +45,9 @@ namespace SSA.Droid.Adapters
                 holder.LinearLayout = view.FindViewById<LinearLayout>(Resource.Id.linearLayout3);
                 holder.Name = view.FindViewById<TextView>(Resource.Id.textView1);
                 holder.Description = view.FindViewById<TextView>(Resource.Id.textView2);
+                holder.Ean = view.FindViewById<TextView>(Resource.Id.textView3);
                 holder.CheckBox = view.FindViewById<CheckBox>(Resource.Id.checkBox1);
-                holder.Status = view.FindViewById<TextView>(Resource.Id.textView3);
+                holder.Status = view.FindViewById<TextView>(Resource.Id.textView4);
                 holder.Item = item;
 
                 holder.LinearLayout.Click += (sender, args) =>
@@ -61,11 +62,10 @@ namespace SSA.Droid.Adapters
             }
 
             holder.Item = item;
-            holder.Name.Text = $"{item.Name} [{item.KodEAN}]";
-            if (item.ListId != 0) holder.Name.Text += $"[Lista nr {item.ListId}]";
+            holder.Name.Text = $"{item.Name}";
             holder.Description.Text = item.Description;
             holder.Status.Text = item.Status.Name;
-
+            holder.Ean.Text = $"[{ item.KodEAN}]";
             return view;
         }
 
@@ -88,6 +88,7 @@ namespace SSA.Droid.Adapters
         public TextView Name { get; set; }
         public TextView Description { get; set; }
         public TextView Status { get; set; }
+        public TextView Ean { get; set; }
         public CheckBox CheckBox { get; set; }
     }
 }

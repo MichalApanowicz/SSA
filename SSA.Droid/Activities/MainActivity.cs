@@ -91,7 +91,7 @@ namespace SSA.Droid
             _viewPager = FindViewById<ViewPager>(Resource.Id.mainviewpager);
             _viewPager.Adapter =
                 new MainActivityFragmentAdapter(SupportFragmentManager, _fragments, _tabNames);
-            
+
             _headerProgress = FindViewById<ProgressBar>(Resource.Id.progressBar1);
             _mainContent = FindViewById<LinearLayout>(Resource.Id.main_content);
 
@@ -152,14 +152,15 @@ namespace SSA.Droid
             {
                 try
                 {
-                    RunOnUiThread(() => {
+                    RunOnUiThread(() =>
+                    {
                         View dialogView = LayoutInflater.Inflate(Resource.Layout.NewListDialog, null);
                         EditText name = dialogView.FindViewById<EditText>(Resource.Id.editNameNewList);
                         EditText description = dialogView.FindViewById<EditText>(Resource.Id.editDescNewList);
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
                         builder.SetTitle("Nowa lista");
                         builder.SetView(dialogView);
-                        builder.SetPositiveButton("Zapisz", (s,e) =>
+                        builder.SetPositiveButton("Zapisz", (s, e) =>
                         {
                             var list = new ListModel()
                             {
@@ -175,10 +176,11 @@ namespace SSA.Droid
                             DataProvider.AddNewList(list);
                             Toast.MakeText(this, $"Utworzono listę z {selectedItems.Count} przedmiotami",
                                 ToastLength.Short).Show();
+                            OnResume();
                         });
                         builder.SetNegativeButton("Anuluj", (s, e) =>
                         {
-                            
+
                         });
                         builder.Show();
                     });
@@ -190,7 +192,6 @@ namespace SSA.Droid
                         ToastLength.Short).Show();
                 }
             });
-            OnResume();
             RunOnUiThread(() =>
             {
                 _mainContent.Visibility = ViewStates.Visible;
@@ -215,7 +216,7 @@ namespace SSA.Droid
         }
 
 
-       
+
         readonly string[] PermissionsLocation =
         {
             Manifest.Permission.ReadContacts,
@@ -231,20 +232,16 @@ namespace SSA.Droid
             const string permission = Manifest.Permission.ReadContacts;
             if (CheckSelfPermission(permission) == (int)Permission.Granted)
             {
-                SaveUserNameToDatabase();
+                SaveUser();
                 return;
             }
 
-            if (true)
-            {
-                //Explain to the user why we need to read the contacts
-                Snackbar.Make(_mainContent, "Aplikacja potrzebuje pewnych uprawnień w celu identyfikacji użytkownika.", Snackbar.LengthIndefinite)
-                    .SetAction("OK", v =>
-                    {
-                        RequestPermissions(PermissionsLocation, RequestLocationId);
-                    })
-                    .Show();
-            }
+            Snackbar.Make(_mainContent, "Aplikacja potrzebuje pewnych uprawnień w celu identyfikacji użytkownika.", Snackbar.LengthIndefinite)
+                .SetAction("OK", v =>
+                {
+                    RequestPermissions(PermissionsLocation, RequestLocationId);
+                })
+                .Show();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
@@ -257,7 +254,7 @@ namespace SSA.Droid
                         {
                             Snackbar.Make(_mainContent, "Kontakty są dostępne. Pobieram użytkownika", Snackbar.LengthShort)
                                     .Show();
-                            SaveUserNameToDatabase();
+                            SaveUser();
                         }
                         else
                         {
@@ -289,21 +286,15 @@ namespace SSA.Droid
             return null;
         }
 
-        private void SaveUserNameToDatabase()
+        private void SaveUser()
         {
             var name = GetUserName();
-            var person = DataProvider.GetPerson(name);
-            if (person == null)
+            var person = DataProvider.GetPersonLocal(name) ?? new PersonModel
             {
-                person = new PersonModel
-                {
-                    Name = name,
-                    Description = "Nowy uzytkownik",
-                    //Lists = new List<ListModel>()
-                };
-                DataProvider.SavePerson(person);
-            }
-            _loggedUser = person;
+                Name = name,
+                Description = "Nowy uzytkownik",
+            };
+            _loggedUser = DataProvider.SavePersonLocal(person);
             _toolbar.Title = _loggedUser.Name;
             SetActionBar(_toolbar);
         }

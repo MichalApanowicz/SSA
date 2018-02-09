@@ -3,57 +3,60 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-    <Toolbar
-        android:background="?android:attr/colorPrimary"
-        android:layout_width="match_parent"
+  <include
+      android:id="@+id/toolbar"
+      layout="@layout/toolbar" />
+  <Toolbar
+      android:background="?android:attr/colorPrimary"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/radioToolbar">
+    <RadioGroup
+      android:orientation="horizontal"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/listDetailsRadioGroup">
+      <RadioButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:checked="true"
+          android:textColor="@color/primaryTextColor"
+          android:text="Dodaj"
+          android:id="@+id/getItemRadioButton" />
+      <RadioButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Usuń"
+          android:textColor="@color/primaryTextColor"
+          android:id="@+id/deleteItemRadioButton" />
+    </RadioGroup>
+  </Toolbar>
+  <RelativeLayout
+      android:minWidth="25px"
+      android:minHeight="25px"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/relativeLayout1">
+    <EditText
+        android:id="@+id/eanCodeEditText"
+        android:lines="1"
+        android:textSize="@dimen/abc_action_bar_stacked_max_height"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radioToolbar">
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/listDetailsRadioGroup">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Dodaj / Pobierz"
-                android:id="@+id/getItemRadioButton" />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Usuń / Zwróć"
-                android:id="@+id/deleteItemRadioButton" />
-        </RadioGroup>
-    </Toolbar>
-    <RelativeLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout1">
-        <EditText
-            android:id="@+id/eanCodeEditText"
-            android:lines="1"
-            android:textSize="@dimen/abc_action_bar_stacked_max_height"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:minWidth="235dp"
-            android:inputType="phone"
-            android:maxLines="1"
-            android:minLines="1"
-            android:singleLine="true"
-            android:selectAllOnFocus="true"
-            android:text="00000000" />
-    </RelativeLayout>
-    <ListView
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/android:list" />
+        android:layout_centerHorizontal="true"
+        android:minWidth="235dp"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:minLines="1"
+        android:singleLine="true"
+        android:selectAllOnFocus="true"
+        android:text="00000000" />
+  </RelativeLayout>
+  <ListView
+      android:minWidth="25px"
+      android:minHeight="25px"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/android:list" />
 </LinearLayout>

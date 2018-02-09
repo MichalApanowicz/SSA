@@ -13,6 +13,7 @@ using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
 using SSA.Droid.Models;
+using SSA.Droid.Repositories;
 
 namespace SSA.Droid.Activities
 {
@@ -21,6 +22,7 @@ namespace SSA.Droid.Activities
     {
         private ItemModel _item;
         private TextView _ean, _name, _description, _status, _list, _category, _localization;
+        private CheckBox _damaged;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,6 +36,8 @@ namespace SSA.Droid.Activities
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             toolbar.Title = _item.Name;
             toolbar.InflateMenu(Resource.Menu.top_menu);
+            toolbar.SetBackgroundColor(new Color(_item.Category.ColorR, _item.Category.ColorG,
+                _item.Category.ColorB));
             SetActionBar(toolbar);
 
             _ean = FindViewById<TextView>(Resource.Id.textItemDetailsEAN);
@@ -43,16 +47,30 @@ namespace SSA.Droid.Activities
             _list = FindViewById<TextView>(Resource.Id.textItemDetailsList);
             _category = FindViewById<TextView>(Resource.Id.textItemDetailsCategory);
             _localization = FindViewById<TextView>(Resource.Id.textItemDetailsLocalization);
+            _damaged = FindViewById<CheckBox>(Resource.Id.checkBox1);
 
             _ean.Text = _item.KodEAN;
             _name.Text = _item.Name;
-            _description.Text = _item.Description.Replace(", ",System.Environment.NewLine).Replace(":", ":"+System.Environment.NewLine);
+            _description.Text = _item.Description.Replace(", ", System.Environment.NewLine).Replace(":", ":" + System.Environment.NewLine);
             _status.Text = _item.Status.Name;
             _list.Text = JsonConvert.SerializeObject(_item.ListId);
             _category.Text = _item.Category.Name;
-            _category.SetBackgroundColor(new Color(_item.Category.ColorR, _item.Category.ColorG,
-                _item.Category.ColorB));
             _localization.Text = _item.Localization.Name;
+            _damaged.Checked = _item.Damaged;
+
+            _damaged.Click += (o, e) =>
+            {
+                if (_damaged.Checked != _item.Damaged)
+                {
+                    _item.Damaged = _damaged.Checked;
+                    DataProvider.UpdateItem(_item);
+                    Toast.MakeText(this, $"Oznaczyłeś {_item.Name} jako uszkodzony", ToastLength.Short).Show();
+                }
+                else
+                    Toast.MakeText(this, $"Oznaczyłeś {_item.Name} jako nieuszkodzony", ToastLength.Short).Show();
+            };
+
+      
         }
     }
 }

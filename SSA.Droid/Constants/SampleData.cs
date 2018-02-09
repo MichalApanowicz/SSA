@@ -122,16 +122,10 @@ namespace SSA.Droid
         {
             new PersonModel()
             {
-                Name = "Michal Apanowicz",
+                Name = "Michał Apanowicz",
                 Description = "Administrator",
                 Lists = new List<ListModel>()
             },
-            new PersonModel()
-            {
-                Name = "GetUserName()",
-                Description = "Pobrane dane",
-                Lists = new List<ListModel>()
-            }
         };
 
         private static readonly List<ListStatus> ListStatus = new List<ListStatus>()
@@ -139,81 +133,64 @@ namespace SSA.Droid
             new ListStatus
             {
                 ListStatusId = (int)ListStatusEnum.Uncommitted,
-                Name = "Uncommitted",
+                Name = "Niezatwierdzona",
             },
             new ListStatus
             {
                 ListStatusId = (int)ListStatusEnum.Committed,
-                Name = "Committed",
+                Name = "Zatwierdzona",
             },
             new ListStatus
             {
                 ListStatusId = (int)ListStatusEnum.Terminated,
-                Name = "Terminated",
+                Name = "Rozwiązana",
             }
         };
 
-        private static readonly List<ListModel> Lists = new List<ListModel>
-        {
-            new ListModel()
-            {
-                Name = "Na biwak",
-                Description = "Rzeczy do zabrania na biwak w Ostromecku",
-                CreateDate = DateTime.Parse(DateTime.Parse("2017-12-14").ToLongDateString()).ToLongDateString(),
-                Person = Persons[0],
-               Status =ListStatus[0],
-                Items = new List<ItemModel>
-                {
-
-                },
-            },
-            new ListModel()
-            {
-                Name = "Lista obozowa 1",
-                Description = "Rzeczy zabrane na kwaterkę",
-                CreateDate = DateTime.Parse("2017-12-14").ToLongDateString(),
-                Person = Persons[0],
-               Status =ListStatus[0],
-                Items = new List<ItemModel>
-                {
-
-                },
-            },
-            new ListModel()
-            {
-                Name = "Lista Jastrzębi",
-                Description = "Rzeczy zabrane na zbiórkę",
-                CreateDate = DateTime.Parse("2017-12-14").ToLongDateString(),
-                Person = Persons[0],
-               Status =ListStatus[0],
-                Items = new List<ItemModel>
-                {
-
-                },
-            }
-        };
-
+      
         public static List<ItemStatus> ItemStatus = new List<ItemStatus>()
         {
             new ItemStatus
             {
                 ItemStatusId = (int)ItemStatusEnum.Available,
-                Name = "Available",
+                Name = "Dostępny",
             },
             new ItemStatus
             {
                 ItemStatusId = (int)ItemStatusEnum.Unavailable,
-                Name = "Unavailable",
+                Name = "Niedostępny",
             },
             new ItemStatus
             {
                 ItemStatusId = (int)ItemStatusEnum.Reserved,
-                Name = "Reserved",
+                Name = "Zarezerwowany",
             }
         };
 
         private static readonly List<ItemModel> Items = new List<ItemModel>
         {
+            new ItemModel()
+            {
+                Damaged = false,
+                Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Unavailable),
+                KodEAN = "00000875",
+                Name = "Rzutnik ASUS ZenBeamGo E1Z",
+                Description = "USB mini projector",
+                Category = Categories[0],
+                Localization = Localizations[2],
+                ListId = 1
+            },
+            new ItemModel()
+            {
+                Damaged = false,
+                Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Unavailable),
+                KodEAN = "00000895",
+                Name = "Czytnik kodów kreskowych Symcode",
+                Description = "Symcode MJ-4209",
+                Category = Categories[0],
+                Localization = Localizations[2],
+                ListId = 1
+            },
            new ItemModel()
             {
                Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
@@ -232,6 +209,7 @@ namespace SSA.Droid
                 Category = Categories[0],
                 Localization = Localizations[1]
             },
+            
             new ItemModel()
             {
                Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
@@ -1008,6 +986,96 @@ namespace SSA.Droid
             },
         };
 
+        private static readonly List<ListModel> Lists = new List<ListModel>
+        {
+            new ListModel()
+            {
+                Name = "Egzamin inżynierski",
+                Description = "",
+                CreateDate = DateTime.Parse("2018-02-16").ToLongDateString(),
+                Person = Persons[0],
+                Status = ListStatus[1],
+                Items = new List<ItemModel>
+                {
+                    Items[0],
+                    Items[1]
+                },
+            },
+            new ListModel()
+            {
+                Name = "Biwak zimowy",
+                Description = "Rzeczy potrzebne do realizacji programu metodycznego na zimowisku",
+                CreateDate = DateTime.Parse("2018-02-05").ToLongDateString(),
+                Person = Persons[0],
+               Status =ListStatus[2],
+                Items = new List<ItemModel>
+                {
+                    Items[60],
+                    Items[65],
+                    Items[66],
+                    Items[64],
+                    Items[69],
+                    Items[61],
+                    Items[63],
+                    Items[67],
+                },
+            },
+            new ListModel()
+            {
+                Name = "Lista obozowa 1",
+                Description = "Rzeczy zabrane na kwaterkę",
+                CreateDate = DateTime.Parse("2017-07-04").ToLongDateString(),
+                Person = Persons[0],
+               Status =ListStatus[1],
+                Items = new List<ItemModel>
+                {
+                    Items[31],
+                    Items[33],
+                    Items[34],
+                    Items[35],
+                    Items[36],
+                    Items[37],
+                    Items[38],
+                    Items[39],
+                    Items[70],
+                    Items[71],
+                    Items[72],
+                    Items[73],
+                    Items[74],
+                },
+            },
+            new ListModel()
+            {
+                Name = "Lista Jastrzębi",
+                Description = "Rzeczy zabrane na zbiórkę",
+                CreateDate = DateTime.Parse("2017-11-11").ToLongDateString(),
+                Person = Persons[0],
+                Status = ListStatus[0],
+                Items = new List<ItemModel>
+                {
+                    Items[51],
+                    Items[52],
+                    Items[53],
+                    Items[54],
+                    Items[55],
+                },
+            },
+            new ListModel()
+            {
+                Name = "Lista Orłów",
+                Description = "Rzeczy zabrane na zbiórkę",
+                CreateDate = DateTime.Parse("2018-01-19").ToLongDateString(),
+                Person = Persons[0],
+                Status = ListStatus[0],
+                Items = new List<ItemModel>
+                {
+                    Items[19],
+                    Items[12],
+                    Items[11],
+                    Items[15],
+                },
+            }
+        };
 
 
         public static void AddData()

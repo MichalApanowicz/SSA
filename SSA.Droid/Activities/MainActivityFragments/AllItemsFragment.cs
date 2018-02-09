@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Android.App;
 using Android.Content;
@@ -45,7 +46,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
             var lv = view.FindViewById<ListView>(Android.Resource.Id.List);
             SelectedItems = new List<ItemModel>();
 
-            _items = DataProvider.GetItems();
+            _items = DataProvider.GetItemsFromLocal();
             _adapter = new AllItemsAdapter(Activity, _items, _selectedIds);
             ListAdapter = _adapter;
             lv.ChoiceMode = ChoiceMode.None;

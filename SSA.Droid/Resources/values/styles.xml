@@ -12,8 +12,8 @@
     <item name="colorPrimary">@color/primaryColor</item>
     <item name="colorPrimaryDark">@color/primaryDarkColor</item>
     <item name="colorAccent">@color/secondaryColor</item>
-    <item name="colorControlNormal">@color/secondaryLightColor</item>
-    <item name="colorControlActivated">@color/secondaryDarkColor</item>
+    <item name="colorControlNormal">@color/secondaryDarkColor</item>
+    <item name="colorControlActivated">@color/secondaryLightColor</item>
   </style>
   
   <style name="MainTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">

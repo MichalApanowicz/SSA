@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:local="http://schemas.android.com/apk/res-auto">
+      xmlns:local="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/menu_list">
   <item android:id="@+id/menu_commitList"
-        android:icon="@mipmap/ic_action_content_create"
+        android:icon="@mipmap/commit"
         android:showAsAction="always"
-        android:title="Zatwierdź" />
+        android:title="Zatwierdź listę" />
   <item android:id="@+id/menu_terminateList"
-        android:icon="@mipmap/ic_menu_cut_holo_dark"
+        android:icon="@mipmap/terminate"
         android:showAsAction="always"
-        android:title="Rozwiąrz" />
+        android:title="Rozwiąż listę" />
 </menu>

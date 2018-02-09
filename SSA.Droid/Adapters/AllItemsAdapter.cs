@@ -69,9 +69,9 @@ namespace SSA.Droid.Adapters
             }
 
             holder.Item = item;
-            holder.Name.Text = $"{item.Name} [{item.KodEAN}]";
-            if (item.ListId != 0) holder.Name.Text += $"[Lista nr {item.ListId}]";
+            holder.Name.Text = $"{item.Name} ";
             holder.Description.Text = item.Description;
+            if (item.ListId != 0) holder.Name.Text += $"[Lista nr {item.ListId}]";
             if (item.ItemStatusId == (int)ItemStatusEnum.Available)
             {
                 holder.CheckBox.Checked = Selected.Contains(item.ItemId);
@@ -80,7 +80,7 @@ namespace SSA.Droid.Adapters
             }
             else
             {
-                holder.Status.Text = ((ItemStatusEnum)item.ItemStatusId).ToString();
+                holder.Status.Text = item.Status.Name;
                 holder.CheckBox.Visibility = ViewStates.Invisible;
                 holder.Status.Visibility = ViewStates.Visible;
             }

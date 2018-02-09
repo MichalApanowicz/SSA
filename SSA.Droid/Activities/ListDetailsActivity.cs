@@ -37,7 +37,6 @@ namespace SSA.Droid.Activities
         private RadioButton _getItemRadioButton, _deleteItemRadioButton;
         private Toolbar _toolbar, _secondToolbar;
         private RadioGroup _toolbarRadioGroup;
-
         private ArrayAdapter _adapter;
 
         private List<ItemModel> _selectedItems;
@@ -52,6 +51,9 @@ namespace SSA.Droid.Activities
 
             _getItemRadioButton = FindViewById<RadioButton>(Resource.Id.getItemRadioButton);
             _deleteItemRadioButton = FindViewById<RadioButton>(Resource.Id.deleteItemRadioButton);
+            _getItemRadioButton.TextSize = 20;
+            _deleteItemRadioButton.TextSize = 15;
+
             _eanCodeText = FindViewById<EditText>(Resource.Id.eanCodeEditText);
             _eanCodeText.TextChanged += EanTextChanged;
 
@@ -68,11 +70,15 @@ namespace SSA.Droid.Activities
             {
                 if (_getItemRadioButton.Checked)
                 {
+                    _getItemRadioButton.TextSize = 20;
+                    _deleteItemRadioButton.TextSize = 15;
                     _secondToolbar.SetBackgroundColor(Color.DarkGreen);
                     _toolbar.SetBackgroundColor(Color.DarkGreen);
                 }
                 else if (_deleteItemRadioButton.Checked)
                 {
+                    _getItemRadioButton.TextSize = 15;
+                    _deleteItemRadioButton.TextSize = 20;
                     _secondToolbar.SetBackgroundColor(Color.OrangeRed);
                     _toolbar.SetBackgroundColor(Color.OrangeRed);
                 }
@@ -100,11 +106,38 @@ namespace SSA.Droid.Activities
                 }
             }
             ListAdapter = new ItemsOnListDetailsAdapter(this, _items, selected);
+            SetViewByListStatus();
+        }
+
+        private void SetViewByListStatus()
+        {
+            if (_list.ListStatusId == (int)ListStatusEnum.Uncommitted)
+            {
+                _getItemRadioButton.Text = "Dodaj";
+                _deleteItemRadioButton.Text = "Usuń";
+            }
+            else if (_list.ListStatusId == (int)ListStatusEnum.Committed)
+            {
+                _getItemRadioButton.Text = "Pobierz";
+                _deleteItemRadioButton.Text = "Zwróć";
+            }
+            else if (_list.ListStatusId == (int)ListStatusEnum.Terminated)
+            {
+                _eanCodeText.Visibility = ViewStates.Gone;
+                _secondToolbar.Visibility = ViewStates.Gone;
+                _toolbar.SetBackgroundColor(Color.DarkGray);
+            }
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.listDetails_top_menu, menu);
+            if (_list.ListStatusId == (int) ListStatusEnum.Terminated)
+            {
+                menu.FindItem(Resource.Id.menu_commitList).SetVisible(false);
+                menu.FindItem(Resource.Id.menu_terminateList).SetVisible(false);
+            }
+                
             return base.OnCreateOptionsMenu(menu);
         }
 
@@ -123,25 +156,43 @@ namespace SSA.Droid.Activities
                         ToastLength.Short).Show();
                     return true;
             }
+            SetViewByListStatus();
             return base.OnOptionsItemSelected(item);
         }
 
         private void CommitList()
         {
-            foreach (var item in _items)
+            if (_list.ListStatusId == (int) ListStatusEnum.Uncommitted)
             {
-                if (item.Status.ItemStatusId == (int)ItemStatusEnum.Available)
-                {
-                    item.Status = _repository.GetItemStatus(ItemStatusEnum.Reserved);
-                    _repository.Update(item);
-                }
+                //foreach (var item in _items)
+                //{
+                //    if (item.Status.ItemStatusId == (int) ItemStatusEnum.Available)
+                //    {
+                //        item.Status = _repository.GetItemStatus(ItemStatusEnum.Reserved);
+                //        item.ItemStatusId = (int) ItemStatusEnum.Reserved;
+                //    }
+                //    else
+                //    {
+                //        item.ListId = 0;
+                //    }
+                //    DataProvider.UpdateItem(item);
+                //}
+
+                //_list.Status = _repository.GetListStatus(ListStatusEnum.Committed);
+                //_list.ListStatusId = (int) ListStatusEnum.Committed;
+                //_list.Items = _items;
+                DataProvider.CommitList(_list);
+
+                UpdateItemList();
             }
-
-            _list.Status = _repository.GetListStatus(ListStatusEnum.Committed);
-            _list.Items = _items;
-            _repository.Update(_list);
-
-            UpdateItemList();
+            else if(_list.ListStatusId == (int)ListStatusEnum.Committed)
+            {
+                Toast.MakeText(this, "Lista jest już zatwierdzona!", ToastLength.Short).Show();
+            }
+            else if (_list.ListStatusId == (int)ListStatusEnum.Terminated)
+            {
+                Toast.MakeText(this, "Lista jest rozwiązana!", ToastLength.Short).Show();
+            }
         }
 
         private string TerminateList()

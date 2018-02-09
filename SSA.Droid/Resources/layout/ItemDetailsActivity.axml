@@ -2,106 +2,117 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-  <include
-      android:id="@+id/toolbar"
-      layout="@layout/toolbar" />
-  <TextView
-      android:text="Kod EAN"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textItemDetails2"
-      android:layout_marginLeft="10px" />
-  <TextView
-      android:text="Large Text"
-      android:textAppearance="?android:attr/textAppearanceLarge"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textItemDetailsEAN"
-      android:layout_margin="15px" />
-  <TextView
-      android:text="Nazwa"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textItemDetails3"
-      android:layout_marginLeft="10px"/>
-  <TextView
-      android:text="Large Text"
-      android:textAppearance="?android:attr/textAppearanceLarge"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textItemDetailsName"
-    android:layout_margin="15px" />
-  <TextView
-      android:text="Opis"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textItemDetails5"
-    android:layout_marginLeft="10px"/>
-  <TextView
-      android:text="Large Text"
-      android:textAppearance="?android:attr/textAppearanceLarge"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textItemDetailsDescription"
-    android:layout_margin="15px"/>
-  <TextView
-      android:text="Status"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textItemDetails7"
-    android:layout_marginLeft="10px" />
-  <TextView
-      android:text="Large Text"
-      android:textAppearance="?android:attr/textAppearanceLarge"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textItemDetailsStatus"
-    android:layout_margin="15px" />
-  <TextView
-      android:text="Lista"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textItemDetails9"
-    android:layout_marginLeft="10px" />
-  <TextView
-      android:text="Large Text"
-      android:textAppearance="?android:attr/textAppearanceLarge"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/textItemDetailsList"
-    android:layout_margin="15px"/>
-  <TextView
-    android:text="Kategoria"
-    android:textAppearance="?android:attr/textAppearanceSmall"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/textItemDetails10"
-    android:layout_marginLeft="10px" />
-  <TextView
-    android:text="Large Text"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/textItemDetailsCategory"
-    android:layout_margin="15px"/>
-  <TextView
-    android:text="Lokalizacja"
-    android:textAppearance="?android:attr/textAppearanceSmall"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/textItemDetails11"
-    android:layout_marginLeft="10px" />
-  <TextView
-    android:text="Large Text"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/textItemDetailsLocalization"
-    android:layout_margin="15px"/>
+    android:layout_height="match_parent"
+    android:padding="15dp">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+    <TextView
+        android:text="Kod EAN"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetails2" />
+    <TextView
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetailsEAN"
+        android:layout_marginBottom="15px" />
+    <TextView
+        android:text="Nazwa"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetails3" />
+    <TextView
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetailsName"
+        android:layout_marginBottom="15px" />
+    <TextView
+        android:text="Opis"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetails5" />
+    <TextView
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetailsDescription"
+        android:layout_marginBottom="15px" />
+    <TextView
+        android:text="Status"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetails7" />
+    <TextView
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetailsStatus"
+        android:layout_marginBottom="15px" />
+    <TextView
+        android:text="Numer listy"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetails9" />
+    <TextView
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetailsList"
+        android:layout_marginBottom="15px" />
+    <TextView
+        android:text="Kategoria"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetails10" />
+    <TextView
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetailsCategory"
+        android:layout_marginBottom="15px" />
+    <TextView
+        android:text="Lokalizacja"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetails11" />
+    <TextView
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetailsLocalization"
+        android:layout_marginBottom="15px" />
+    <TextView
+        android:text="Uszkodzony"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textItemDetails12" />
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/checkBox1"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="15px"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:focusable="false" />
 </LinearLayout>
