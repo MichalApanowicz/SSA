@@ -23,7 +23,7 @@ namespace SSA.Droid.Repositories
     {
         public static bool AddItemToList(ItemModel item, ListModel list)
         {
-            var url = Constants.ApiPath + "items/" + item.ItemId + "/addToList/" + list.ListId;
+            var url = Configuration.ApiPath + "items/" + item.ItemId + "/addToList/" + list.ListId;
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.ContentType = "application/json";
             request.Method = "POST";
@@ -39,7 +39,7 @@ namespace SSA.Droid.Repositories
         public static bool UpdateItem(ItemModel item)
         {
             var id = item.ItemId;
-            var url = Constants.ApiPath + "items/" + id;
+            var url = Configuration.ApiPath + "items/" + id;
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.ContentType = "application/json";
             request.Method = "POST";
@@ -64,7 +64,7 @@ namespace SSA.Droid.Repositories
         public static bool UpdateList(ListModel list)
         {
             var id = list.ListId;
-            var url = Constants.ApiPath + "lists/" + id;
+            var url = Configuration.ApiPath + "lists/" + id;
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.ContentType = "application/json";
             request.Method = "POST";
@@ -88,7 +88,7 @@ namespace SSA.Droid.Repositories
 
         public static ItemModel GetItem(int id)
         {
-            var url = Constants.ApiPath + "items/" + id;
+            var url = Configuration.ApiPath + "items/" + id;
             var json = "";
 
             var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
@@ -109,7 +109,7 @@ namespace SSA.Droid.Repositories
 
         public static List<ItemModel> GetItems()
         {
-            var url = Constants.ApiPath + "items";
+            var url = Configuration.ApiPath + "items";
             var json = "";
 
             var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
@@ -135,7 +135,7 @@ namespace SSA.Droid.Repositories
 
         public static ListModel AddNewList(ListModel list)
         {
-            var url = Constants.ApiPath + "lists/new";
+            var url = Configuration.ApiPath + "lists/new";
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.ContentType = "application/json";
             request.Method = "POST";
@@ -160,7 +160,7 @@ namespace SSA.Droid.Repositories
 
         public static List<ListModel> GetLists()
         {
-            var url = Constants.ApiPath + "lists";
+            var url = Configuration.ApiPath + "lists";
             var json = "";
 
             var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
@@ -181,7 +181,7 @@ namespace SSA.Droid.Repositories
 
         public static void TerminateList(ListModel list)
         {
-            var url = Constants.ApiPath + "lists/terminate/" + list.ListId;
+            var url = Configuration.ApiPath + "lists/terminate/" + list.ListId;
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.ContentType = "application/json";
             request.Method = "POST";
@@ -195,7 +195,7 @@ namespace SSA.Droid.Repositories
 
         public static void CommitList(ListModel list)
         {
-            var url = Constants.ApiPath + "lists/commit/" + list.ListId;
+            var url = Configuration.ApiPath + "lists/commit/" + list.ListId;
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.ContentType = "application/json";
             request.Method = "POST";
@@ -209,7 +209,7 @@ namespace SSA.Droid.Repositories
 
         public static PersonModel GetPerson(int id)
         {
-            var url = Constants.ApiPath + "persons/" + id;
+            var url = Configuration.ApiPath + "persons/" + id;
             var json = "";
 
             var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
@@ -230,7 +230,7 @@ namespace SSA.Droid.Repositories
 
         public static PersonModel GetPerson(string name)
         {
-            var url = Constants.ApiPath + "persons/" + name;
+            var url = Configuration.ApiPath + "persons/" + name;
             var json = "";
 
             var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
@@ -251,7 +251,7 @@ namespace SSA.Droid.Repositories
 
         public static PersonModel SavePerson(PersonModel person)
         {
-            var url = Constants.ApiPath + "persons/new";
+            var url = Configuration.ApiPath + "persons/new";
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.ContentType = "application/json";
             request.Method = "POST";

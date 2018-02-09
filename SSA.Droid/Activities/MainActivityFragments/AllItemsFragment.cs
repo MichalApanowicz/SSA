@@ -35,9 +35,15 @@ namespace SSA.Droid.Activities.MainActivityFragments
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            _items = DataProvider.GetItemsFromLocal();
+            _items = DataProvider.GetItems();
             _adapter = new AllItemsAdapter(Activity, _items);
             ListAdapter = _adapter;
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            UpdateItems();
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -46,7 +52,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
             var lv = view.FindViewById<ListView>(Android.Resource.Id.List);
             SelectedItems = new List<ItemModel>();
 
-            _items = DataProvider.GetItemsFromLocal();
+            _items = DataProvider.GetItems();
             _adapter = new AllItemsAdapter(Activity, _items, _selectedIds);
             ListAdapter = _adapter;
             lv.ChoiceMode = ChoiceMode.None;
@@ -57,7 +63,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         public override void OnListItemClick(ListView l, View v, int position, long id)
         {
-            SelectedItems.Add(DataProvider.GetItem((int)id));
+            SelectedItems.Add(DataProvider.GetItemFromLocal((int)id));
             Log.Debug("Fragment", $"_selectedItems[{SelectedItems.Count}]: {SelectedItems.ToArray()}");
         }
 
@@ -80,7 +86,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
         public void UpdateItems()
         {
             _selectedIds = _adapter?.GetSelectedRows();
-            _items = DataProvider.GetItemsFromLocal();
+            _items = DataProvider.GetItems();
             _adapter = new AllItemsAdapter(Activity, _items, _selectedIds);
             _adapter.NotifyDataSetChanged();
             ListAdapter = _adapter;

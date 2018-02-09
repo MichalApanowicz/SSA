@@ -18,7 +18,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
     public class SettingsFragment : Android.Support.V4.App.Fragment
     {
         private EditText _apiUrl;
-
+        private CheckBox _online;
 
         private MainRepository _repository;
 
@@ -35,15 +35,29 @@ namespace SSA.Droid.Activities.MainActivityFragments
             return fragment;
         }
 
+        public override void OnResume()
+        {
+            base.OnResume();
+            if (_online != null)
+                _online.Checked = Configuration.Online;
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             View view = inflater.Inflate(Resource.Layout.Settings, null);
 
+            _online = view.FindViewById<CheckBox>(Resource.Id.checkBoxOnline);
+            _online.Checked = Configuration.Online;
+            _online.Click += (s, e) =>
+            {
+                Configuration.Online = _online.Checked;
+            };
+
             _apiUrl = view.FindViewById<EditText>(Resource.Id.editApiUrl);
             _apiUrl.TextChanged += (s, e) =>
             {
-                Constants.ApiPath = _apiUrl.Text;
+                Configuration.ApiPath = _apiUrl.Text;
             };
 
             return view;

@@ -18,11 +18,27 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView6" />
+        android:id="@+id/textView6"
+      android:layout_marginLeft="15px"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editApiUrl"
+      android:layout_marginLeft="15px"
+      android:layout_marginBottom="15px"
         android:text="http://192.168.0.13:3000/" />
+    <TextView
+      android:text="Czy jesteś w sieci magazynu?"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="15px"
+      android:id="@+id/textView6" />
+    <CheckBox
+      android:id="@+id/checkBoxOnline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="15px"
+      android:layout_marginBottom="15px" />
   </LinearLayout>
 </ScrollView>

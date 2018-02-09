@@ -12,6 +12,7 @@ namespace SSA.Droid.Repositories
         public static MainRepository LocalData = new MainRepository(new SQLiteConnection(Constants.DatabasePath));
         private static bool _needRefresh = true;
 
+        private static List<ListModel> _unsavedLists = new List<ListModel>();
 
         public static void UpdateItemsAndLists()
         {
@@ -48,25 +49,43 @@ namespace SSA.Droid.Repositories
             return item;
         }
 
-        public static List<ItemModel> GetItems()
+        public static ItemModel GetItemFromLocal(int itemId)
         {
-            var items = ServerRepository.GetItems();
-            foreach (var item in items)
-            {
-                item.Category = LocalData.GetCategory(item.CategoryId);
-                item.Localization = LocalData.GetLocalization(item.LocalizationId);
-                item.Status = LocalData.GetItemStatus(item.ItemStatusId);
-            }
+            var item = LocalData.GetItem(itemId);
 
-            return items;
+            item.Category = LocalData.GetCategory(item.CategoryId);
+            item.Localization = LocalData.GetLocalization(item.LocalizationId);
+            item.Status = LocalData.GetItemStatus(item.ItemStatusId);
+
+            return item;
         }
 
-        public static List<ItemModel> GetItemsFromLocal()
+        public static List<ItemModel> GetItems()
+        {
+            if (Configuration.Online)
+            {
+                var items = ServerRepository.GetItems();
+                foreach (var item in items)
+                {
+                    item.Category = LocalData.GetCategory(item.CategoryId);
+                    item.Localization = LocalData.GetLocalization(item.LocalizationId);
+                    item.Status = LocalData.GetItemStatus(item.ItemStatusId);
+                }
+
+                return items;
+            }
+            else
+            {
+                return GetItemsFromLocal();
+            }
+        }
+
+        private static List<ItemModel> GetItemsFromLocal()
         {
             return LocalData.GetAllItemsWithCildren();
         }
 
-        public static List<ListModel> GetListsFromLocal()
+        private static List<ListModel> GetListsFromLocal()
         {
             var lists = LocalData.GetAllLists();
             foreach (var list in lists)
@@ -80,10 +99,35 @@ namespace SSA.Droid.Repositories
 
         public static bool AddItemToList(ItemModel item, ListModel list)
         {
-            ServerRepository.AddItemToList(item, list);
+            item.ListId = list.ListId;
+            //ServerRepository.AddItemToList(item, list);
             LocalData.Update(item);
-            _needRefresh = true;
+            //_needRefresh = true;
             return true;
+        }
+
+        public static void AddItemInList(ItemModel item, ListModel list)
+        {
+            item.ListId = list.ListId;
+            LocalData.Update(item);
+        }
+
+        public static void GetItemInList(ItemModel item, ListModel list)
+        {
+            item.Status = LocalData.GetItemStatus(ItemStatusEnum.Unavailable);
+            LocalData.Update(item);
+        }
+
+        public static void RemoveItemInList(ItemModel item, ListModel list)
+        {
+            item.ListId = 0;
+            LocalData.Update(item);
+        }
+
+        public static void ReturnItemInList(ItemModel item, ListModel list)
+        {
+            item.Status = LocalData.GetItemStatus(ItemStatusEnum.Reserved);
+            LocalData.Update(item);
         }
 
         public static bool AddNewList(ListModel list)
@@ -105,33 +149,73 @@ namespace SSA.Droid.Repositories
             return true;
         }
 
+        public static void AddNewListLocal(ListModel list)
+        {
+            list = LocalData.Save(list);
+            _unsavedLists.Add(list);
+        }
+
         public static List<ItemModel> GetItemsFromList(int listId)
         {
-            var items = LocalData.GetAllItemsWithCildren().Where(i => i.ListId == listId).ToList();
-            foreach (var item in items)
+            if (Configuration.Online)
             {
-                item.Category = LocalData.GetCategory(item.CategoryId);
-                item.Localization = LocalData.GetLocalization(item.LocalizationId);
-                item.Status = LocalData.GetItemStatus(item.ItemStatusId);
+                var items = ServerRepository.GetItemsFromList(listId);
+                foreach (var item in items)
+                {
+                    item.Category = LocalData.GetCategory(item.CategoryId);
+                    item.Localization = LocalData.GetLocalization(item.LocalizationId);
+                    item.Status = LocalData.GetItemStatus(item.ItemStatusId);
+                }
+                return items;
             }
-            return items;
+            else
+            {
+                var items = LocalData.GetAllItemsWithCildren().Where(i => i.ListId == listId).ToList();
+                foreach (var item in items)
+                {
+                    item.Category = LocalData.GetCategory(item.CategoryId);
+                    item.Localization = LocalData.GetLocalization(item.LocalizationId);
+                    item.Status = LocalData.GetItemStatus(item.ItemStatusId);
+                }
+                return items;
+            }
+            
         }
 
         public static List<ListModel> GetLists()
         {
-            var lists = ServerRepository.GetLists();
-            foreach (var list in lists)
+            if (Configuration.Online)
             {
-                list.Person = GetPerson(list.PersonId);
-                list.Status = LocalData.GetListStatus(list.ListStatusId);
-                list.Items = GetItemsFromList(list.ListId);
-            }
+                var lists = ServerRepository.GetLists();
+                var items = ServerRepository.GetItems();
+                foreach (var list in lists)
+                {
+                    list.Person = GetPerson(list.PersonId);
+                    list.Status = LocalData.GetListStatus(list.ListStatusId);
+                    list.Items = items.Where(l => l.ListId == list.ListId).ToList();
+                }
+                lists.AddRange(_unsavedLists);
 
-            return lists;
+                LocalData.DeleteAll<ListModel>();
+                LocalData.SaveAll(lists);
+
+                return lists;
+            }
+            else
+            {
+                return GetListsFromLocal();
+            }
         }
 
         public static void CommitList(ListModel list)
         {
+            var person = LocalData.GetPerson(list.PersonId);
+            var remotePerson = ServerRepository.GetPerson(person.Name) ?? ServerRepository.SavePerson(person);
+            list.PersonId = remotePerson.PersonId;
+            
+            ServerRepository.AddNewList(list);
+            var check = _unsavedLists.Remove(_unsavedLists.First(l => l.ListId == list.ListId));
+
             ServerRepository.CommitList(list);
         }
 

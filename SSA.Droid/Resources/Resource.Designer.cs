@@ -2447,11 +2447,11 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f08002b
 			public const int add = 2131230763;
 			
-			// aapt resource value: 0x7f0800e1
-			public const int addItemButton = 2131230945;
+			// aapt resource value: 0x7f0800e2
+			public const int addItemButton = 2131230946;
 			
-			// aapt resource value: 0x7f0800df
-			public const int addListButton = 2131230943;
+			// aapt resource value: 0x7f0800e0
+			public const int addListButton = 2131230944;
 			
 			// aapt resource value: 0x7f08006f
 			public const int alertTitle = 2131230831;
@@ -2480,8 +2480,8 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f080062
 			public const int buttonPanel = 2131230818;
 			
-			// aapt resource value: 0x7f0800e5
-			public const int callApi = 2131230949;
+			// aapt resource value: 0x7f0800e6
+			public const int callApi = 2131230950;
 			
 			// aapt resource value: 0x7f0800cd
 			public const int cancel_action = 2131230925;
@@ -2497,6 +2497,9 @@ namespace SSA.Droid
 			
 			// aapt resource value: 0x7f0800a9
 			public const int checkBox1 = 2131230889;
+			
+			// aapt resource value: 0x7f0800df
+			public const int checkBoxOnline = 2131230943;
 			
 			// aapt resource value: 0x7f080072
 			public const int checkbox = 2131230834;
@@ -2534,14 +2537,14 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f08005f
 			public const int default_activity_button = 2131230815;
 			
-			// aapt resource value: 0x7f0800e4
-			public const int deleteItemButton = 2131230948;
+			// aapt resource value: 0x7f0800e5
+			public const int deleteItemButton = 2131230949;
 			
 			// aapt resource value: 0x7f0800b6
 			public const int deleteItemRadioButton = 2131230902;
 			
-			// aapt resource value: 0x7f0800e0
-			public const int deleteListButton = 2131230944;
+			// aapt resource value: 0x7f0800e1
+			public const int deleteListButton = 2131230945;
 			
 			// aapt resource value: 0x7f08008f
 			public const int design_bottom_sheet = 2131230863;
@@ -2573,20 +2576,20 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0800c7
 			public const int editNameNewList = 2131230919;
 			
-			// aapt resource value: 0x7f0800e7
-			public const int editTextDesc = 2131230951;
+			// aapt resource value: 0x7f0800e8
+			public const int editTextDesc = 2131230952;
+			
+			// aapt resource value: 0x7f0800ea
+			public const int editTextEan = 2131230954;
 			
 			// aapt resource value: 0x7f0800e9
-			public const int editTextEan = 2131230953;
+			public const int editTextListId = 2131230953;
 			
-			// aapt resource value: 0x7f0800e8
-			public const int editTextListId = 2131230952;
+			// aapt resource value: 0x7f0800e7
+			public const int editTextName = 2131230951;
 			
-			// aapt resource value: 0x7f0800e6
-			public const int editTextName = 2131230950;
-			
-			// aapt resource value: 0x7f0800eb
-			public const int editTextStatus = 2131230955;
+			// aapt resource value: 0x7f0800ec
+			public const int editTextStatus = 2131230956;
 			
 			// aapt resource value: 0x7f08007d
 			public const int edit_query = 2131230845;
@@ -2630,14 +2633,14 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0800c5
 			public const int frameLayout1 = 2131230917;
 			
-			// aapt resource value: 0x7f0800e2
-			public const int getFromListButton = 2131230946;
+			// aapt resource value: 0x7f0800e3
+			public const int getFromListButton = 2131230947;
 			
 			// aapt resource value: 0x7f0800b5
 			public const int getItemRadioButton = 2131230901;
 			
-			// aapt resource value: 0x7f0800e3
-			public const int getListButton = 2131230947;
+			// aapt resource value: 0x7f0800e4
+			public const int getListButton = 2131230948;
 			
 			// aapt resource value: 0x7f08000a
 			public const int ghost_view = 2131230730;
@@ -2720,29 +2723,29 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0800c3
 			public const int mainviewpager = 2131230915;
 			
-			// aapt resource value: 0x7f0800ef
-			public const int masked = 2131230959;
+			// aapt resource value: 0x7f0800f0
+			public const int masked = 2131230960;
 			
 			// aapt resource value: 0x7f0800cf
 			public const int media_actions = 2131230927;
 			
-			// aapt resource value: 0x7f0800f1
-			public const int menu_commitList = 2131230961;
-			
-			// aapt resource value: 0x7f0800f3
-			public const int menu_createNewList = 2131230963;
-			
-			// aapt resource value: 0x7f0800f0
-			public const int menu_list = 2131230960;
+			// aapt resource value: 0x7f0800f2
+			public const int menu_commitList = 2131230962;
 			
 			// aapt resource value: 0x7f0800f4
-			public const int menu_refreshData = 2131230964;
+			public const int menu_createNewList = 2131230964;
 			
-			// aapt resource value: 0x7f0800f2
-			public const int menu_terminateList = 2131230962;
+			// aapt resource value: 0x7f0800f1
+			public const int menu_list = 2131230961;
 			
-			// aapt resource value: 0x7f0800ed
-			public const int message = 2131230957;
+			// aapt resource value: 0x7f0800f5
+			public const int menu_refreshData = 2131230965;
+			
+			// aapt resource value: 0x7f0800f3
+			public const int menu_terminateList = 2131230963;
+			
+			// aapt resource value: 0x7f0800ee
+			public const int message = 2131230958;
 			
 			// aapt resource value: 0x7f080030
 			public const int middle = 2131230768;
@@ -2774,8 +2777,8 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0800d1
 			public const int notification_main_column_container = 2131230929;
 			
-			// aapt resource value: 0x7f0800ec
-			public const int outputText = 2131230956;
+			// aapt resource value: 0x7f0800ed
+			public const int outputText = 2131230957;
 			
 			// aapt resource value: 0x7f08004b
 			public const int parallax = 2131230795;
@@ -3002,8 +3005,8 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f0800b2
 			public const int textView4 = 2131230898;
 			
-			// aapt resource value: 0x7f0800ea
-			public const int textView5 = 2131230954;
+			// aapt resource value: 0x7f0800eb
+			public const int textView5 = 2131230955;
 			
 			// aapt resource value: 0x7f0800c6
 			public const int textView6 = 2131230918;
@@ -3071,8 +3074,8 @@ namespace SSA.Droid
 			// aapt resource value: 0x7f080016
 			public const int view_offset_helper = 2131230742;
 			
-			// aapt resource value: 0x7f0800ee
-			public const int visible = 2131230958;
+			// aapt resource value: 0x7f0800ef
+			public const int visible = 2131230959;
 			
 			// aapt resource value: 0x7f08003b
 			public const int withText = 2131230779;

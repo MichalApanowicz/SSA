@@ -30,11 +30,17 @@ namespace SSA.Droid.Activities.MainActivityFragments
         {
             var view = inflater.Inflate(Resource.Layout.AllLists, null);
 
-            _lists = DataProvider.GetListsFromLocal();
+            _lists = DataProvider.GetLists();
 
             ListAdapter = new AllListsAdapter(Activity, _lists);
 
             return view;
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            UpdateLists();
         }
 
         public override void OnListItemClick(ListView l, View v, int position, long id)
@@ -49,7 +55,7 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         public void UpdateLists()
         {
-            _lists = DataProvider.GetListsFromLocal();
+            _lists = DataProvider.GetLists();
             _adapter = new AllListsAdapter(Activity, _lists);
             _adapter.NotifyDataSetChanged();
             ListAdapter = _adapter;

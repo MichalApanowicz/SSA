@@ -145,6 +145,7 @@
     <Compile Include="Adapters\AllListsAdapter.cs" />
     <Compile Include="Adapters\ItemsOnListDetailsAdapter.cs" />
     <Compile Include="Adapters\MainActivityFragmentAdapter.cs" />
+    <Compile Include="Constants\Configuration.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Constants\ItemStatusEnum.cs" />
     <Compile Include="Constants\ListStatusEnum.cs" />

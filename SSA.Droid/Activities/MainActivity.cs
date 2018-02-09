@@ -51,15 +51,14 @@ namespace SSA.Droid
         {
             base.OnResume();
 
-            ((AllListsFragment)_fragments[0]).UpdateLists();
-            ((AllItemsFragment)_fragments[1]).UpdateItems();
-            var currentItem = _viewPager.CurrentItem;
+            //RefreshData();
+            //var currentItem = _viewPager.CurrentItem;
 
-            _viewPager = FindViewById<ViewPager>(Resource.Id.mainviewpager);
-            _viewPager.Adapter =
-                new MainActivityFragmentAdapter(SupportFragmentManager, _fragments, _tabNames);
+            //_viewPager = FindViewById<ViewPager>(Resource.Id.mainviewpager);
+            //_viewPager.Adapter =
+            //    new MainActivityFragmentAdapter(SupportFragmentManager, _fragments, _tabNames);
 
-            _viewPager.SetCurrentItem(currentItem, false);
+            //_viewPager.SetCurrentItem(currentItem, false);
         }
 
         protected override void OnCreate(Bundle bundle)
@@ -173,10 +172,10 @@ namespace SSA.Droid
                                 Person = _loggedUser,
                                 CreateDate = DateTime.Now.ToLongDateString()
                             };
-                            DataProvider.AddNewList(list);
+                            DataProvider.AddNewListLocal(list);
                             Toast.MakeText(this, $"Utworzono listę z {selectedItems.Count} przedmiotami",
                                 ToastLength.Short).Show();
-                            OnResume();
+                            RefreshData();
                         });
                         builder.SetNegativeButton("Anuluj", (s, e) =>
                         {
@@ -199,15 +198,15 @@ namespace SSA.Droid
             });
         }
 
-        private async void RefreshData()
+        private void RefreshData()
         {
             RunOnUiThread(() =>
             {
                 _mainContent.Visibility = ViewStates.Gone;
                 _headerProgress.Visibility = ViewStates.Visible;
             });
-            await Task.Factory.StartNew(DataProvider.UpdateItemsAndLists);
-            OnResume();
+            ((AllListsFragment)_fragments[0]).UpdateLists();
+            ((AllItemsFragment)_fragments[1]).UpdateItems();
             RunOnUiThread(() =>
             {
                 _mainContent.Visibility = ViewStates.Visible;
@@ -215,7 +214,18 @@ namespace SSA.Droid
             });
         }
 
+        public void DialogWithAskForConnect()
+        {
+            if (Configuration.Online) return;
 
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.SetTitle("Uwaga!");
+            builder.SetMessage(
+                "Możesz wykonać tę akcję tylko gdy jesteś połączony z siecią magazynu. \nCzy zaznaczyć, że jesteś połączony?");
+            builder.SetPositiveButton("Tak", (s, e) => { Configuration.Online = true; });
+            builder.SetNegativeButton("Anuluj", (s, e) => { });
+            builder.Show();
+        }
 
         readonly string[] PermissionsLocation =
         {
@@ -289,12 +299,13 @@ namespace SSA.Droid
         private void SaveUser()
         {
             var name = GetUserName();
-            var person = DataProvider.GetPersonLocal(name) ?? new PersonModel
-            {
-                Name = name,
-                Description = "Nowy uzytkownik",
-            };
-            _loggedUser = DataProvider.SavePersonLocal(person);
+            var person = DataProvider.GetPersonLocal(name) ??
+                DataProvider.SavePersonLocal(new PersonModel
+                {
+                    Name = name,
+                    Description = "Nowy uzytkownik",
+                });
+            _loggedUser = person;
             _toolbar.Title = _loggedUser.Name;
             SetActionBar(_toolbar);
         }

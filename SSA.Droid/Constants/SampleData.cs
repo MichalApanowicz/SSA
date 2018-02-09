@@ -518,7 +518,7 @@ namespace SSA.Droid
             },
             new ItemModel()
             {
-               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
+               Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Reserved),
                 KodEAN = "00000383",
                 Name = "Poziomica",
                 Description = "50cm, żółta",
