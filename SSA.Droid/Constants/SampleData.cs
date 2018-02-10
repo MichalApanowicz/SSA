@@ -907,8 +907,8 @@ namespace SSA.Droid
             {
                Damaged = false, Status =ItemStatus.First(x => x.ItemStatusId == (int)ItemStatusEnum.Available),
                 KodEAN = "00000819",
-                Name = "Apteczka plecakowa Janysport AP20 z zawartością",
-                Description = "czerwona",
+                Name = "Apteczka plecakowa Janysport AP20",
+                Description = "czerwona, z zawartością",
                 Category = Categories[0],
                 Localization = Localizations[1]
             },

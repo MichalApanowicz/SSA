@@ -148,6 +148,7 @@ namespace SSA.Droid.Activities
             {
                 case Resource.Id.menu_commitList:
                     CommitList();
+                    SetViewByListStatus();
                     return true;
 
                 case Resource.Id.menu_terminateList:
@@ -155,7 +156,6 @@ namespace SSA.Droid.Activities
                         ToastLength.Short).Show();
                     return true;
             }
-            SetViewByListStatus();
             return base.OnOptionsItemSelected(item);
         }
 
@@ -183,6 +183,7 @@ namespace SSA.Droid.Activities
                     Toast.MakeText(this, $"Zatwierdzono '{_list.Name}'",
                         ToastLength.Short).Show();
                     UpdateItemList();
+                    SetViewByListStatus();
                 }
 
                 //foreach (var item in _items)
@@ -284,7 +285,6 @@ namespace SSA.Droid.Activities
                 if (typedEan.Length >= 8)
                 {
                     typedEan = typedEan.Substring(0, 8);
-                    _eanCodeText.Text = typedEan;
                     var actionString = "";
                     var item = _repository.GetItemByEanCode(typedEan);
                     if (_getItemRadioButton.Checked)
@@ -293,12 +293,18 @@ namespace SSA.Droid.Activities
                         {
                             if (!_items.Select(x => x.ItemId).Contains(item.ItemId))
                             {
+                                _list.Items.Add(item);
                                 DataProvider.AddItemInList(item, _list);
                                 actionString = "Dodano: ";
                             }
                         }
                         else if (_list.Status.ListStatusId == (int)ListStatusEnum.Committed)
                         {
+                            if(!Configuration.Online) {
+                                DialogWithAskForConnect();
+                                return;
+                            }
+
                             if (_items.Select(x => x.ItemId).Contains(item.ItemId))
                             {
                                 DataProvider.GetItemInList(item, _list);
@@ -311,14 +317,22 @@ namespace SSA.Droid.Activities
                         if (_list.Status.ListStatusId == (int)ListStatusEnum.Uncommitted)
                         {
                             if (item.Status.ItemStatusId ==
-                                _repository.GetItemStatus(ItemStatusEnum.Available).ItemStatusId)
+                                _repository.GetItemStatus(ItemStatusEnum.Available).ItemStatusId && 
+                                _items.Select(x => x.ItemId).Contains(item.ItemId))
                             {
+                                _list.Items.Remove(_list.Items.First(i => i.ItemId == item.ItemId));
                                 DataProvider.RemoveItemInList(item, _list);
                                 actionString = "Usunięto: ";
                             }
                         }
                         else if (_list.Status.ListStatusId == (int)ListStatusEnum.Committed)
                         {
+                            if (!Configuration.Online)
+                            {
+                                DialogWithAskForConnect();
+                                return;
+                            }
+
                             if (item.Status.ItemStatusId ==
                                 _repository.GetItemStatus(ItemStatusEnum.Unavailable).ItemStatusId)
                             {

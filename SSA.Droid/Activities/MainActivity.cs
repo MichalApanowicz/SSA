@@ -67,8 +67,8 @@ namespace SSA.Droid
 
             SetContentView(Resource.Layout.Main);
 
-            SampleData.DropData();
-            SampleData.AddData();
+            //SampleData.DropData();
+            //SampleData.AddData();
 
 
             _fragments = new Android.Support.V4.App.Fragment[]

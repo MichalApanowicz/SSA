@@ -42,7 +42,7 @@ namespace SSA.Droid.Repositories
             var url = Configuration.ApiPath + "items/" + id;
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.ContentType = "application/json";
-            request.Method = "POST";
+            request.Method = "PUT";
 
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {
@@ -230,7 +230,7 @@ namespace SSA.Droid.Repositories
 
         public static PersonModel GetPerson(string name)
         {
-            var url = Configuration.ApiPath + "persons/" + name;
+            var url = Configuration.ApiPath + "persons/" + name.Replace(" ", "%20");
             var json = "";
 
             var request = (HttpWebRequest)WebRequest.Create(new Uri(url));

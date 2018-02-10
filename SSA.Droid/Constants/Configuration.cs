@@ -14,7 +14,7 @@ namespace SSA.Droid
 {
     static class Configuration
     {
-        public static string ApiPath = "http://192.168.0.13:3000/";
+        public static string ApiPath = "http://192.168.43.2:3000/";
         public static bool Online = false;
     }
 }
