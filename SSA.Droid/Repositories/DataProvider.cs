@@ -189,15 +189,15 @@ namespace SSA.Droid.Repositories
             if (Configuration.Online)
             {
                 var lists = ServerRepository.GetLists();
-                var items = ServerRepository.GetItems();
+                var items = GetItems();
                 foreach (var list in lists)
                 {
-                    list.Person = GetPerson(list.PersonId);
+                    list.Person = LocalData.GetPerson(list.PersonId);
                     list.Status = LocalData.GetListStatus(list.ListStatusId);
                     list.Items = items.Where(l => l.ListId == list.ListId).ToList();
                     if (_unsavedLists.Exists(l => l.ListId == list.ListId))
                     {
-                        list.Items = LocalData.GetList(list.ListId).Items;
+                        list.Items = ServerRepository.GetItemsFromList(list.ListId);
                     }
                 }
                 lists.AddRange(_unsavedLists);

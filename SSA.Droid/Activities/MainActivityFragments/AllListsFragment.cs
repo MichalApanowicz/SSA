@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Support.Design.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -55,10 +57,15 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         public void UpdateLists()
         {
-            _lists = DataProvider.GetLists();
-            _adapter = new AllListsAdapter(Activity, _lists);
-            _adapter.NotifyDataSetChanged();
-            ListAdapter = _adapter;
+            Activity.RunOnUiThread(() =>
+            {
+                _lists = DataProvider.GetLists();
+                _adapter = new AllListsAdapter(Activity, _lists);
+                _adapter.NotifyDataSetChanged();
+                ListAdapter = _adapter;
+            });
+           
+
         }
     }
 }

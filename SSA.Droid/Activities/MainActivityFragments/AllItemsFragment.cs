@@ -85,11 +85,17 @@ namespace SSA.Droid.Activities.MainActivityFragments
 
         public void UpdateItems()
         {
-            _selectedIds = _adapter?.GetSelectedRows();
-            _items = DataProvider.GetItems();
-            _adapter = new AllItemsAdapter(Activity, _items, _selectedIds);
-            _adapter.NotifyDataSetChanged();
-            ListAdapter = _adapter;
+
+            Activity.RunOnUiThread(() =>
+            {
+
+                _selectedIds = _adapter?.GetSelectedRows();
+                _items = DataProvider.GetItems();
+                _adapter = new AllItemsAdapter(Activity, _items, _selectedIds);
+                _adapter.NotifyDataSetChanged();
+                ListAdapter = _adapter;
+            });
+
         }
     }
 }

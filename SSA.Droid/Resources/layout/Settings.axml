@@ -26,7 +26,7 @@
         android:id="@+id/editApiUrl"
       android:layout_marginLeft="15px"
       android:layout_marginBottom="15px"
-        android:text="http://192.168.43.2:3000/" />
+        android:text="http://192.168.0.13:3000/" />
     <TextView
       android:text="Czy jesteś w sieci magazynu?"
       android:textAppearance="?android:attr/textAppearanceSmall"

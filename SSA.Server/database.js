@@ -15,9 +15,9 @@ const db = new Sequelize('database',
         },
         storage: 'Database.db',
         operatorsAliases: false
-});
+    });
 
-const ItemModel = function() {
+const ItemModel = function () {
     return db.define('ItemModel',
         {
             ItemId: {
@@ -37,7 +37,7 @@ const ItemModel = function() {
         { tableName: 'ItemModel', timestamps: false })
 };
 
-const ListModel = function() {
+const ListModel = function () {
     return db.define('ListModel',
         {
             ListId: {
@@ -54,14 +54,14 @@ const ListModel = function() {
         { tableName: 'ListModel', timestamps: false });
 };
 
-const ItemStatus = function() {
+const ItemStatus = function () {
     return db.define('ItemStatus',
         {
         },
         { tableName: 'ItemStatus' })
 };
 
-const ListStatus = function() {
+const ListStatus = function () {
     return db.define('ListStatus',
         {
         },
@@ -83,8 +83,8 @@ const PersonModel = function () {
 };
 
 var database = {
-   
-    findItem: function(id) {
+
+    findItem: function (id) {
         return ItemModel().findOne({
             where: {
                 ItemId: {
@@ -97,7 +97,7 @@ var database = {
         });
     },
 
-    getAllItems: function() {
+    getAllItems: function () {
         return ItemModel().findAll({
             attributes: [
                 'ItemId', 'Name', 'Description', 'KodEAN', 'Damaged', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId'
@@ -105,7 +105,7 @@ var database = {
         });
     },
 
-    addItemToList: function(itemId, listId) {
+    addItemToList: function (itemId, listId) {
         return ItemModel().update(
             {
                 ListId: listId
@@ -114,13 +114,13 @@ var database = {
                 where: {
                     ItemId: {
                         [Op.eq]: itemId
-                    } 
+                    }
                 }
             }
         )
     },
 
-    findList: function(id) {
+    findList: function (id) {
         return ListModel().findOne({
             where: {
                 ListId: {
@@ -131,13 +131,13 @@ var database = {
         });
     },
 
-    getAllLists: function() {
+    getAllLists: function () {
         return ListModel().findAll({
             attributes: ['ListId', 'Name', 'Description', 'PersonId', 'CreateDate', 'ListStatusId']
         });
     },
 
-    saveNewList: function(value) {
+    saveNewList: function (value) {
         return ListModel().create({
             Name: value.Name,
             Description: value.Description,
@@ -168,20 +168,36 @@ var database = {
 
             return ListModel().update(
                 {
-                    ListStatusId: 2 
+                    ListStatusId: 2
                 },
                 {
                     where: {
                         ListId: {
                             [Op.eq]: id
-                        } 
+                        }
                     },
-                    transaction: t 
+                    transaction: t
                 }
-            ).then(function(val) {
+            ).then(function (val) {
                 return ItemModel().update(
                     {
-                        ItemStatusId: 3
+                        ListId: 0
+                    },
+                    {
+                        where: {
+                            ListId: {
+                                [Op.eq]: id
+                            },
+                            [Op.or]: [{ ItemStatusId: 3 }, { ItemStatusId: 2 }]
+                        },
+                        transaction: t
+                    }
+                )
+            }).then(function (val) {
+                return ItemModel().update(
+                    {
+                        ItemStatusId: 3,
+                        ListId: id
                     },
                     {
                         where: {
@@ -190,26 +206,11 @@ var database = {
                             },
                             ItemStatusId: {
                                 [Op.eq]: 1
-                            } 
+                            }
                         },
                         transaction: t
                     }
                 )
-            }).then(function (val) {
-                    return ItemModel().update(
-                        {
-                            ListId: 0
-                        },
-                        {
-                            where: {
-                                ListId: {
-                                    [Op.eq]: id
-                                },
-                                [Op.or]: [{ ItemStatusId: 3 }, { ItemStatusId: 2 }]
-                            },
-                            transaction: t
-                        }
-                    )
             });
         }).then(function (result) {
             console.log("SUCCESS - Commited")
@@ -223,19 +224,19 @@ var database = {
         return db.transaction(function (t) {
 
             return ItemModel().findAll({
-                    attributes: [
-                        'ItemId', 'Name', 'Description', 'KodEAN', 'Damaged', 'ItemStatusId', 'ListId', 'CategoryId',
-                        'LocalizationId'
-                    ],
-                    where: {
-                        ListId: {
-                            [Op.eq]: id
-                        },
-                        ItemStatusId: { [Op.or]: [3, 2] }
-                    }
+                attributes: [
+                    'ItemId', 'Name', 'Description', 'KodEAN', 'Damaged', 'ItemStatusId', 'ListId', 'CategoryId',
+                    'LocalizationId'
+                ],
+                where: {
+                    ListId: {
+                        [Op.eq]: id
+                    },
+                    ItemStatusId: { [Op.or]: [3, 2] }
+                }
             }).then(function (items) {
                 console.log(`items: ${items}`)
-                items.forEach(function(item) {
+                items.forEach(function (item) {
                     if (item.ItemStatusId !== 3)
                         return;
                 });
@@ -277,15 +278,39 @@ var database = {
     },
 
     updateItem: function (id, newItem) {
-        return ItemModel().update({ Damaged: newItem.Damaged, ListId: newItem.ListId },{
+        var updateProperties = {};
+        if (newItem.ItemStatusId != 0) {
+            updateProperties["ItemStatusId"] = newItem.ItemStatusId;
+        }
+        if (newItem.Damaged != 0) {
+            updateProperties["Damaged"] = newItem.Damaged;
+        }
+        if (newItem.ListId != 0) {
+            updateProperties["ListId"] = newItem.ListId;
+        }
+        console.log(`updateItem: ${updateProperties}`);
+        return ItemModel().update(updateProperties, {
             where: {
                 ItemId: {
                     [Op.eq]: id
                 }
             },
-                attributes: [
-                    'ItemId', 'Name', 'Description', 'KodEAN', 'Damaged', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId'
-                ]
+            attributes: [
+                'ItemId', 'Name', 'Description', 'KodEAN', 'Damaged', 'ItemStatusId', 'ListId', 'CategoryId', 'LocalizationId'
+            ]
+        });
+    },
+
+    updateList: function (id, newList) {
+        return ListModel().update({ ListStatusId: newList.ListStatusId }, {
+            where: {
+                ListId: {
+                    [Op.eq]: id
+                }
+            },
+            attributes: [
+                'Name', 'Description', 'PersonId', 'CreateDate', 'ListStatusId'
+            ]
         });
     },
 
@@ -313,12 +338,23 @@ var database = {
             attributes: ['PersonId', 'Name', 'Description']
         });
     },
-    
+
     saveNewPerson: function (value) {
-        return PersonModel().create({
-            Name: value.Name,
-            Description: value.Description,
+        console.log("value: " + value)
+        return PersonModel().findOne({
+             where: { Name: value.Name }
+        }).then(function (person) {
+            console.log("Person: "+person)
+            if (person == null) {
+                return PersonModel().create({
+                    Name: value.Name,
+                    Description: value.Description,
+                })
+            } else {
+                return person;
+            }
         })
+        
     },
 };
 module.exports = database;

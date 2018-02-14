@@ -48,7 +48,7 @@ namespace SSA.Droid.Activities
             SetContentView(Resource.Layout.ListDetailsActivity);
             var text = Intent.GetStringExtra("List");
             _list = JsonConvert.DeserializeObject<ListModel>(text) ?? new ListModel();
-            _items = DataProvider.GetItemsFromList(_list.ListId);
+            _items = _list.Items;
 
             _getItemRadioButton = FindViewById<RadioButton>(Resource.Id.getItemRadioButton);
             _deleteItemRadioButton = FindViewById<RadioButton>(Resource.Id.deleteItemRadioButton);
@@ -101,7 +101,7 @@ namespace SSA.Droid.Activities
             var selected = new List<int>();
             foreach (var item in _items)
             {
-                if (item.Status.ItemStatusId == (int)ItemStatusEnum.Unavailable)
+                if (item.ItemStatusId == (int)ItemStatusEnum.Unavailable)
                 {
                     selected.Add(item.ItemId);
                 }
@@ -148,7 +148,6 @@ namespace SSA.Droid.Activities
             {
                 case Resource.Id.menu_commitList:
                     CommitList();
-                    SetViewByListStatus();
                     return true;
 
                 case Resource.Id.menu_terminateList:
@@ -182,31 +181,11 @@ namespace SSA.Droid.Activities
                     DataProvider.CommitList(_list);
                     Toast.MakeText(this, $"Zatwierdzono '{_list.Name}'",
                         ToastLength.Short).Show();
+                    _list.ListStatusId = (int)ListStatusEnum.Committed;
+
                     UpdateItemList();
                     SetViewByListStatus();
                 }
-
-                //foreach (var item in _items)
-                //{
-                //    if (item.Status.ItemStatusId == (int) ItemStatusEnum.Available)
-                //    {
-                //        item.Status = _repository.GetItemStatus(ItemStatusEnum.Reserved);
-                //        item.ItemStatusId = (int) ItemStatusEnum.Reserved;
-                //    }
-                //    else
-                //    {
-                //        item.ListId = 0;
-                //    }
-                //    DataProvider.UpdateItem(item);
-                //}
-
-                //_list.Status = _repository.GetListStatus(ListStatusEnum.Committed);
-                //_list.ListStatusId = (int) ListStatusEnum.Committed;
-                //_list.Items = _items;
-                //DataProvider.CommitList(_list);
-                //Toast.MakeText(this, $"Zatwierdzono '{_list.Name}'",
-                //    ToastLength.Short).Show();
-                
             }
             else if (_list.ListStatusId == (int)ListStatusEnum.Committed)
             {
@@ -220,53 +199,27 @@ namespace SSA.Droid.Activities
 
         private string TerminateList()
         {
-
-
-            //foreach (var item in _items)
-            //{
-            //    if (item.Status.ItemStatusId != (int)ItemStatusEnum.Reserved)
-            //    {
-            //        return "Zwróć wszystkie przedmioty!";
-            //    }
-            //}
-            //foreach (var item in _items)
-            //{
-
-            //    item.Status = _repository.GetItemStatus(ItemStatusEnum.Available);
-            //    _repository.Update(item);
-            //}
-
-            //_list.Status = _repository.GetListStatus(ListStatusEnum.Terminated);
-            //_list.Items = _items;
-            //_repository.Update(_list);
-
-            //UpdateItemList();
-
-            var url = Configuration.ApiPath + "lists/terminate/" + _list.ListId;
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.ContentType = "application/json";
-            request.Method = "POST";
-
-            var response = (HttpWebResponse)request.GetResponse();
-            using (var streamReader = new StreamReader(response.GetResponseStream()))
+            
+            foreach (var item in _items)
             {
-                var result = streamReader.ReadToEnd();
-                //_repository.Save<ListModel>(list);
+                if (item.ItemStatusId != (int)ItemStatusEnum.Reserved)
+                {
+                    return "Zwróć wszystkie przedmioty!";
+                }
             }
-
-
-            return "Rozwiązano listę: " + _list.Name;
+            if (DataProvider.TerminateList(_list))
+            {
+                _list.ListStatusId = (int) ListStatusEnum.Terminated;
+                UpdateItemList();
+                SetViewByListStatus();
+                return "Rozwiązano listę: " + _list.Name;
+            }
+            return "Błąd!";
         }
 
         public void RefreshItems()
         {
             _items = DataProvider.GetItemsFromList(_list.ListId);
-            foreach (var item in _items)
-            {
-                item.Category = _repository.GetCategory(item.CategoryId);
-                item.Localization = _repository.GetLocalization(item.LocalizationId);
-                item.Status = _repository.GetItemStatus(item.ItemStatusId);
-            }
         }
 
         private void UpdateItemList()
@@ -289,7 +242,7 @@ namespace SSA.Droid.Activities
                     var item = _repository.GetItemByEanCode(typedEan);
                     if (_getItemRadioButton.Checked)
                     {
-                        if (_list.Status.ListStatusId == (int)ListStatusEnum.Uncommitted)
+                        if (_list.ListStatusId == (int)ListStatusEnum.Uncommitted)
                         {
                             if (!_items.Select(x => x.ItemId).Contains(item.ItemId))
                             {
@@ -298,7 +251,7 @@ namespace SSA.Droid.Activities
                                 actionString = "Dodano: ";
                             }
                         }
-                        else if (_list.Status.ListStatusId == (int)ListStatusEnum.Committed)
+                        else if (_list.ListStatusId == (int)ListStatusEnum.Committed)
                         {
                             if(!Configuration.Online) {
                                 DialogWithAskForConnect();
@@ -314,9 +267,9 @@ namespace SSA.Droid.Activities
                     }
                     else if (_deleteItemRadioButton.Checked)
                     {
-                        if (_list.Status.ListStatusId == (int)ListStatusEnum.Uncommitted)
+                        if (_list.ListStatusId == (int)ListStatusEnum.Uncommitted)
                         {
-                            if (item.Status.ItemStatusId ==
+                            if (item.ItemStatusId ==
                                 _repository.GetItemStatus(ItemStatusEnum.Available).ItemStatusId && 
                                 _items.Select(x => x.ItemId).Contains(item.ItemId))
                             {
@@ -325,7 +278,7 @@ namespace SSA.Droid.Activities
                                 actionString = "Usunięto: ";
                             }
                         }
-                        else if (_list.Status.ListStatusId == (int)ListStatusEnum.Committed)
+                        else if (_list.ListStatusId == (int)ListStatusEnum.Committed)
                         {
                             if (!Configuration.Online)
                             {
@@ -333,7 +286,7 @@ namespace SSA.Droid.Activities
                                 return;
                             }
 
-                            if (item.Status.ItemStatusId ==
+                            if (item.ItemStatusId ==
                                 _repository.GetItemStatus(ItemStatusEnum.Unavailable).ItemStatusId)
                             {
 

@@ -46,6 +46,17 @@ namespace SSA.Droid
         private string[] _tabNames;
         private PersonModel _loggedUser;
 
+        public override void OnBackPressed()
+        {
+
+
+            AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+            builder2.SetTitle("Wyjście");
+            builder2.SetMessage("Na pewno chcesz opuścić aplikację?");
+            builder2.SetPositiveButton("Tak", (s, e) => { base.OnBackPressed(); });
+            builder2.SetNegativeButton("Nie", (s, e) => { });
+            builder2.Show();
+        }
 
         protected override void OnResume()
         {
@@ -67,24 +78,22 @@ namespace SSA.Droid
 
             SetContentView(Resource.Layout.Main);
 
-            //SampleData.DropData();
-            //SampleData.AddData();
+            SampleData.DropData();
+            SampleData.AddData();
 
 
             _fragments = new Android.Support.V4.App.Fragment[]
             {
                 AllListsFragment.NewInstance(),
                 AllItemsFragment.NewInstance(),
-                SettingsFragment.NewInstance(_repository),
-                TestFragment.NewInstance(_repository),
+                SettingsFragment.NewInstance(_repository)
             };
 
             _tabNames = new[]
             {
                 "Listy",
                 "Wszystkie przedmioty",
-                "Ustawienia",
-                "Test"
+                "Ustawienia"
             };
 
             _viewPager = FindViewById<ViewPager>(Resource.Id.mainviewpager);
@@ -116,6 +125,11 @@ namespace SSA.Droid
                     CreateNewList();
                     break;
                 case Resource.Id.menu_refreshData:
+                    if (!Configuration.Online)
+                    {
+                        DialogWithAskForConnect();
+                        break;
+                    }
                     RefreshData();
                     break;
                 default:
@@ -198,20 +212,66 @@ namespace SSA.Droid
             });
         }
 
-        private void RefreshData()
+        private async void RefreshData()
         {
             RunOnUiThread(() =>
             {
                 _mainContent.Visibility = ViewStates.Gone;
                 _headerProgress.Visibility = ViewStates.Visible;
             });
-            ((AllListsFragment)_fragments[0]).UpdateLists();
-            ((AllItemsFragment)_fragments[1]).UpdateItems();
-            RunOnUiThread(() =>
+
+
+
+            try
             {
-                _mainContent.Visibility = ViewStates.Visible;
-                _headerProgress.Visibility = ViewStates.Gone;
+
+                await Task.Run(() =>
+                {
+                    try
+                    {
+                        ((AllListsFragment)_fragments[0]).UpdateLists();
+
+                        ((AllItemsFragment)_fragments[1]).UpdateItems();
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowAlertWithException(ex);
+                    }
+                    RunOnUiThread(() =>
+                    {
+                        _mainContent.Visibility = ViewStates.Visible;
+                        _headerProgress.Visibility = ViewStates.Gone;
+                    });
+                });
+            }
+            catch (Exception ex)
+            {
+                ShowAlertWithException(ex);
+            }
+        }
+
+        void ShowAlertWithException(Exception ex)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.SetTitle("Wystąpił błąd");
+            builder.SetMessage("");
+            builder.SetPositiveButton("Ok", (s, e) => { });
+            builder.SetNegativeButton("Szczegóły", (s2, e2) =>
+            {
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+                builder2.SetTitle(ex.GetType().Name);
+                builder2.SetMessage(ex.ToString());
+                builder2.SetNegativeButton("Ok", (s, e) =>
+                {
+                    RunOnUiThread(() =>
+                    {
+                        _mainContent.Visibility = ViewStates.Visible;
+                        _headerProgress.Visibility = ViewStates.Gone;
+                    });
+                });
+                builder2.Show();
             });
+            builder.Show();
         }
 
         public void DialogWithAskForConnect()
@@ -293,7 +353,7 @@ namespace SSA.Droid
                 return (cursor.GetString(cursor.GetColumnIndex(projection[0])));
 
             }
-            return null;
+            return "brak nazwy";
         }
 
         private void SaveUser()
